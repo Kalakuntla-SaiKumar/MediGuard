@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MediGuard Risk Dashboard</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 30px;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.logo img {
+  height: 80px;
+}
+
+.nav-right {
+  font-weight: bold;
+}
+
+.nav-right a {
+  color: #1565C0;
+  text-decoration: none;
+}
+
+/* Main layout */
+.dashboard {
+  max-width: 1100px;
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/* Assessment Panel */
+.panel {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.panel h2 {
+  margin-top: 0;
+  color: #0D47A1;
+}
+
+/* Inputs */
+label {
+  display: block;
+  margin-top: 14px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+input:focus, select:focus {
+  border-color: #1565C0;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(21,101,192,0.2);
+}
+
+/* Button */
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #1565C0;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+button:hover {
+  background: #0D47A1;
+  transform: translateY(-2px);
+}
+
+/* Results */
+.result-card {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #E3F2FD;
+}
+
+/* Severity colors */
+.severity {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.high { background: #ff5252; color: white; }
+.medium { background: #ffb300; color: white; }
+.low { background: #4caf50; color: white; }
+
+.alt {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div class="logo">
+    <img src="Logo.png">
+  </div>
+  <div class="nav-right">
+    <a href="profile.html">Profile</a>
+  </div>
+</div>
+
+<div class="dashboard">
+
+<!-- LEFT: Assessment Panel -->
+<div class="panel">
+
+<h2>Medication Risk Assessment</h2>
+
+<label>Interaction Type</label>
+<select>
+  <option>Drug–Drug Interaction</option>
+  <option>Drug–Food Interaction</option>
+  <option>Drug–Condition Interaction</option>
+</select>
+
+<label>Drug A</label>
+<input placeholder="Enter first drug">
+
+<label>Drug B</label>
+<input placeholder="Enter second drug">
+
+<label>Medical Condition</label>
+<input placeholder="Hypertension, Diabetes...">
+
+<label>Food Interaction</label>
+<input placeholder="Alcohol, Grapefruit...">
+
+<button>Assess Risk</button>
+
+</div>
+
+<!-- RIGHT: Result Panel -->
+<div class="panel">
+
+<h2>Risk Result</h2>
+
+<div class="result-card">
+
+<div class="severity high">
+HIGH RISK
+</div>
+
+<p><strong>Explanation:</strong><br>
+Increased bleeding risk detected when combining aspirin and warfarin.
+Immediate clinical review recommended.
+</p>
+
+<p><strong>Safer Alternatives:</strong></p>
+
+<div class="alt">Acetaminophen</div>
+<div class="alt">Ibuprofen (low dose)</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

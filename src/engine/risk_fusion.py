@@ -28,8 +28,15 @@ def fuse_risk(ddi_risk, dfi_risk_A, dfi_risk_B, dci_risk_A, dci_risk_B):
     max_score = max(scores)
 
     # Reverse mapping
-    for level, score in SEVERITY_SCORES.items():
-        if score == max_score:
-            final_risk = level
+    reverse_map = {v: k for k, v in SEVERITY_SCORES.items()}
+    final_risk = reverse_map[max_score]
 
-    return final_risk
+    # ✅ RETURN EVERYTHING (not just final risk)
+    return {
+        "DDI": ddi_risk,
+        "DFI_A": dfi_risk_A,
+        "DFI_B": dfi_risk_B,
+        "DCI_A": dci_risk_A,
+        "DCI_B": dci_risk_B,
+        "Final_Risk": final_risk
+    }

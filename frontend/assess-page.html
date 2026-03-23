@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assessment - MediGuard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --sw: 230px; --swc: 68px; --blue: #1565C0; --blue-dark: #0D47A1; --blue-light: #E3F2FD; --green: #2e7d32; --green-bg: #e8f5e9; --orange: #e65100; --orange-bg: #fff3e0; --red: #c62828; --red-bg: #ffebee; --gray: #64748b; --border: #e2e8f0; }
+body { font-family: 'DM Sans', sans-serif; background: #f0f4f8; min-height: 100vh; }
+
+/* SIDEBAR */
+.sidebar { position: fixed; top: 0; left: 0; height: 100vh; width: var(--sw); background: linear-gradient(180deg, #0D47A1 0%, #1565C0 60%, #1976D2 100%); display: flex; flex-direction: column; z-index: 9999; overflow: hidden; transition: width 0.3s ease; box-shadow: 4px 0 20px rgba(13,71,161,0.2); }
+.sidebar.collapsed { width: var(--swc); }
+.sb-logo { display: flex; align-items: center; justify-content: center; padding: 8px 10px; min-height: 70px; border-bottom: 1px solid rgba(255,255,255,0.12); flex-shrink: 0; overflow: hidden; }
+.sb-logo img { height: 56px; width: 100%; max-width: 200px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+.sb-nav { flex: 1; padding: 14px 8px; display: flex; flex-direction: column; gap: 3px; overflow-y: auto; overflow-x: hidden; }
+.sb-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
+.sb-item:hover { background: rgba(255,255,255,0.13); color: white; }
+.sb-item.active { background: rgba(255,255,255,0.18); color: white; font-weight: bold; }
+.sb-item .si { font-size: 18px; flex-shrink: 0; width: 22px; text-align: center; }
+.sb-lbl { transition: opacity 0.2s; }
+.sidebar.collapsed .sb-lbl { opacity: 0; }
+.sb-divider { height: 1px; background: rgba(255,255,255,0.12); margin: 6px 0; }
+.sb-user { padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.sb-avatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.sb-uinfo { overflow: hidden; transition: opacity 0.2s; }
+.sidebar.collapsed .sb-uinfo { opacity: 0; }
+.sb-uname { font-size: 13px; font-weight: bold; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-urole { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+/* LAYOUT */
+.page-wrap { margin-left: var(--sw); transition: margin-left 0.3s ease; min-height: 100vh; }
+.page-wrap.shifted { margin-left: var(--swc); }
+.navbar { display: flex; justify-content: space-between; align-items: center; padding: 0 28px; height: 64px; background: white; box-shadow: 0 1px 0 var(--border); position: sticky; top: 0; z-index: 100; }
+.sidebar-toggle { font-size: 20px; color: var(--blue); cursor: pointer; padding: 8px; border-radius: 8px; border: none; background: none; }
+.sidebar-toggle:hover { background: var(--blue-light); }
+.main { padding: 32px 36px; max-width: 900px; }
+.page-title { font-size: 26px; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+.page-sub { color: var(--gray); font-size: 14px; margin-bottom: 28px; }
+
+/* TABS */
+.tabs { display: flex; gap: 0; background: white; border-radius: 14px; padding: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 28px; width: fit-content; }
+.tab-btn { padding: 10px 24px; border-radius: 10px; border: none; background: none; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; color: var(--gray); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.tab-btn.active { background: var(--blue); color: white; box-shadow: 0 2px 8px rgba(21,101,192,0.3); }
+.tab-btn:hover:not(.active) { background: var(--blue-light); color: var(--blue); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* CARD */
+.card { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 20px; }
+.card-title { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 4px; }
+.card-desc { font-size: 13px; color: var(--gray); margin-bottom: 24px; }
+
+/* FORM */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 12px; font-weight: 600; color: #374151; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-group input { padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #0f172a; transition: all 0.2s; background: white; width: 100%; }
+.form-group input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(21,101,192,0.1); }
+.input-hint { font-size: 11px; color: #9ca3af; }
+
+/* AUTOCOMPLETE */
+.autocomplete-wrap { position: relative; }
+.autocomplete-list { position: absolute; top: 100%; left: 0; right: 0; z-index: 9999; background: white; border: 1.5px solid var(--blue); border-top: none; border-radius: 0 0 10px 10px; max-height: 200px; overflow-y: auto; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.autocomplete-item { padding: 10px 14px; font-size: 13px; cursor: pointer; border-bottom: 1px solid #f0f0f0; color: #1a1e2e; }
+.autocomplete-item:hover, .autocomplete-item.ac-active { background: var(--blue-light); color: var(--blue); }
+
+/* BUTTON */
+.btn-assess { width: 100%; padding: 14px; border-radius: 12px; border: none; background: linear-gradient(135deg, var(--blue), var(--blue-dark)); color: white; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 8px; box-shadow: 0 4px 14px rgba(21,101,192,0.3); }
+.btn-assess:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(21,101,192,0.4); }
+.btn-assess:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* RESULTS */
+.result-box { border-radius: 14px; padding: 20px 24px; margin-bottom: 16px; border-left: 5px solid; }
+.result-box.high { background: var(--red-bg); border-color: var(--red); }
+.result-box.moderate { background: var(--orange-bg); border-color: var(--orange); }
+.result-box.low { background: #fffde7; border-color: #f9a825; }
+.result-box.none { background: var(--green-bg); border-color: var(--green); }
+.result-badge { font-size: 18px; font-weight: 800; }
+.result-badge.high { color: var(--red); }
+.result-badge.moderate { color: var(--orange); }
+.result-badge.low { color: #f9a825; }
+.result-badge.none { color: var(--green); }
+.result-subtitle { font-size: 13px; color: var(--gray); margin-top: 2px; }
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.result-item { background: #f8faff; border-radius: 10px; padding: 14px 16px; border: 1px solid var(--border); }
+.result-item-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); margin-bottom: 4px; }
+.result-item-value { font-size: 15px; font-weight: 700; }
+.result-item-value.High { color: var(--red); }
+.result-item-value.Moderate { color: var(--orange); }
+.result-item-value.Low { color: #f9a825; }
+.result-item-value.None { color: var(--green); }
+
+/* AI */
+.ai-response { background: #f8faff; border: 1.5px solid #c7d9f5; border-radius: 14px; padding: 20px 24px; margin-top: 16px; }
+.ai-response h4 { font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 12px; }
+.ai-response-body { font-size: 14px; color: #334155; line-height: 1.8; }
+.ai-response-body ul { padding-left: 18px; margin: 8px 0; }
+.ai-response-body li { margin-bottom: 4px; }
+
+.loading { display: flex; align-items: center; gap: 10px; color: var(--gray); font-size: 14px; padding: 20px; background: white; border-radius: 14px; }
+.spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--blue); border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.btn-row { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+.btn-secondary { padding: 10px 20px; border-radius: 10px; border: 1.5px solid var(--blue); background: white; color: var(--blue); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.btn-secondary:hover { background: var(--blue-light); }
+.warning-box { background: #fff8e1; border: 1.5px solid #ffc107; border-radius: 12px; padding: 14px 18px; font-size: 13px; color: #5f4200; margin-top: 16px; }
+
+/* PATIENT PROFILE PANEL */
+.profile-panel { background: white; border-radius: 16px; padding: 22px 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); margin-bottom: 24px; border-left: 4px solid var(--blue); }
+.profile-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.profile-panel-title { font-size: 14px; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 8px; }
+.profile-panel-subtitle { font-size: 12px; color: var(--gray); }
+.btn-edit-profile { padding: 6px 14px; border-radius: 8px; border: 1.5px solid var(--blue); background: white; color: var(--blue); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.btn-edit-profile:hover { background: var(--blue-light); }
+.profile-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.profile-field { display: flex; flex-direction: column; gap: 4px; }
+.profile-field label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); }
+.profile-field input, .profile-field select { padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: #0f172a; background: #f8faff; transition: all 0.2s; }
+.profile-field input:focus, .profile-field select:focus { outline: none; border-color: var(--blue); background: white; box-shadow: 0 0 0 3px rgba(21,101,192,0.1); }
+.profile-field.wide { grid-column: span 2; }
+.profile-incomplete { background: #fff8e1; border: 1.5px solid #ffc107; border-radius: 10px; padding: 10px 16px; font-size: 13px; color: #5f4200; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+
+</style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo"><img src="Logo.png" alt="MediGuard"></div>
+  <nav class="sb-nav">
+    <a class="sb-item" href="/"><span class="si">🏠</span><span class="sb-lbl">Dashboard</span></a>
+    <a class="sb-item active" href="/assess-page"><span class="si">🔬</span><span class="sb-lbl">New Assessment</span></a>
+    <a class="sb-item" href="/history-page"><span class="si">📋</span><span class="sb-lbl">Assessment History</span></a>
+    <div class="sb-divider"></div>
+    <a class="sb-item" href="/profile"><span class="si">👤</span><span class="sb-lbl">My Profile</span></a>
+    <div class="sb-divider"></div>
+    <a class="sb-item" href="#" onclick="handleLogout();return false;" style="color:rgba(255,180,180,0.85);"><span class="si">🚪</span><span class="sb-lbl">Logout</span></a>
+  </nav>
+  <div class="sb-user">
+    <div class="sb-avatar">👤</div>
+    <div class="sb-uinfo">
+      <div class="sb-uname" id="sidebar-username">Guest</div>
+      <div class="sb-urole">Patient</div>
+    </div>
+  </div>
+</aside>
+
+<div class="page-wrap" id="page-wrap">
+  <div class="navbar">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+      <span style="font-size:16px;font-weight:700;color:#0f172a;">Safety Assessment</span>
+    </div>
+    <div id="nav-right"></div>
+  </div>
+
+  <div class="main">
+    <div class="page-title">🔬 Medication Safety Check</div>
+    <div class="page-sub">Choose the type of interaction you want to check</div>
+
+
+    <!-- PATIENT PROFILE PANEL -->
+    <div class="profile-panel" id="profile-panel">
+      <div class="profile-panel-header">
+        <div>
+          <div class="profile-panel-title">👤 Patient Profile <span id="profile-status" style="font-size:11px;font-weight:500;color:#9ca3af;">(loading...)</span></div>
+          <div class="profile-panel-subtitle">Pre-filled from your profile. Edit before submitting if needed.</div>
+        </div>
+        <a href="/profile" class="btn-edit-profile">Edit Full Profile →</a>
+      </div>
+      <div id="profile-incomplete" class="profile-incomplete" style="display:none;">
+        ⚠️ Your profile is incomplete. <a href="/profile" style="color:#1565C0;font-weight:700;">Complete it</a> for personalized assessments, or fill in below.
+      </div>
+      <div class="profile-grid">
+        <div class="profile-field">
+          <label>Age</label>
+          <input type="number" id="p-age" placeholder="e.g. 35" min="1" max="120">
+        </div>
+        <div class="profile-field">
+          <label>Gender</label>
+          <select id="p-gender">
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="profile-field">
+          <label>Pregnancy Status</label>
+          <select id="p-pregnancy">
+            <option value="na">N/A</option>
+            <option value="not_pregnant">Not Pregnant</option>
+            <option value="pregnant">Pregnant</option>
+            <option value="breastfeeding">Breastfeeding</option>
+          </select>
+        </div>
+        <div class="profile-field wide">
+          <label>Chronic Conditions</label>
+          <input type="text" id="p-conditions" placeholder="e.g. diabetes, hypertension">
+        </div>
+        <div class="profile-field wide">
+          <label>Known Allergies</label>
+          <input type="text" id="p-allergies" placeholder="e.g. penicillin, sulfa">
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-btn-ddi" onclick="switchTab('ddi',this)">💊 Drug–Drug</button>
+      <button class="tab-btn" id="tab-btn-dfi" onclick="switchTab('dfi',this)">🍽️ Drug–Food</button>
+      <button class="tab-btn" id="tab-btn-dci" onclick="switchTab('dci',this)">🏥 Drug–Condition</button>
+    </div>
+
+    <!-- DDI -->
+    <div class="tab-panel active" id="tab-ddi">
+      <div class="card">
+        <div class="card-title">Drug–Drug Interaction (DDI)</div>
+        <div class="card-desc">Check if two medications are safe to take together. Dosage is optional but helps the AI give better advice.</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Drug 1</label>
+            <div class="autocomplete-wrap">
+              <input type="text" id="ddi-drug1" placeholder="e.g. warfarin, dolo, aspirin" autocomplete="off" oninput="showSug('ddi-drug1',DRUGS)" onkeydown="handleKey(event,'ddi-drug1')">
+              <div class="autocomplete-list" id="ddi-drug1-list" style="display:none;"></div>
+            </div>
+            <span class="input-hint">Generic or brand name</span>
+          </div>
+          <div class="form-group">
+            <label>Drug 2</label>
+            <div class="autocomplete-wrap">
+              <input type="text" id="ddi-drug2" placeholder="e.g. tramadol, ibuprofen" autocomplete="off" oninput="showSug('ddi-drug2',DRUGS)" onkeydown="handleKey(event,'ddi-drug2')">
+              <div class="autocomplete-list" id="ddi-drug2-list" style="display:none;"></div>
+            </div>
+            <span class="input-hint">Generic or brand name</span>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Dosage of Drug 1 <span style="color:#9ca3af;font-weight:400;">(optional)</span></label>
+            <input type="text" id="ddi-dose1" placeholder="e.g. 500mg twice daily">
+          </div>
+          <div class="form-group">
+            <label>Dosage of Drug 2 <span style="color:#9ca3af;font-weight:400;">(optional)</span></label>
+            <input type="text" id="ddi-dose2" placeholder="e.g. 200mg once daily">
+          </div>
+        </div>
+        <button class="btn-assess" onclick="runDDI()">Check Drug–Drug Interaction →</button>
+      </div>
+      <div id="ddi-result"></div>
+    </div>
+
+    <!-- DFI -->
+    <div class="tab-panel" id="tab-dfi">
+      <div class="card">
+        <div class="card-title">Drug–Food Interaction (DFI)</div>
+        <div class="card-desc">Check if a specific food or drink is safe while taking a medication.</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Drug Name</label>
+            <div class="autocomplete-wrap">
+              <input type="text" id="dfi-drug" placeholder="e.g. warfarin, metformin, dolo" autocomplete="off" oninput="showSug('dfi-drug',DRUGS)" onkeydown="handleKey(event,'dfi-drug')">
+              <div class="autocomplete-list" id="dfi-drug-list" style="display:none;"></div>
+            </div>
+            <span class="input-hint">Generic or brand name</span>
+          </div>
+          <div class="form-group">
+            <label>Food / Drink</label>
+            <div class="autocomplete-wrap">
+              <input type="text" id="dfi-food" placeholder="e.g. grapefruit, alcohol, milk" autocomplete="off" oninput="showSug('dfi-food',FOODS)" onkeydown="handleKey(event,'dfi-food')">
+              <div class="autocomplete-list" id="dfi-food-list" style="display:none;"></div>
+            </div>
+            <span class="input-hint">What food or drink are you concerned about?</span>
+          </div>
+        </div>
+        <button class="btn-assess" onclick="runDFI()">Check Drug–Food Interaction →</button>
+      </div>
+      <div id="dfi-result"></div>
+    </div>
+
+    <!-- DCI -->
+    <div class="tab-panel" id="tab-dci">
+      <div class="card">
+        <div class="card-title">Drug–Condition Interaction (DCI)</div>
+        <div class="card-desc">Check if a medication is safe for someone with a specific medical condition.</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Drug Name</label>
+            <div class="autocomplete-wrap">
+              <input type="text" id="dci-drug" placeholder="e.g. ibuprofen, metformin" autocomplete="off" oninput="showSug('dci-drug',DRUGS)" onkeydown="handleKey(event,'dci-drug')">
+              <div class="autocomplete-list" id="dci-drug-list" style="display:none;"></div>
+            </div>
+            <span class="input-hint">Generic or brand name</span>
+          </div>
+          <div class="form-group">
+            <label>Medical Condition</label>
+            <div class="autocomplete-wrap">
+              <input type="text" id="dci-condition" placeholder="e.g. epilepsy, heart failure" autocomplete="off" oninput="showSug('dci-condition',CONDITIONS)" onkeydown="handleKey(event,'dci-condition')">
+              <div class="autocomplete-list" id="dci-condition-list" style="display:none;"></div>
+            </div>
+            <span class="input-hint">Type your medical condition</span>
+          </div>
+        </div>
+        <button class="btn-assess" onclick="runDCI()">Check Drug–Condition Interaction →</button>
+      </div>
+      <div id="dci-result"></div>
+    </div>
+  </div>
+</div>
+
+<script src="auth.js"></script>
+<script>
+const API = (window.MEDIGUARD_API_BASE || '').replace(/\/$/, '');
+let GROQ_KEY = '';
+let groqKeyReady = false;
+let groqKeyPromise = fetch(`${API}/api/config`, { credentials: 'include' })
+  .then(r => r.json())
+  .then(d => { GROQ_KEY = d.groq_key || ''; groqKeyReady = true; })
+  .catch(e => { console.warn('Could not load config:', e); groqKeyReady = true; });
+const GROQ_MODEL = 'llama-3.3-70b-versatile';
+
+let DRUGS = [];
+fetch(`${API}/api/drugs`, { credentials: 'include' })
+  .then(r => r.json())
+  .then(data => { DRUGS = data.drugs || []; })
+  .catch(() => {
+    DRUGS = ['warfarin','aspirin','metformin','ibuprofen','paracetamol'];
+  });
+
+const CONDITIONS = Array.from(new Set([
+  // Common names first
+  'diabetes','hypertension','high blood pressure','kidney disease','kidney failure','liver disease',
+  'heart disease','heart failure','stroke','epilepsy','asthma','copd','thyroid','hypothyroid',
+  'hyperthyroid','arthritis','rheumatoid arthritis','depression','anxiety','bipolar','schizophrenia',
+  'insomnia','migraine','parkinson','alzheimer','dementia','anemia','high cholesterol','obesity',
+  'gout','osteoporosis','stomach ulcer','acid reflux','gerd','ibs','colitis','crohns','psoriasis',
+  'eczema','glaucoma','cataract','hiv','tuberculosis','tb','lupus','pregnancy','cancer','leukemia',
+  'lymphoma','breast cancer','lung cancer','pain','chronic pain','blood cancer','liver problem',
+  'irregular heartbeat','hepatitis','low blood pressure','slow heart rate','back pain','water retention',
+
+  // Existing medical terms below
+  'seizures','tremor','inflammation','hyperkinesis','huntington disease','liver neoplasms',
+  'liver diseases','lung neoplasms','stomach neoplasms','skin diseases','ovarian diseases',
+  'movement disorders','poisoning','edema','scoliosis','cardiovascular diseases','hyperplasia',
+  'acute lung injury','cardiomyopathies','fibrosis','hyperalgesia','hyperglycemia','insulin resistance',
+  'pulmonary edema','weight gain','weight loss','bradycardia','hypotension','hepatitis, chronic',
+  'arrhythmias, cardiac','lymphoma, non-hodgkin','lymphoma, t-cell','stevens-johnson syndrome',
+  'chemical and drug induced liver injury','primary myelofibrosis','precancerous conditions',
+  'cocaine-related disorders','triple negative breast neoplasms','myocardial reperfusion injury'
+]));
+
+let FOODS = [];
+// Load food list from dataset
+fetch(`${API}/api/foods`, { credentials: 'include' })
+  .then(r => r.json())
+  .then(data => { FOODS = data.foods || []; })
+  .catch(() => {
+    // Fallback hardcoded list
+    FOODS = ['Alcohol','Grapefruit','Milk','Caffeine','Coffee','Tea','Green Tea',
+      'Spinach','Kale','Broccoli','Aged Cheese','Red Wine','Beer','Antacids',
+      'Garlic','Ginger','Turmeric','Banana','Avocado','Salt','Dairy',
+      'Rice','Dal','Curd','Ghee','Coconut Milk','Methi','Amla','Ashwagandha',
+      'Tulsi','Karela','Bitter Gourd','Pomegranate','Achar','Ajwain'];
+  });
+
+
+// ── PATIENT PROFILE ──
+async function loadPatientProfile() {
+  try {
+    const user = await getCurrentUser();
+    if (!user) {
+      document.getElementById('profile-status').textContent = '(not logged in)';
+      document.getElementById('profile-incomplete').style.display = 'flex';
+      return;
+    }
+    // Fill fields from profile
+    if (user.age)               document.getElementById('p-age').value = user.age;
+    if (user.gender)            document.getElementById('p-gender').value = user.gender;
+    if (user.pregnancy_status)  document.getElementById('p-pregnancy').value = user.pregnancy_status;
+    if (user.health_conditions) document.getElementById('p-conditions').value = user.health_conditions;
+    if (user.allergies)         document.getElementById('p-allergies').value = user.allergies;
+
+    // Check completeness
+    const incomplete = !user.age || !user.gender || !user.health_conditions;
+    if (incomplete) {
+      document.getElementById('profile-incomplete').style.display = 'flex';
+      document.getElementById('profile-status').textContent = '(incomplete)';
+      document.getElementById('profile-status').style.color = '#f59e0b';
+    } else {
+      document.getElementById('profile-status').textContent = '(loaded ✓)';
+      document.getElementById('profile-status').style.color = '#22c55e';
+    }
+  } catch(e) {
+    document.getElementById('profile-status').textContent = '(error loading)';
+  }
+}
+
+function getPatientContext() {
+  const age        = document.getElementById('p-age').value.trim();
+  const gender     = document.getElementById('p-gender').value;
+  const pregnancy  = document.getElementById('p-pregnancy').value;
+  const conditions = document.getElementById('p-conditions').value.trim();
+  const allergies  = document.getElementById('p-allergies').value.trim();
+
+  let parts = [];
+  if (age)        parts.push(`Age: ${age}`);
+  if (gender)     parts.push(`Gender: ${gender}`);
+  if (pregnancy && pregnancy !== 'na') parts.push(`Pregnancy status: ${pregnancy}`);
+  if (conditions) parts.push(`Chronic conditions: ${conditions}`);
+  if (allergies)  parts.push(`Known allergies: ${allergies}`);
+
+  return parts.length ? `\n\nPatient profile: ${parts.join(', ')}.` : '';
+}
+
+
+
+// ── PATIENT-SPECIFIC RISK ANALYSIS ──
+async function fetchPatientRisk(item1, item2, riskLevel, type, patCtx) {
+  if (!groqKeyReady) await groqKeyPromise;
+  // Only run if patient profile has meaningful data
+  const age        = document.getElementById('p-age').value.trim();
+  const conditions = document.getElementById('p-conditions').value.trim();
+  const allergies  = document.getElementById('p-allergies').value.trim();
+  const pregnancy  = document.getElementById('p-pregnancy').value;
+  const gender     = document.getElementById('p-gender').value;
+
+  if (!age && !conditions && !allergies && (!pregnancy || pregnancy === 'na')) return null;
+
+  const typeLabel = {'DDI': `drug interaction between ${item1} and ${item2}`,
+                     'DFI': `eating ${item2} while taking ${item1}`,
+                     'DCI': `taking ${item1} with condition ${item2}`}[type];
+
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_KEY },
+      body: JSON.stringify({
+        model: GROQ_MODEL,
+        messages: [
+          { role: 'system', content: 'You are a clinical pharmacist providing personalized medication risk analysis. Be specific and evidence-based. Respond ONLY in valid JSON.' },
+          { role: 'user', content: `Analyze how this specific patient profile affects the risk of ${typeLabel}. Base risk level: ${riskLevel}.
+
+Patient: Age ${age||'unknown'}, Gender: ${gender||'unknown'}, Pregnancy: ${pregnancy||'na'}, Conditions: ${conditions||'none'}, Allergies: ${allergies||'none'}.
+
+Return ONLY this JSON (no markdown):
+{
+  "overall_patient_risk": "Low/Moderate/High/Critical",
+  "flags": [
+    {"type": "allergy|age|pregnancy|condition|gender", "severity": "warning|danger", "message": "specific clinical reason this patient is at higher/lower risk"}
+  ],
+  "summary": "1-2 sentence personalized summary for this patient specifically"
+}
+Only include flags that genuinely apply based on medical evidence. If no patient-specific concerns, return empty flags array.` }
+        ],
+        max_tokens: 500, temperature: 0.1
+      })
+    });
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content || '{}';
+    return JSON.parse(text.replace(/```json|```/g, '').trim());
+  } catch(e) { return null; }
+}
+
+function renderPatientRisk(data, type) {
+  if (!data || (!data.flags?.length && !data.summary)) return '';
+
+  const severityIcon = { warning: '⚠️', danger: '🚨' };
+  const typeIcon = { allergy: '🧪', age: '👴', pregnancy: '🤰', condition: '🫀', gender: '⚕️' };
+  const severityColor = { warning: '#e65100', danger: '#c62828' };
+
+  const flagsHtml = (data.flags || []).map(f => {
+    const badgeColor = f.severity === 'danger' ? '#c62828' : '#e65100';
+    const badgeBg = f.severity === 'danger' ? '#ffebee' : '#fff3e0';
+    const badgeLabel = f.severity === 'danger' ? '🚨 HIGH CONCERN' : '⚠️ CAUTION';
+    return `<div style="display:flex;gap:12px;align-items:flex-start;padding:12px;margin-bottom:8px;background:white;border-radius:8px;border:1px solid #fde8e8;">
+      <span style="font-size:22px;flex-shrink:0;">${typeIcon[f.type]||'📋'}</span>
+      <div style="flex:1;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;">
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;color:#374151;letter-spacing:0.5px;">${f.type}</span>
+          <span style="background:${badgeBg};color:${badgeColor};font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap;">${badgeLabel}</span>
+        </div>
+        <div style="font-size:13px;color:#1a1e2e;line-height:1.6;">${f.message}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const riskColor = {'Low':'#2e7d32','Moderate':'#e65100','High':'#c62828','Critical':'#7b1fa2'}[data.overall_patient_risk] || '#c62828';
+  const riskBg = {'Low':'#e8f5e9','Moderate':'#fff3e0','High':'#ffebee','Critical':'#f3e5f5'}[data.overall_patient_risk] || '#ffebee';
+
+  return `
+    <div style="background:#fff8f8;border:1.5px solid #ef9a9a;border-radius:12px;padding:18px 22px;margin-top:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div style="font-size:14px;font-weight:700;color:#b71c1c;">👤 Patient-Specific Risk Analysis</div>
+        <span style="background:${riskBg};color:${riskColor};font-size:11px;font-weight:700;padding:4px 12px;border-radius:99px;border:1px solid ${riskColor}30;">${data.overall_patient_risk} for you</span>
+      </div>
+      ${flagsHtml || ''}
+      ${data.summary ? `<div style="margin-top:12px;padding:10px 14px;background:white;border-radius:8px;font-size:13px;color:#374151;line-height:1.6;border:1px solid #fde8e8;"><strong>Summary:</strong> ${data.summary}</div>` : ''}
+    </div>`;
+}
+
+// ── SAFER ALTERNATIVES (AI-generated, structured) ──
+async function fetchAlternatives(drug1, drug2, risk, patCtx) {
+  if (risk === 'None' || risk === 'Low') return null;
+  if (!groqKeyReady) await groqKeyPromise;
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_KEY },
+      body: JSON.stringify({
+        model: GROQ_MODEL,
+        messages: [
+          { role: 'system', content: 'You are a clinical pharmacist. Always respond ONLY with valid JSON, no extra text.' },
+          { role: 'user', content: `Drug interaction: ${drug1} + ${drug2}. Risk: ${risk}.${patCtx}
+Return ONLY valid JSON, no markdown, no explanation:
+{
+  "alternatives": [
+    "Replace [drug name] with [specific alternative drug] — [exact reason why it is safer, e.g. less bleeding risk, fewer CYP450 interactions]",
+    "Replace [drug name] with [specific alternative drug] — [exact reason]",
+    "Replace [drug name] with [specific alternative drug] — [exact reason]"
+  ],
+  "precautions": [
+    "specific monitoring action with frequency, e.g. Check INR every 2 weeks",
+    "specific warning sign to watch for",
+    "specific timing or dosage precaution",
+    "specific lifestyle precaution"
+  ]
+}
+Be very specific with drug names and exact reasons. Always say which drug to replace and why the alternative is safer.` }
+        ],
+        max_tokens: 400, temperature: 0.1
+      })
+    });
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content || '{}';
+    const clean = text.replace(/```json|```/g, '').trim();
+    return JSON.parse(clean);
+  } catch(e) {
+    return null;
+  }
+}
+
+function riskBadge(label, color, bg) {
+  return `<span style="background:${bg};color:${color};font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;border:1px solid ${color}40;margin-left:8px;vertical-align:middle;white-space:nowrap;">${label}</span>`;
+}
+function pillify(text, drugs) {
+  let out = text;
+  drugs.filter(Boolean).forEach(drug => {
+    if (drug.length < 3) return;
+    const re = new RegExp('\\b(' + drug.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')\\b', 'gi');
+    out = out.replace(re, '<span style="background:#dbeafe;color:#1d4ed8;padding:1px 8px;border-radius:4px;font-weight:700;font-size:12px;display:inline-block;margin:1px;">$1</span>');
+  });
+  return out;
+}
+
+const COMMON_DRUGS = ['warfarin','aspirin','clopidogrel','acetaminophen','paracetamol','ibuprofen',
+  'apixaban','rivaroxaban','dabigatran','metformin','insulin','glipizide','atorvastatin',
+  'simvastatin','rosuvastatin','lisinopril','ramipril','amlodipine','losartan','metoprolol',
+  'atenolol','propranolol','omeprazole','pantoprazole','sertraline','fluoxetine','amoxicillin',
+  'azithromycin','ciprofloxacin','doxycycline','levothyroxine','prednisolone','tramadol',
+  'codeine','morphine','gabapentin','carbamazepine','valproic acid','phenytoin','lamotrigine',
+  'digoxin','furosemide','spironolactone','hydrochlorothiazide','prasugrel',
+  'ticagrelor','celecoxib','diclofenac','naproxen','meloxicam','methotrexate','cyclosporine',
+  'tacrolimus','azathioprine','prednisone','dexamethasone','quetiapine','risperidone',
+  'olanzapine','alprazolam','lorazepam','diazepam','zolpidem','melatonin'];
+
+function renderAlternativesBox(data, risk, drug1, drug2) {
+  if (!data) return '';
+  const isHigh = risk === 'High';
+  const bg = isHigh ? '#fff0f0' : '#fff8e1';
+  const border = isHigh ? '#ef4444' : '#f59e0b';
+  const color = isHigh ? '#dc2626' : '#d97706';
+  const drugs = [drug1, drug2].filter(Boolean);
+
+  const altList = (data.alternatives || []).map(a => {
+    return '<li style="margin-bottom:10px;padding:10px 14px;background:white;border-radius:8px;border:1px solid ' + border + '40;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">'
+      + '<span style="font-size:13px;color:#0f172a;line-height:1.7;flex:1;">' + pillify(a, drugs.concat(COMMON_DRUGS)) + '</span>'
+      + '<span style="background:#dcfce7;color:#15803d;font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap;flex-shrink:0;">✓ SAFER</span>'
+      + '</li>';
+  }).join('');
+
+  const precList = (data.precautions || []).map(p => {
+    const lower = p.toLowerCase();
+    const isWarn = lower.includes('watch') || lower.includes('avoid') || lower.includes('bleed') || lower.includes('sign');
+    const isMon = lower.includes('monitor') || lower.includes('check') || lower.includes('inr') || lower.includes('week');
+    const badge = isWarn
+      ? '<span style="background:#ffebee;color:#c62828;font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap;flex-shrink:0;">⚠ WATCH FOR</span>'
+      : isMon
+      ? '<span style="background:#e3f2fd;color:#1565C0;font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap;flex-shrink:0;">📋 MONITOR</span>'
+      : '<span style="background:#fff8e1;color:#5f4200;font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;white-space:nowrap;flex-shrink:0;">ℹ NOTE</span>';
+    return '<li style="margin-bottom:10px;padding:10px 14px;background:white;border-radius:8px;border:1px solid ' + border + '40;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">'
+      + '<span style="font-size:13px;color:#0f172a;line-height:1.7;flex:1;">' + pillify(p, drugs.concat(COMMON_DRUGS)) + '</span>'
+      + badge
+      + '</li>';
+  }).join('');
+
+  return '<div style="background:' + bg + ';border:1.5px solid ' + border + ';border-radius:12px;padding:18px 22px;margin-top:16px;">'
+    + '<div style="font-size:14px;font-weight:700;color:' + color + ';margin-bottom:12px;">' + (isHigh ? '⚠️' : '💡') + ' Safer Alternatives</div>'
+    + '<ul style="padding:0;margin:0;">' + altList + '</ul></div>'
+    + '<div style="background:' + bg + ';border:1.5px solid ' + border + ';border-radius:12px;padding:18px 22px;margin-top:12px;">'
+    + '<div style="font-size:14px;font-weight:700;color:' + color + ';margin-bottom:12px;">🔴 Precautions & Monitoring</div>'
+    + '<ul style="padding:0;margin:0;">' + precList + '</ul></div>';
+}
+
+// Frontend drug name map (same as backend)
+
+// TABS
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+}
+
+// AUTOCOMPLETE
+let activeIdx = {};
+function showSug(id, list) {
+  const input = document.getElementById(id);
+  const drop = document.getElementById(id + '-list');
+  const val = input.value.toLowerCase().trim();
+  if (!val) { drop.style.display = 'none'; return; }
+  const matches = list.filter(d => d.toLowerCase().includes(val)).slice(0, 8);
+  if (!matches.length) { drop.style.display = 'none'; return; }
+  drop.innerHTML = matches.map(m =>
+    `<div class="autocomplete-item" data-val="${m}" onmousedown="pickSug('${id}','${m.replace(/'/g,"\\'")}')">
+      ${m.replace(new RegExp(val.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi'), s => `<strong>${s}</strong>`)}
+    </div>`
+  ).join('');
+  drop.style.display = 'block';
+  activeIdx[id] = -1;
+}
+function pickSug(id, val) {
+  document.getElementById(id).value = val;
+  document.getElementById(id + '-list').style.display = 'none';
+}
+function handleKey(e, id) {
+  const drop = document.getElementById(id + '-list');
+  const items = drop.querySelectorAll('.autocomplete-item');
+  if (!items.length) return;
+  if (e.key === 'ArrowDown') { e.preventDefault(); activeIdx[id] = Math.min((activeIdx[id]||0) + 1, items.length - 1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); activeIdx[id] = Math.max((activeIdx[id]||0) - 1, 0); }
+  else if (e.key === 'Enter') { const a = drop.querySelector('.ac-active'); if (a) { e.preventDefault(); pickSug(id, a.dataset.val); return; } }
+  else if (e.key === 'Escape') { drop.style.display = 'none'; return; }
+  items.forEach((el, i) => el.classList.toggle('ac-active', i === activeIdx[id]));
+}
+document.addEventListener('click', e => {
+  ['ddi-drug1','ddi-drug2','dfi-drug','dfi-food','dci-drug','dci-condition'].forEach(id => {
+    const l = document.getElementById(id + '-list');
+    if (l && !l.contains(e.target) && e.target.id !== id) l.style.display = 'none';
+  });
+});
+
+// HELPERS
+function riskClass(r) { const m = {'High':'high','Moderate':'moderate','Low':'low','None':'none'}; return m[r] || 'none'; }
+function riskEmoji(r) { return {'High':'🔴','Moderate':'🟠','Low':'🟡','None':'🟢'}[r] || '⚪'; }
+function riskLabel(r, type) {
+  if (type === 'dfi') {
+    return {'High':'High Risk — Avoid this food','Moderate':'Moderate Risk — Use with caution','Low':'Low Risk — Monitor intake','None':'No Interaction Found — Generally Safe'}[r] || r;
+  }
+  return {'High':'High Risk','Moderate':'Moderate Risk','Low':'Low Risk — Monitor for symptoms','None':'No Interaction Found — Generally Safe'}[r] || r;
+}
+
+function overallBox(risk, subtitle) {
+  return `<div class="result-box ${riskClass(risk)}">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:28px;">${riskEmoji(risk)}</span>
+      <div><div class="result-badge ${riskClass(risk)}">${riskLabel(risk)}</div><div class="result-subtitle">${subtitle}</div></div>
+    </div>
+  </div>`;
+}
+
+// GROQ
+async function askGroq(prompt) {
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + GROQ_KEY },
+    body: JSON.stringify({
+      model: GROQ_MODEL,
+      messages: [
+        { role: 'system', content: 'You are MediGuard AI, a clinical pharmacology expert. Give specific, actionable medical advice. When there is a High or Moderate risk interaction, always name 2-3 specific safer alternative medications with their generic names. Never just say "consult a doctor" without first giving specific drug alternatives and dosage guidance. Use bullet points and bold headers. Be direct and specific.' },
+        { role: 'user', content: prompt }
+      ],
+      max_tokens: 500, temperature: 0.3
+    })
+  });
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || 'No response from AI.';
+}
+
+function formatAI(text) {
+  let html = text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/^[\*\-•] (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
+  html = html.replace(/<\/ul>\s*<ul>/g, '');
+  return `<div class="ai-response"><h4>🤖 MediGuard AI Analysis</h4><div class="ai-response-body">${html}</div></div>`;
+}
+
+// DDI
+async function runDDI() {
+  const drug1 = document.getElementById('ddi-drug1').value.trim();
+  const drug2 = document.getElementById('ddi-drug2').value.trim();
+  const dose1 = document.getElementById('ddi-dose1').value.trim();
+  const dose2 = document.getElementById('ddi-dose2').value.trim();
+  if (!drug1 || !drug2) { alert('Please enter both drug names'); return; }
+
+  const btn = document.querySelector('#tab-ddi .btn-assess');
+  btn.disabled = true; btn.textContent = '⏳ Checking...';
+  const rd = document.getElementById('ddi-result');
+  rd.innerHTML = '<div class="loading"><div class="spinner"></div> Checking interaction database + AI...</div>';
+
+  try {
+    const res = await fetch(`${API}/assess`, {
+      method: 'POST', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ drug1, drug2, condition: 'general' })
+    });
+    const json = await res.json();
+    const data = json.data || json;
+    const ddi = data.ddi_risk || 'None';
+
+    const doseInfo = (dose1 || dose2) ? `Dosages: ${drug1} – ${dose1||'not specified'}, ${drug2} – ${dose2||'not specified'}.` : '';
+    const patCtx = getPatientContext();
+
+    const [altData, aiText, patientData] = await Promise.all([
+      fetchAlternatives(drug1, drug2, ddi, patCtx),
+      askGroq(`Drug interaction: ${drug1} + ${drug2}. ${doseInfo} Risk: ${ddi}.${patCtx}\nExplain: 1) **Interaction Summary** 2) **Risk for this patient** 3) **Symptoms to watch** 4) **Safe use tips**`),
+      fetchPatientRisk(drug1, drug2, ddi, 'DDI', patCtx)
+    ]);
+
+    rd.innerHTML = overallBox(ddi, `${drug1} + ${drug2}`) +
+      `<div class="card">
+        <div class="result-grid">
+          <div class="result-item"><div class="result-item-label">Database Risk</div><div class="result-item-value ${ddi}">${ddi}</div></div>
+          <div class="result-item"><div class="result-item-label">Drug 1</div><div class="result-item-value" style="color:#0f172a;font-size:13px;">${drug1}${dose1 ? ' · <span style="color:#64748b;">'+dose1+'</span>' : ''}</div></div>
+          <div class="result-item"><div class="result-item-label">Drug 2</div><div class="result-item-value" style="color:#0f172a;font-size:13px;">${drug2}${dose2 ? ' · <span style="color:#64748b;">'+dose2+'</span>' : ''}</div></div>
+        </div>
+        ${renderAlternativesBox(altData, ddi, drug1, drug2)}
+        ${renderPatientRisk(patientData, 'DDI')}
+        ${formatAI(aiText)}
+        <div class="btn-row">
+          <button class="btn-secondary" onclick="resetTab('ddi')">🔄 New Check</button>
+          <button class="btn-secondary" onclick="window.location.href='/chat?q='+encodeURIComponent('Tell me more about ${drug1} and ${drug2} interaction')">💬 Ask AI More</button>
+        </div>
+      </div>`;
+    saveHistory(drug1, drug2, 'general', data);
+  } catch(err) {
+    rd.innerHTML = `<div class="warning-box">⚠️ Error: ${err.message}. Please check backend availability and try again.</div>`;
+  }
+  btn.disabled = false; btn.textContent = 'Check Drug–Drug Interaction →';
+}
+
+// DFI
+async function runDFI() {
+  const drug = document.getElementById('dfi-drug').value.trim();
+  const food = document.getElementById('dfi-food').value.trim();
+  if (!drug || !food) { alert('Please enter both drug and food'); return; }
+
+  const btn = document.querySelector('#tab-dfi .btn-assess');
+  btn.disabled = true; btn.textContent = '⏳ Checking...';
+  const rd = document.getElementById('dfi-result');
+  rd.innerHTML = '<div class="loading"><div class="spinner"></div> Checking dataset + AI...</div>';
+
+  try {
+    const patCtx = getPatientContext();
+
+    // 1. Get dataset interactions for this drug
+    let datasetRisk = 'None';
+    let interactions = [];
+    let lookupResult = null;
+    try {
+      // Check specific drug+food lookup first
+      const lookupRes = await fetch(`${API}/api/dfi/lookup`, {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ drug, food })
+      });
+      if (lookupRes.ok) {
+        const lookupData = await lookupRes.json();
+        if (lookupData.found) {
+          lookupResult = lookupData;
+          console.log('Lookup found:', lookupData.risk, lookupData.mechanism);
+        }
+      }
+      // Also get general drug food interactions
+      const dfiRes = await fetch(`${API}/api/dfi`, {
+        method: 'POST', credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ drug })
+      });
+      if (dfiRes.ok) {
+        const dfiData = await dfiRes.json();
+        datasetRisk = dfiData.risk || 'None';
+        interactions = dfiData.interactions || [];
+      }
+    } catch(e) {
+      console.warn('DFI fetch failed:', e.message);
+    }
+
+    // Build context from dataset interactions to guide AI
+    const datasetContext = interactions.length > 0
+      ? `\nDataset shows ${drug} has these known food interactions: ${interactions.map(i => i.text).join('; ')}`
+      : '';
+
+    // 2. Ask AI specifically about this drug + food combo, informed by dataset
+    const aiText = await askGroq(`A patient is taking "${drug}" and wants to eat/drink "${food}". Is this safe?${datasetContext}${patCtx}
+
+Important: Use your clinical pharmacology knowledge to assess this specific food-drug combination accurately.
+For example: warfarin + vitamin K rich foods (spinach, liver, kale) = HIGH risk. Warfarin + alcohol = HIGH risk.
+
+Answer:
+1) **Risk level**: State exactly one of: No interaction / Low risk / Moderate risk / High risk
+2) **What happens**: The exact clinical mechanism if any interaction exists
+3) **Timing**: When to avoid ${food} relative to the dose if needed
+4) **Safe alternatives**: 3 specific similar foods that are safer to eat`);
+
+    // Use AI risk for the specific food entered
+    // Dataset shows general drug food risks (shown in info box below)
+    const lower = aiText.toLowerCase();
+    const normalized = lower.replace(/\s+/g, ' ').trim();
+    let aiRisk = 'None';
+
+    // Prefer explicit "Risk level:" label from the AI response when present.
+    const labeledRisk = normalized.match(/risk\s*level\s*[:\-]\s*(high risk|moderate risk|low risk|no interaction)/i);
+    if (labeledRisk) {
+      const token = labeledRisk[1].toLowerCase();
+      if (token.includes('high')) aiRisk = 'High';
+      else if (token.includes('moderate')) aiRisk = 'Moderate';
+      else if (token.includes('low')) aiRisk = 'Low';
+      else aiRisk = 'None';
+    } else {
+      // Use the opening lines first to avoid picking up echoed examples later in text.
+      const lines = lower.split('\n').map(s => s.trim()).filter(Boolean);
+      const head = (lines.slice(0, 2).join(' ') || normalized);
+
+      if (head.includes('high risk')) aiRisk = 'High';
+      else if (head.includes('moderate risk')) aiRisk = 'Moderate';
+      else if (head.includes('low risk')) aiRisk = 'Low';
+      else if (head.includes('no interaction') || head.includes('generally safe') || head.includes('no direct interaction')) aiRisk = 'None';
+      else if (normalized.includes('high risk') && !normalized.includes('low risk')) aiRisk = 'High';
+      else if (normalized.includes('moderate risk')) aiRisk = 'Moderate';
+      else if (normalized.includes('low risk') || normalized.includes('minor') || normalized.includes('no significant')) aiRisk = 'Low';
+      else if (normalized.includes('no interaction') || normalized.includes('no known interaction') || normalized.includes('generally safe')) aiRisk = 'None';
+    }
+
+    console.log('DFI risk parse debug:', { aiRisk, headText: (lower.split('\n').slice(0, 2).join(' ') || lower), snippet: lower.slice(0, 220) });
+
+    // Use lookup result if found (most accurate), otherwise use AI risk
+    const finalRisk = lookupResult ? lookupResult.risk : aiRisk;
+    const patientData = await fetchPatientRisk(drug, food, finalRisk, 'DFI', patCtx);
+
+    // Build lookup result box if found
+    let lookupBox = '';
+    if (lookupResult && lookupResult.found) {
+      const lc = lookupResult.risk === 'High' ? '#dc2626' : lookupResult.risk === 'Moderate' ? '#e65100' : '#2e7d32';
+      const lb = lookupResult.risk === 'High' ? '#fff0f0' : lookupResult.risk === 'Moderate' ? '#fff8e1' : '#e8f5e9';
+      lookupBox = `<div style="background:${lb};border:1.5px solid ${lc}30;border-radius:12px;padding:14px 18px;margin-top:16px;">
+        <div style="font-size:12px;font-weight:700;color:${lc};margin-bottom:6px;">🔬 Clinical Interaction Data</div>
+        <div style="font-size:13px;color:#1a1e2e;line-height:1.6;">${lookupResult.mechanism}</div>
+      </div>`;
+    }
+
+    // Build dataset interactions box
+    let datasetBox = '';
+    if (interactions.length > 0) {
+      const items = interactions.map(i =>
+        `<li style="margin-bottom:8px;"><span style="font-weight:600;color:${i.risk==='High'?'#dc2626':i.risk==='Moderate'?'#e65100':'#2e7d32'};">[${i.risk}]</span> ${i.text}</li>`
+      ).join('');
+      datasetBox = `<div style="background:#f8faff;border:1.5px solid #c7d9f5;border-radius:12px;padding:18px 22px;margin-top:16px;">
+        <div style="font-size:13px;font-weight:700;color:#1565C0;margin-bottom:12px;">📋 General Food Warnings for ${drug}</div>
+        <ul style="padding-left:18px;margin:0;font-size:13px;line-height:1.8;">${items}</ul>
+      </div>`;
+    }
+
+    rd.innerHTML = overallBox(finalRisk, `${drug} + ${food}`, 'dfi') +
+      `<div class="card">
+        <div class="result-grid">
+          <div class="result-item"><div class="result-item-label">Food Risk</div><div class="result-item-value ${finalRisk}">${finalRisk}</div></div>
+          <div class="result-item"><div class="result-item-label">Drug</div><div class="result-item-value" style="color:#0f172a;font-size:13px;">${drug}</div></div>
+          <div class="result-item"><div class="result-item-label">Food</div><div class="result-item-value" style="color:#0f172a;font-size:13px;">${food}</div></div>
+        </div>
+        ${lookupBox}
+        ${datasetBox}
+        ${renderPatientRisk(patientData, 'DFI')}
+        ${formatAI(aiText)}
+        <div class="btn-row">
+          <button class="btn-secondary" onclick="resetTab('dfi')">🔄 New Check</button>
+          <button class="btn-secondary" onclick="window.location.href='/chat?q='+encodeURIComponent('Tell me about ${drug} and ${food} interaction')">💬 Ask AI More</button>
+        </div>
+      </div>`;
+    saveHistory(drug, '', 'dfi_food:'+food, { dfi_risk_drug1: finalRisk, overall_risk: finalRisk });
+  } catch(err) {
+    rd.innerHTML = `<div class="warning-box">⚠️ Error: ${err.message}</div>`;
+  }
+  btn.disabled = false; btn.textContent = 'Check Drug–Food Interaction →';
+}
+
+
+// DCI
+async function runDCI() {
+  const drug = document.getElementById('dci-drug').value.trim();
+  const condition = document.getElementById('dci-condition').value.trim();
+  if (!drug || !condition) { alert('Please enter both drug and condition'); return; }
+
+  const btn = document.querySelector('#tab-dci .btn-assess');
+  btn.disabled = true; btn.textContent = '⏳ Checking...';
+  const rd = document.getElementById('dci-result');
+  rd.innerHTML = '<div class="loading"><div class="spinner"></div> Checking database + AI...</div>';
+
+  try {
+    const res = await fetch(`${API}/assess`, {
+      method: 'POST', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ drug1: drug, drug2: drug, condition })
+    });
+    const json = await res.json();
+    const data = json.data || json;
+    const dci = data.dci_risk_drug1 || 'None';
+
+    const patCtx = getPatientContext();
+    const [aiText, patientData] = await Promise.all([
+      askGroq(`Is "${drug}" safe for a patient with "${condition}"? Database risk: ${dci}.${patCtx}
+
+Please provide:
+1) **Safety Assessment**: Is this drug safe for this specific condition and patient?
+2) **Risk factors**: How do their age/gender/other conditions change the risk?
+${dci === 'High' || dci === 'Moderate' ? `3) **Safer Alternatives**: Name 2-3 specific alternative medications for treating this condition that are safer for this patient. Give actual drug names.
+4) **Dosage adjustment**: If this drug must be used, what dose/monitoring is needed?` : `3) **Safe use tips**: How to use this drug safely with this condition.`}
+5) **Pregnancy/breastfeeding**: Any concerns if applicable.
+Do NOT just say "consult a doctor" - give specific alternative drug names and actionable advice.`),
+      fetchPatientRisk(drug, condition, dci, 'DCI', patCtx)
+    ]);
+
+    rd.innerHTML = overallBox(dci, `${drug} for ${condition}`) +
+      `<div class="card">
+        <div class="result-grid">
+          <div class="result-item"><div class="result-item-label">Database Risk</div><div class="result-item-value ${dci}">${dci}</div></div>
+          <div class="result-item"><div class="result-item-label">Drug</div><div class="result-item-value" style="color:#0f172a;font-size:13px;">${drug}</div></div>
+          <div class="result-item"><div class="result-item-label">Condition</div><div class="result-item-value" style="color:#0f172a;font-size:13px;">${condition}</div></div>
+        </div>
+        ${renderPatientRisk(patientData, 'DCI')}
+        ${formatAI(aiText)}
+        <div class="btn-row">
+          <button class="btn-secondary" onclick="resetTab('dci')">🔄 New Check</button>
+          <button class="btn-secondary" onclick="window.location.href='/chat?q='+encodeURIComponent('Tell me about ${drug} safety for ${condition}')">💬 Ask AI More</button>
+        </div>
+      </div>`;
+
+    saveHistory(drug, drug, condition, data);
+  } catch(err) {
+    rd.innerHTML = `<div class="warning-box">⚠️ Error: ${err.message}</div>`;
+  }
+  btn.disabled = false; btn.textContent = 'Check Drug–Condition Interaction →';
+}
+
+function resetTab(tab) {
+  const fields = { ddi: ['ddi-drug1','ddi-drug2','ddi-dose1','ddi-dose2'], dfi: ['dfi-drug','dfi-food'], dci: ['dci-drug','dci-condition'] };
+  fields[tab].forEach(id => document.getElementById(id).value = '');
+  document.getElementById(tab + '-result').innerHTML = '';
+}
+
+async function saveHistory(drug1, drug2, condition, data) {
+  try {
+    await fetch(`${API}/api/assessments`, {
+      method: 'POST', credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ drug1, drug2, condition, ddi_risk: data.ddi_risk||'None', dfi_risk_drug1: data.dfi_risk_drug1||'None', dfi_risk_drug2: data.dfi_risk_drug2||'None', dci_risk_drug1: data.dci_risk_drug1||'None', dci_risk_drug2: data.dci_risk_drug2||'None', overall_risk: data.overall_risk||'None' })
+    });
+  } catch(e) {}
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('page-wrap').classList.toggle('shifted');
+}
+async function handleLogout() {
+  await fetch(`${API}/api/logout`, { method: 'POST', credentials: 'include' });
+  window.location.href = '/login';
+}
+document.addEventListener('DOMContentLoaded', async () => {
+  const user = await getCurrentUser();
+  if (user) {
+    document.getElementById('sidebar-username').textContent = user.username;
+  } else {
+    document.getElementById('nav-right').innerHTML = '<a href="/login" style="color:#1565C0;font-weight:bold;text-decoration:none;margin-right:12px;">Log In</a><a href="/register" style="background:#1565C0;color:white;padding:8px 16px;border-radius:8px;font-weight:bold;text-decoration:none;">Register</a>';
+  }
+  loadPatientProfile();
+
+  // Auto-switch tab from URL param e.g. ?tab=dfi
+  const urlTab = new URLSearchParams(window.location.search).get('tab');
+  if (urlTab && ['ddi','dfi','dci'].includes(urlTab)) switchTab(urlTab);
+});
+</script>
+</body>
+</html>

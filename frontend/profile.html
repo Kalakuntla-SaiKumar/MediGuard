@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MediGuard - My Health Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --blue:#1565C0; --blue-dark:#0D47A1; --blue-light:#E3F2FD; --green:#2E7D32; --green-bg:#E8F5E9; --red:#C62828; --gray:#f5f7fa; --border:#e0e0e0; --text:#1a1a2e; --muted:#666; }
+body { font-family:'DM Sans',sans-serif; background:var(--gray); min-height:100vh; display:flex; flex-direction:column; }
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:10px 32px; background:white; box-shadow:0 1px 0 var(--border); position:sticky; top:0; z-index:100; }
+.navbar img { height:72px; }
+.nav-links { display:flex; gap:20px; align-items:center; }
+.nav-link { color:var(--blue); text-decoration:none; font-weight:600; font-size:14px; }
+.nav-link:hover { text-decoration:underline; }
+.nav-link.logout { color:#e53935; }
+.page { flex:1; max-width:800px; margin:40px auto; padding:0 20px; width:100%; }
+.profile-header { background:linear-gradient(135deg,var(--blue),var(--blue-dark)); border-radius:20px; padding:32px 36px; color:white; margin-bottom:28px; display:flex; align-items:center; gap:24px; }
+.avatar { width:72px; height:72px; background:rgba(255,255,255,0.2); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px; flex-shrink:0; }
+.profile-header h1 { font-family:'Sora',sans-serif; font-size:22px; margin-bottom:4px; }
+.profile-header p { font-size:14px; opacity:0.85; }
+.card { background:white; border-radius:16px; box-shadow:0 4px 20px rgba(0,0,0,0.07); padding:32px; margin-bottom:24px; animation:rise 0.4s ease; }
+@keyframes rise { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.section-label { font-family:'Sora',sans-serif; font-size:13px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid var(--blue-light); display:flex; align-items:center; gap:8px; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.form-grid .full { grid-column:1/-1; }
+label { display:block; font-weight:600; font-size:13px; color:var(--text); margin-bottom:6px; }
+input[type="text"],input[type="number"],input[type="email"],select,textarea { width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--border); font-size:14px; font-family:'DM Sans',sans-serif; transition:border-color 0.2s,box-shadow 0.2s; background:#fafafa; color:var(--text); }
+input:focus,select:focus,textarea:focus { outline:none; border-color:var(--blue); background:white; box-shadow:0 0 0 3px rgba(21,101,192,0.12); }
+textarea { resize:vertical; min-height:90px; }
+.hint { font-size:11.5px; color:#999; margin-top:4px; }
+.security-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.q-block { background:var(--blue-light); border-radius:10px; padding:14px; }
+.q-block .q-text { font-size:12px; font-weight:700; color:var(--blue-dark); margin-bottom:8px; }
+.btn-row { display:flex; gap:12px; margin-top:8px; }
+.btn { padding:13px 28px; border-radius:10px; border:none; font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700; cursor:pointer; transition:all 0.2s; }
+.btn-primary { background:var(--blue); color:white; flex:1; }
+.btn-primary:hover:not(:disabled) { background:var(--blue-dark); transform:translateY(-1px); box-shadow:0 6px 18px rgba(21,101,192,0.35); }
+.btn-primary:disabled { opacity:0.65; cursor:not-allowed; }
+.btn-outline { background:white; color:var(--blue); border:1.5px solid var(--blue); }
+.btn-outline:hover { background:var(--blue-light); }
+.msg { display:none; padding:11px 14px; border-radius:8px; font-size:13.5px; font-weight:600; margin-bottom:16px; }
+.msg.show { display:block; }
+.msg.error { background:#FFEBEE; color:var(--red); border-left:4px solid var(--red); }
+.msg.success { background:var(--green-bg); color:var(--green); border-left:4px solid var(--green); }
+.completion-bar { background:var(--border); border-radius:99px; height:6px; margin-top:8px; overflow:hidden; }
+.completion-fill { height:100%; background:linear-gradient(90deg,#43a047,#66bb6a); border-radius:99px; transition:width 0.5s ease; }
+.completion-label { font-size:12px; color:rgba(255,255,255,0.8); margin-top:4px; }
+@media(max-width:600px) { .form-grid,.security-grid{grid-template-columns:1fr} .profile-header{flex-direction:column;text-align:center} }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <img src="Logo.png" alt="MediGuard">
+  <div class="nav-links">
+    <a href="/" class="nav-link">🏠 Dashboard</a>
+    <a href="#" class="nav-link logout" onclick="handleLogout()">Logout</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="profile-header">
+    <div class="avatar">👤</div>
+    <div>
+      <h1 id="header-name">My Health Profile</h1>
+      <p id="header-email">Complete your profile to get personalized safety alerts</p>
+      <div class="completion-bar" style="margin-top:10px;width:220px;">
+        <div class="completion-fill" id="completion-fill" style="width:0%"></div>
+      </div>
+      <div class="completion-label" id="completion-label">Profile 0% complete</div>
+    </div>
+  </div>
+
+  <div class="msg" id="msg-error"></div>
+  <div class="msg" id="msg-success"></div>
+
+  <div class="card">
+    <div class="section-label">👤 Personal Information</div>
+    <div class="form-grid">
+      <div><label>Full Name</label><input type="text" id="full_name" placeholder="e.g., Sai Kumar"></div>
+      <div><label>Age</label><input type="number" id="age" placeholder="e.g., 25" min="1" max="120"></div>
+      <div>
+        <label>Gender</label>
+        <select id="gender">
+          <option value="">Select gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+          <option value="prefer_not">Prefer not to say</option>
+        </select>
+      </div>
+      <div>
+        <label>Pregnancy Status</label>
+        <select id="pregnancy_status">
+          <option value="na">Not Applicable</option>
+          <option value="not_pregnant">Not Pregnant</option>
+          <option value="pregnant">Pregnant</option>
+          <option value="breastfeeding">Breastfeeding</option>
+        </select>
+      </div>
+      <div><label>Weight (kg) <span style="color:#999;font-weight:400;">(optional)</span></label><input type="number" id="weight" placeholder="e.g., 70" min="1" max="300"></div>
+      <div>
+        <label>Blood Group <span style="color:#999;font-weight:400;">(optional)</span></label>
+        <select id="blood_group">
+          <option value="">Select blood group</option>
+          <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+          <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+        </select>
+      </div>
+      <div class="full"><label>Phone <span style="color:#999;font-weight:400;">(optional)</span></label><input type="text" id="phone" placeholder="e.g., +91 9876543210"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">🏥 Medical Information</div>
+    <div class="form-grid">
+      <div class="full">
+        <label>Chronic Conditions</label>
+        <textarea id="conditions" placeholder="e.g., Type 2 Diabetes, Hypertension, Asthma"></textarea>
+        <div class="hint">This helps MediGuard flag drug-condition risks specific to you</div>
+      </div>
+      <div class="full">
+        <label>Known Allergies</label>
+        <textarea id="allergies" placeholder="e.g., Penicillin, Sulfa drugs, Peanuts"></textarea>
+        <div class="hint">Include drug allergies and food allergies</div>
+      </div>
+      <div class="full">
+        <label>Current Medications</label>
+        <textarea id="medications" placeholder="e.g., Metformin 500mg, Lisinopril 10mg"></textarea>
+        <div class="hint">List all medications you are currently taking including dosage if known</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-label">🔐 Security Questions</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Used to verify your identity when you forget your password.</p>
+    <div class="security-grid">
+      <div class="q-block">
+        <div class="q-text">Q1: What city were you born in?</div>
+        <input type="text" id="sec_ans_1" placeholder="Your answer" autocomplete="off">
+        <div class="hint">Case-insensitive</div>
+      </div>
+      <div class="q-block">
+        <div class="q-text">Q2: What is your favorite color?</div>
+        <input type="text" id="sec_ans_2" placeholder="Your answer" autocomplete="off">
+        <div class="hint">Case-insensitive</div>
+      </div>
+    </div>
+    <div class="hint" style="margin-top:10px;">⚠️ Only fill these if you want to update your security answers.</div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-outline" onclick="window.location.href='/'">← Back to Dashboard</button>
+    <button class="btn btn-primary" id="save-btn" onclick="saveProfile()">Save Profile</button>
+  </div>
+  <div style="height:40px;"></div>
+</div>
+
+<script src="auth.js"></script>
+<script>
+// AUTH_API already defined in auth.js
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const user = await getCurrentUser();
+  if (!user) { window.location.href = '/login'; return; }
+
+  document.getElementById('header-name').textContent = (user.full_name || user.username) + "'s Profile";
+  document.getElementById('header-email').textContent = user.email;
+
+  // Pre-fill ALL fields
+  if (user.full_name)          document.getElementById('full_name').value = user.full_name;
+  if (user.age)                document.getElementById('age').value = user.age;
+  if (user.gender)             document.getElementById('gender').value = user.gender;
+  if (user.pregnancy_status)   document.getElementById('pregnancy_status').value = user.pregnancy_status;
+  if (user.weight)             document.getElementById('weight').value = user.weight;
+  if (user.blood_group)        document.getElementById('blood_group').value = user.blood_group;
+  if (user.phone)              document.getElementById('phone').value = user.phone;
+  if (user.health_conditions)  document.getElementById('conditions').value = user.health_conditions;
+  if (user.allergies)          document.getElementById('allergies').value = user.allergies;
+  if (user.medications)        document.getElementById('medications').value = user.medications;
+
+  updateCompletion();
+});
+
+function updateCompletion() {
+  const fields = ['full_name','age','gender','conditions','allergies','medications'];
+  const filled = fields.filter(id => document.getElementById(id)?.value?.trim()).length;
+  const pct = Math.round((filled / fields.length) * 100);
+  document.getElementById('completion-fill').style.width = pct + '%';
+  document.getElementById('completion-label').textContent = `Profile ${pct}% complete`;
+}
+
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', updateCompletion);
+});
+
+async function saveProfile() {
+  const btn = document.getElementById('save-btn');
+  btn.textContent = '🔄 Saving...';
+  btn.disabled = true;
+  clearMsgs();
+
+  const payload = {
+    full_name:         document.getElementById('full_name').value.trim(),
+    age:               document.getElementById('age').value || null,
+    gender:            document.getElementById('gender').value,
+    pregnancy_status:  document.getElementById('pregnancy_status').value,
+    weight:            document.getElementById('weight').value || null,
+    blood_group:       document.getElementById('blood_group').value,
+    phone:             document.getElementById('phone').value.trim(),
+    health_conditions: document.getElementById('conditions').value.trim(),
+    allergies:         document.getElementById('allergies').value.trim(),
+    medications:       document.getElementById('medications').value.trim(),
+  };
+
+  const ans1 = document.getElementById('sec_ans_1').value.trim();
+  const ans2 = document.getElementById('sec_ans_2').value.trim();
+  if (ans1) payload.security_answer_1 = ans1;
+  if (ans2) payload.security_answer_2 = ans2;
+
+  try {
+    const res = await fetch(`${AUTH_API}/user`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+    if (res.ok) {
+      showSuccess('✓ Profile saved successfully!');
+      updateCompletion();
+      document.getElementById('sec_ans_1').value = '';
+      document.getElementById('sec_ans_2').value = '';
+    } else {
+      showError(data.error || 'Failed to save profile.');
+    }
+  } catch (err) {
+    showError('Network error: ' + err.message);
+  } finally {
+    btn.textContent = 'Save Profile';
+    btn.disabled = false;
+  }
+}
+
+function showError(msg) {
+  const el = document.getElementById('msg-error');
+  el.textContent = '⚠️ ' + msg;
+  el.className = 'msg error show';
+  el.scrollIntoView({ behavior:'smooth', block:'center' });
+  document.getElementById('msg-success').className = 'msg';
+}
+
+function showSuccess(msg) {
+  const el = document.getElementById('msg-success');
+  el.textContent = msg;
+  el.className = 'msg success show';
+  el.scrollIntoView({ behavior:'smooth', block:'center' });
+  document.getElementById('msg-error').className = 'msg';
+}
+
+function clearMsgs() {
+  document.getElementById('msg-error').className = 'msg';
+  document.getElementById('msg-success').className = 'msg';
+}
+
+async function handleLogout() {
+  await fetch(`${AUTH_API}/logout`, { method:'POST', credentials:'include' });
+  window.location.href = '/login';
+}
+</script>
+</body>
+</html>

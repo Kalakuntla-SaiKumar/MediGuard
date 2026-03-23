@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Assessment History - MediGuard</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #f5f7fa; min-height: 100vh; }
+
+:root { --sw: 230px; --swc: 68px; }
+
+.sidebar {
+  position: fixed; top: 0; left: 0; height: 100vh; width: var(--sw);
+  background: linear-gradient(180deg, #0D47A1 0%, #1565C0 60%, #1976D2 100%);
+  display: flex; flex-direction: column; z-index: 200; overflow: hidden;
+  transition: width 0.3s ease; box-shadow: 4px 0 20px rgba(13,71,161,0.2);
+}
+.sidebar.collapsed { width: var(--swc); }
+.sb-logo { display: flex; align-items: center; justify-content: center; padding: 8px 10px; min-height: 70px; border-bottom: 1px solid rgba(255,255,255,0.12); flex-shrink: 0; overflow: hidden; }
+.sb-logo img { height: 56px; width: 100%; max-width: 200px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+.sb-nav { flex: 1; padding: 14px 8px; display: flex; flex-direction: column; gap: 3px; overflow-y: auto; overflow-x: hidden; }
+.sb-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; white-space: nowrap; position: relative; }
+.sb-item:hover { background: rgba(255,255,255,0.13); color: white; }
+.sb-item.active { background: rgba(255,255,255,0.18); color: white; font-weight: bold; }
+.sb-item .si { font-size: 18px; flex-shrink: 0; width: 22px; text-align: center; }
+.sb-lbl { transition: opacity 0.2s; }
+.sidebar.collapsed .sb-lbl { opacity: 0; }
+.sb-divider { height: 1px; background: rgba(255,255,255,0.12); margin: 6px 0; }
+.sb-user { padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.sb-avatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.sb-uinfo { overflow: hidden; transition: opacity 0.2s; }
+.sidebar.collapsed .sb-uinfo { opacity: 0; }
+.sb-uname { font-size: 13px; font-weight: bold; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-urole { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+.topbar { position: fixed; top: 0; left: var(--sw); right: 0; height: 64px; background: white; border-bottom: 1px solid #e4e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; z-index: 100; transition: left 0.3s ease; box-shadow: 0 1px 8px rgba(0,0,0,0.04); }
+.topbar.shifted { left: var(--swc); }
+.toggle-btn { width: 36px; height: 36px; border-radius: 8px; border: 1.5px solid #e4e8f0; background: white; cursor: pointer; font-size: 16px; transition: all 0.2s; }
+.toggle-btn:hover { background: #E3F2FD; }
+.topbar-title { font-size: 17px; font-weight: bold; color: #1a1e2e; }
+.topbar-right { font-size: 13px; color: #6b7280; }
+.topbar-right span { color: #1565C0; font-weight: bold; }
+
+.main { margin-left: var(--sw); margin-top: 64px; padding: 32px 28px; transition: margin-left 0.3s ease; }
+.main.shifted { margin-left: var(--swc); }
+
+/* Stats */
+.stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 28px; }
+.stat-card { background: white; border-radius: 14px; padding: 18px 22px; border: 1px solid #e4e8f0; display: flex; align-items: center; gap: 14px; }
+.stat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.stat-icon.blue{background:#E3F2FD} .stat-icon.red{background:#FFEBEE} .stat-icon.orange{background:#FFF3E0} .stat-icon.green{background:#E8F5E9}
+.stat-value { font-size: 22px; font-weight: bold; color: #1a1e2e; }
+.stat-label { font-size: 12px; color: #6b7280; margin-top: 2px; }
+
+/* Filter bar */
+.filter-bar { background: white; border-radius: 14px; border: 1px solid #e4e8f0; padding: 16px 22px; margin-bottom: 20px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.filter-bar input { flex: 1; min-width: 200px; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #e4e8f0; font-size: 14px; font-family: Arial, sans-serif; outline: none; }
+.filter-bar input:focus { border-color: #1565C0; }
+.filter-bar select { padding: 10px 14px; border-radius: 8px; border: 1.5px solid #e4e8f0; font-size: 14px; font-family: Arial, sans-serif; outline: none; cursor: pointer; }
+
+/* Table */
+.table-panel { background: white; border-radius: 16px; border: 1px solid #e4e8f0; overflow: hidden; }
+.table-header { padding: 18px 22px; border-bottom: 1px solid #e4e8f0; display: flex; align-items: center; justify-content: space-between; }
+.table-title { font-size: 15px; font-weight: bold; color: #1a1e2e; }
+.record-count { font-size: 13px; color: #6b7280; }
+
+.history-table { width: 100%; border-collapse: collapse; }
+.history-table th { text-align: left; font-size: 11px; font-weight: bold; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 18px; background: #fafafa; border-bottom: 1px solid #e4e8f0; }
+.history-table td { padding: 14px 18px; font-size: 13px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.history-table tr:hover td { background: #F0F7FF; }
+.history-table tr:last-child td { border-bottom: none; }
+
+.risk-badge { display: inline-block; padding: 4px 12px; border-radius: 99px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+.risk-badge.high     { background: #FFEBEE; color: #C62828; }
+.risk-badge.moderate { background: #FFF3E0; color: #E65100; }
+.risk-badge.low      { background: #FFFDE7; color: #7B6000; }
+.risk-badge.none, .risk-badge.safe { background: #E8F5E9; color: #2E7D32; }
+
+.drug-pill { display: inline-block; background: #E3F2FD; color: #1565C0; padding: 3px 10px; border-radius: 99px; font-size: 12px; font-weight: 600; margin: 2px; }
+
+.empty-state { text-align: center; padding: 60px 20px; color: #6b7280; }
+.empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-state h3 { font-size: 16px; margin-bottom: 8px; color: #1a1e2e; }
+.empty-state a { color: #1565C0; text-decoration: none; font-weight: bold; }
+
+.ask-ai-btn {
+  padding: 6px 12px; border-radius: 8px; border: 1.5px solid #1565C0;
+  background: white; color: #1565C0; font-size: 12px; font-weight: bold;
+  cursor: pointer; transition: all 0.2s; white-space: nowrap;
+}
+.ask-ai-btn:hover { background: #E3F2FD; }
+
+@media(max-width:900px) { .stats-row{grid-template-columns:1fr 1fr} }
+@media(max-width:600px) { .stats-row{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo"><img src="Logo.png" alt="MediGuard"></div>
+  <nav class="sb-nav">
+    <a class="sb-item" href="/" data-label="Dashboard"><span class="si">🏠</span><span class="sb-lbl">Dashboard</span></a>
+    <a class="sb-item" href="/assess-page" data-label="New Assessment"><span class="si">🔬</span><span class="sb-lbl">New Assessment</span></a>
+    <a class="sb-item active" href="/history-page" data-label="Assessment History"><span class="si">📋</span><span class="sb-lbl">Assessment History</span></a>
+    <div class="sb-divider"></div>
+    <a class="sb-item" href="/profile" data-label="My Profile"><span class="si">👤</span><span class="sb-lbl">My Profile</span></a>
+    <div class="sb-divider"></div>
+    <a class="sb-item" href="#" data-label="Logout" onclick="handleLogout(); return false;" style="color:rgba(255,180,180,0.85);"><span class="si">🚪</span><span class="sb-lbl">Logout</span></a>
+  </nav>
+  <div class="sb-user">
+    <div class="sb-avatar">👤</div>
+    <div class="sb-uinfo">
+      <div class="sb-uname" id="sidebar-username">Guest</div>
+      <div class="sb-urole">Patient</div>
+    </div>
+  </div>
+</aside>
+
+<header class="topbar" id="topbar">
+  <div style="display:flex;align-items:center;gap:14px;">
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    <span class="topbar-title">📋 Assessment History</span>
+  </div>
+  <div class="topbar-right" id="topbar-user"></div>
+</header>
+
+<main class="main" id="main">
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-icon blue">📊</div><div><div class="stat-value" id="stat-total">—</div><div class="stat-label">Total Assessments</div></div></div>
+    <div class="stat-card"><div class="stat-icon red">⚠️</div><div><div class="stat-value" id="stat-high">—</div><div class="stat-label">High Risk</div></div></div>
+    <div class="stat-card"><div class="stat-icon orange">⚡</div><div><div class="stat-value" id="stat-moderate">—</div><div class="stat-label">Moderate Risk</div></div></div>
+    <div class="stat-card"><div class="stat-icon green">✅</div><div><div class="stat-value" id="stat-safe">—</div><div class="stat-label">Safe</div></div></div>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <input type="text" id="search-filter" placeholder="🔍 Search by drug name or condition..." oninput="filterTable()">
+    <select id="risk-filter" onchange="filterTable()">
+      <option value="">All Risk Levels</option>
+      <option value="High">⚠️ High Risk</option>
+      <option value="Moderate">⚡ Moderate Risk</option>
+      <option value="Low">ℹ️ Low Risk</option>
+      <option value="None">✅ Safe</option>
+    </select>
+    <select id="type-filter" onchange="filterTable()">
+      <option value="">All Types</option>
+      <option value="DDI">💊 Drug–Drug</option>
+      <option value="DFI">🥗 Drug–Food</option>
+      <option value="DCI">🏥 Drug–Condition</option>
+    </select>
+    <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#374151;cursor:pointer;white-space:nowrap;">
+      <input type="checkbox" id="dedup-toggle" onchange="filterTable()" checked> Show unique only
+    </label>
+    <button onclick="confirmClearAll()" style="margin-left:auto;background:#fee2e2;color:#dc2626;border:1.5px solid #fca5a5;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;">🗑️ Clear All</button>
+  </div>
+
+  <!-- Table -->
+  <div class="table-panel">
+    <div class="table-header">
+      <div class="table-title">All Assessments</div>
+      <div class="record-count" id="record-count"></div>
+    </div>
+    <div id="table-container">
+      <div class="empty-state"><div class="empty-icon">⏳</div><h3>Loading...</h3></div>
+    </div>
+  </div>
+
+</main>
+
+<script src="auth.js"></script>
+<script>
+const HISTORY_API = `${(window.MEDIGUARD_API_BASE || '').replace(/\/$/, '')}/api`;
+let allAssessments = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const user = await getCurrentUser();
+  if (!user) { window.location.href = '/login'; return; }
+  document.getElementById('sidebar-username').textContent = user.username;
+  document.getElementById('topbar-user').innerHTML = `Welcome, <span>${user.username}</span>!`;
+  loadHistory();
+});
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('topbar').classList.toggle('shifted');
+  document.getElementById('main').classList.toggle('shifted');
+}
+
+function detectType(a) {
+  if (a.type) return a.type.toUpperCase();
+  // Check condition field for type prefix
+  if (a.condition && a.condition.startsWith('dfi_food:')) return 'DFI';
+  if (a.condition && a.condition.startsWith('dci_')) return 'DCI';
+  if (a.assessment_type) return a.assessment_type.toUpperCase();
+  // Fallback: if condition is 'general' or empty and drug2 exists → DDI
+  if (!a.condition || a.condition === 'general') return 'DDI';
+  return 'DCI';
+}
+
+function typeLabel(type) {
+  return {'DDI':'💊 DDI','DFI':'🥗 DFI','DCI':'🏥 DCI'}[type] || type;
+}
+
+function deduplicate(data) {
+  const seen = new Set();
+  return data.filter(a => {
+    const key = [
+      (a.drug1||'').toLowerCase().trim(),
+      (a.drug2||'').toLowerCase().trim(),
+      (a.condition||'').toLowerCase().trim(),
+      (a.overall_risk||'').toLowerCase()
+    ].join('|');
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+async function loadHistory() {
+  try {
+    const res  = await fetch(`${HISTORY_API}/assessments`, { credentials: 'include' });
+    const data = await res.json();
+    if (!res.ok) throw new Error('Failed to load');
+    allAssessments = data.assessments || [];
+    const initial = applyFilters(allAssessments);
+    updateStats(initial);
+    renderTable(initial);
+  } catch(e) {
+    document.getElementById('table-container').innerHTML = `<div class="empty-state"><div class="empty-icon">❌</div><h3>Failed to load history</h3></div>`;
+  }
+}
+
+function updateStats(data) {
+  document.getElementById('stat-total').textContent    = data.length;
+  document.getElementById('stat-high').textContent     = data.filter(a => a.overall_risk === 'High').length;
+  document.getElementById('stat-moderate').textContent = data.filter(a => a.overall_risk === 'Moderate').length;
+  document.getElementById('stat-safe').textContent     = data.filter(a => a.overall_risk === 'None' || a.overall_risk === 'Low').length;
+}
+
+function applyFilters(data) {
+  const search = document.getElementById('search-filter').value.toLowerCase();
+  const risk   = document.getElementById('risk-filter').value;
+  const type   = document.getElementById('type-filter').value;
+  const dedup  = document.getElementById('dedup-toggle').checked;
+
+  let filtered = data.filter(a => {
+    const matchSearch = !search ||
+      a.drug1?.toLowerCase().includes(search) ||
+      a.drug2?.toLowerCase().includes(search) ||
+      a.condition?.toLowerCase().includes(search);
+    const matchRisk = !risk || a.overall_risk === risk;
+    const matchType = !type || detectType(a) === type;
+    return matchSearch && matchRisk && matchType;
+  });
+
+  if (dedup) filtered = deduplicate(filtered);
+  return filtered;
+}
+
+function filterTable() {
+  const filtered = applyFilters(allAssessments);
+  updateStats(filtered);
+  renderTable(filtered);
+}
+
+async function deleteRow(id, trEl) {
+  if (!confirm('Delete this assessment?')) return;
+  try {
+    const res = await fetch(`${HISTORY_API}/assessments/${id}`, { method: 'DELETE', credentials: 'include' });
+    if (res.ok) {
+      allAssessments = allAssessments.filter(a => a.id !== id);
+      updateStats(allAssessments);
+      trEl.remove();
+      document.getElementById('record-count').textContent =
+        `${document.querySelectorAll('#table-container tbody tr').length} records`;
+    } else {
+      alert('Could not delete. Make sure the delete endpoint is added to Flask.');
+    }
+  } catch(e) { alert('Delete failed: ' + e.message); }
+}
+
+async function confirmClearAll() {
+  if (!confirm('Delete ALL assessments? This cannot be undone.')) return;
+  try {
+    const res = await fetch(`${HISTORY_API}/assessments/clear`, { method: 'DELETE', credentials: 'include' });
+    if (res.ok) {
+      allAssessments = [];
+      updateStats([]);
+      renderTable([]);
+    } else {
+      alert('Could not clear. Make sure the clear endpoint is added to Flask.');
+    }
+  } catch(e) { alert('Clear failed: ' + e.message); }
+}
+
+function renderTable(data) {
+  document.getElementById('record-count').textContent = `${data.length} record${data.length !== 1 ? 's' : ''}`;
+
+  if (!data.length) {
+    document.getElementById('table-container').innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">📭</div>
+        <h3>No assessments found</h3>
+        <p style="margin-top:8px;"><a href="/assess-page">Run your first assessment →</a></p>
+      </div>`;
+    return;
+  }
+
+  document.getElementById('table-container').innerHTML = `
+    <table class="history-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Type</th>
+          <th>Drugs / Items</th>
+          <th>Overall Risk</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${data.map((a, i) => {
+          const risk = (a.overall_risk || 'none').toLowerCase();
+          const type = detectType(a);
+          const dateStr = a.created_at || a.timestamp;
+          const date = dateStr ? new Date(dateStr).toLocaleDateString('en-IN', {day:'numeric',month:'short',year:'numeric'}) : '—';
+          let item2 = '';
+          if (type === 'DFI' && a.condition && a.condition.startsWith('dfi_food:')) {
+            const food = a.condition.replace('dfi_food:', '');
+            item2 = `<span style="color:#6b7280;font-size:11px;">+</span><span class="drug-pill" style="background:#e8f5e9;color:#2e7d32;">${food}</span>`;
+          } else if (a.drug2 && a.drug2 !== a.drug1 && a.drug2 !== '') {
+            item2 = `<span style="color:#6b7280;font-size:11px;">+</span><span class="drug-pill">${a.drug2}</span>`;
+          } else if (type === 'DCI') {
+            item2 = `<span style="color:#6b7280;font-size:11px;">+</span><span class="drug-pill" style="background:#fff3e0;color:#e65100;">${a.condition}</span>`;
+          }
+          return `<tr id="row-${a.id}">
+            <td style="color:#6b7280;font-size:12px;">${i+1}</td>
+            <td><span style="font-size:12px;font-weight:600;color:#1565c0;background:#e8f0fe;padding:3px 8px;border-radius:6px;">${typeLabel(type)}</span></td>
+            <td><span class="drug-pill">${a.drug1||'—'}</span>${item2}</td>
+            <td><span class="risk-badge ${risk}">${a.overall_risk||'—'}</span></td>
+            <td style="color:#6b7280;font-size:12px;white-space:nowrap;">${date}</td>
+            <td style="display:flex;gap:6px;">
+              <button class="ask-ai-btn" onclick="window.location.href='/chat?q='+encodeURIComponent('Explain interaction between ${a.drug1||''} and ${a.drug2||''}')" title="Ask AI">🤖 Ask AI</button>
+              <button onclick="deleteRow(${a.id}, document.getElementById('row-${a.id}'))" style="background:#fee2e2;color:#dc2626;border:1px solid #fca5a5;border-radius:6px;padding:5px 10px;font-size:12px;cursor:pointer;" title="Delete">🗑️</button>
+            </td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
+}
+
+async function handleLogout() {
+  await fetch(`${HISTORY_API}/logout`, { method: 'POST', credentials: 'include' });
+  window.location.href = '/login';
+}
+</script>
+</body>
+</html>

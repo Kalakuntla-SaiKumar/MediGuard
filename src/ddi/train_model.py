@@ -5,11 +5,24 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+import os
+import pandas as pd
 
-# ----------------------------
-# Load dataset
-# ----------------------------
-df = pd.read_csv("dataset/db_drug_interactions.csv")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+DDI_PATH = os.path.join(BASE_DIR, "data", "processed", "db_drug_interactions.csv")
+
+df = pd.read_csv(DDI_PATH)
+
+print("\n===== DDI Dataset Preview =====")
+print(df.sample(min(8, len(df))))
+
+print("\n===== Columns =====")
+print(df.columns.tolist())
+
+print("\n===== Total Records =====")
+print(len(df))
+
+
 
 # Add positive label
 df["label"] = 1

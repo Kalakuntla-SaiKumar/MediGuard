@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MediGuard Dashboard</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+}
+
+/* Top Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 30px;
+  background: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.logo img {
+  height: 100px;
+}
+
+.profile-icon {
+  font-size: 22px;
+  text-decoration: none;
+  color: #1565C0;
+  padding: 6px 10px;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.profile-icon:hover {
+  background: #E3F2FD;
+  transform: scale(1.1);
+}
+
+.menu-icon {
+  font-size: 22px;
+  color: #1565C0;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.menu-icon:hover {
+  background: #E3F2FD;
+}
+
+
+/* Assessment Form Section */
+.assessment-section {
+  background: linear-gradient(135deg, #1565C0, #0D47A1);
+  padding: 40px 20px;
+  text-align: center;
+  color: white;
+}
+
+.assessment-section h2 {
+  margin: 0 0 30px 0;
+  font-size: 28px;
+}
+
+.assessment-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.assessment-form input {
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  min-width: 200px;
+  flex: 1;
+  outline: none;
+}
+
+.assessment-form input::placeholder {
+  color: #999;
+}
+
+.assessment-form button {
+  padding: 14px 32px;
+  border-radius: 8px;
+  border: none;
+  background: white;
+  color: #1565C0;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.assessment-form button:hover {
+  background: #E3F2FD;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.assessment-form button:active {
+  transform: scale(0.98);
+}
+
+/* Results Section */
+#results {
+  margin-top: 20px;
+  animation: slideIn 0.3s ease-in;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search Section */
+.search-section {
+  background: linear-gradient(135deg, #E3F2FD, #FFFFFF);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.search-box {
+  margin-top: 20px;
+}
+
+.search-box input {
+  width: 50%;
+  padding: 14px;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-box button {
+  padding: 14px 22px;
+  margin-left: 8px;
+  border-radius: 30px;
+  border: none;
+  background: #1565C0;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(21,101,192,0.3);
+}
+
+/* Hover */
+.search-box button:hover {
+  background: #0D47A1;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(21,101,192,0.5);
+}
+
+/* Click press */
+.search-box button:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 5px rgba(21,101,192,0.3);
+}
+
+
+/* Feature Cards */
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  padding: 30px;
+  width: 280px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+  font-weight: bold;
+  color: #0D47A1;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: #E3F2FD;
+}
+/* Explore Section */
+.explore {
+  padding: 60px 20px;
+  background: white;
+  text-align: center;
+}
+
+.explore h2 {
+  color: #0D47A1;
+  margin-bottom: 40px;
+}
+
+.explore-grid {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Small Cards */
+.explore-card {
+  width: 300px;
+  background: #E3F2FD;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.explore-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  background: #BBDEFB;
+}
+
+.explore-card h3 {
+  color: #1565C0;
+  margin-bottom: 10px;
+}
+
+.explore-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Highlight Card */
+/* Highlight Card styled like explore cards */
+.explore-highlight {
+  margin: 50px auto 0;
+  max-width: 750px;
+  background: #E3F2FD;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.explore-highlight:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  background: #BBDEFB;
+}
+
+.explore-highlight h3 {
+  color: #1565C0;
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.explore-highlight p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+/* Drug Info Section */
+.drug-info {
+  padding: 70px 20px;
+  background: #f5f7fa;
+  text-align: center;
+}
+
+.drug-info h2 {
+  color: #0D47A1;
+  margin-bottom: 50px;
+}
+
+.drug-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.drug-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.drug-text {
+  max-width: 500px;
+  text-align: left;
+}
+
+.drug-text h3 {
+  color: #1565C0;
+  margin-bottom: 10px;
+}
+
+.drug-text p {
+  color: #333;
+  line-height: 1.6;
+}
+
+.drug-image img {
+  width: 320px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transition: 0.3s ease;
+}
+
+.drug-image img:hover {
+  transform: scale(1.05);
+}
+/* How It Works Section */
+.how-it-works {
+  padding: 70px 20px;
+  background: white;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.how-it-works h2 {
+  color: #0D47A1;
+  margin-bottom: 50px;
+}
+
+/* Steps grid layout */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Step cards */
+.step {
+  background: #E3F2FD;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: all 0.35s ease;
+  animation: slideUp 0.8s ease forwards;
+  opacity: 0.6;
+  transform: scale(0.96);
+}
+
+/* stagger entrance animation */
+.step:nth-child(1) { animation-delay: 0.1s; }
+.step:nth-child(2) { animation-delay: 0.2s; }
+.step:nth-child(3) { animation-delay: 0.3s; }
+.step:nth-child(4) { animation-delay: 0.4s; }
+.step:nth-child(5) { animation-delay: 0.5s; }
+
+/* Step 5 centered */
+.step:nth-child(5) {
+  grid-column: 2 / span 2;
+}
+
+/* hover focus system */
+.steps:hover .step {
+  opacity: 0.35;
+  transform: scale(0.95);
+}
+
+.steps .step:hover {
+  opacity: 1;
+  transform: scale(1.05);
+  background: #BBDEFB;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* Step number circle */
+.step-number {
+  width: 42px;
+  height: 42px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  background: #1565C0;
+  color: white;
+  font-weight: bold;
+  line-height: 42px;
+  transition: 0.3s ease;
+}
+
+.step:hover .step-number {
+  background: #0D47A1;
+  transform: scale(1.15);
+}
+
+/* Text */
+.step h3 {
+  color: #1565C0;
+  margin-bottom: 8px;
+}
+
+.step p {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Animations */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+}
+
+
+
+/* ── SIDEBAR ── */
+:root { --sw: 230px; --swc: 68px; }
+.sidebar {
+  position: fixed; top: 0; left: 0; height: 100vh; width: var(--sw);
+  background: linear-gradient(180deg, #0D47A1 0%, #1565C0 60%, #1976D2 100%);
+  display: flex; flex-direction: column; z-index: 9999; overflow: hidden;
+  transition: width 0.3s ease; box-shadow: 4px 0 20px rgba(13,71,161,0.2);
+}
+.sidebar.collapsed { width: var(--swc); }
+.sb-logo { display: flex; align-items: center; justify-content: center; padding: 8px 10px; min-height: 70px; border-bottom: 1px solid rgba(255,255,255,0.12); flex-shrink: 0; overflow: hidden; }
+.sb-logo img { height: 56px; width: 100%; max-width: 200px; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+.sb-nav { flex: 1; padding: 14px 8px; display: flex; flex-direction: column; gap: 3px; overflow-y: auto; overflow-x: hidden; }
+.sb-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; white-space: nowrap; position: relative; cursor: pointer; }
+.sb-item:hover { background: rgba(255,255,255,0.13); color: white; }
+.sb-item.active { background: rgba(255,255,255,0.18); color: white; font-weight: bold; }
+.sb-item .si { font-size: 18px; flex-shrink: 0; width: 22px; text-align: center; }
+.sb-lbl { transition: opacity 0.2s; }
+.sidebar.collapsed .sb-lbl { opacity: 0; }
+.sidebar.collapsed .sb-item:hover::after { content: attr(data-label); position: absolute; left: calc(var(--swc) + 8px); background: #0D47A1; color: white; padding: 6px 12px; border-radius: 8px; font-size: 13px; white-space: nowrap; box-shadow: 0 4px 12px rgba(0,0,0,0.25); z-index: 9999; }
+.sb-divider { height: 1px; background: rgba(255,255,255,0.12); margin: 6px 0; }
+.sb-user { padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.sb-avatar { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.sb-uinfo { overflow: hidden; transition: opacity 0.2s; }
+.sidebar.collapsed .sb-uinfo { opacity: 0; }
+.sb-uname { font-size: 13px; font-weight: bold; color: white; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-urole { font-size: 11px; color: rgba(255,255,255,0.6); }
+.page-wrap { margin-left: var(--sw); transition: margin-left 0.3s ease; }
+.page-wrap.shifted { margin-left: var(--swc); }
+.sidebar-toggle { font-size: 22px; color: #1565C0; cursor: pointer; padding: 6px 10px; border-radius: 8px; border: none; background: none; transition: 0.2s; }
+.sidebar-toggle:hover { background: #E3F2FD; }
+.auth-toast { position: fixed; top: 80px; right: 20px; background: #1565C0; color: white; padding: 10px 18px; border-radius: 10px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.2); z-index: 9998; }
+.auth-toast a { color: white; text-decoration: underline; margin: 0 4px; }
+
+</style>
+</head>
+
+<body>
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo"><img src="Logo.png" alt="MediGuard"></div>
+  <nav class="sb-nav">
+    <a class="sb-item active" href="/" data-label="Dashboard"><span class="si">🏠</span><span class="sb-lbl">Dashboard</span></a>
+    <a class="sb-item" href="/assess-page" data-label="New Assessment"><span class="si">🔬</span><span class="sb-lbl">New Assessment</span></a>
+    <a class="sb-item" href="/history-page" data-label="Assessment History"><span class="si">📋</span><span class="sb-lbl">Assessment History</span></a>
+    <div class="sb-divider"></div>
+    <a class="sb-item" href="/profile" data-label="My Profile"><span class="si">👤</span><span class="sb-lbl">My Profile</span></a>
+    <div class="sb-divider"></div>
+    <a class="sb-item" href="#" data-label="Logout" onclick="handleLogout(); return false;" style="color:rgba(255,180,180,0.85);"><span class="si">🚪</span><span class="sb-lbl">Logout</span></a>
+  </nav>
+  <div class="sb-user">
+    <div class="sb-avatar">👤</div>
+    <div class="sb-uinfo">
+      <div class="sb-uname" id="sidebar-username">Guest</div>
+      <div class="sb-urole">Patient</div>
+    </div>
+  </div>
+</aside>
+<!-- PAGE WRAP -->
+<div class="page-wrap" id="page-wrap">
+
+
+<!-- Navbar -->
+<div class="navbar">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+    <div id="navbar-welcome"></div>
+  </div>
+  <div id="nav-right" style="display:flex;align-items:center;gap:8px;"></div>
+</div>
+
+<!-- Auth Check -->
+<script src="auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const user = await getCurrentUser();
+  if (!user) {
+    // Show Login/Register buttons for guests
+    document.getElementById('nav-right').innerHTML = `
+      <a href="/login" style="color:#1565C0;font-weight:700;text-decoration:none;font-size:14px;padding:8px 18px;border:1.5px solid #1565C0;border-radius:8px;">Log In</a>
+      <a href="/register" style="background:#1565C0;color:white;font-weight:700;text-decoration:none;font-size:14px;padding:8px 18px;border-radius:8px;">Register</a>
+    `;
+    document.getElementById('sidebar-username').textContent = 'Guest';
+    document.getElementById('navbar-welcome').innerHTML = '<img src="Logo.png" style="height:60px;">';
+    // Disable assessment features
+    document.querySelectorAll('.assessment-form input').forEach(i => i.disabled = true);
+    const btn = document.querySelector('.assessment-form button');
+    if (btn) { btn.disabled = true; btn.style.opacity = '0.5'; }
+    // Make sidebar assessment links redirect to login
+    document.querySelectorAll('.sb-item[href="/assess-page"], .sb-item[href="/history-page"]').forEach(el => {
+      el.addEventListener('click', e => { e.preventDefault(); window.location.href = '/login'; });
+    });
+  } else {
+    window._userLoggedIn = true;
+    document.getElementById('sidebar-username').textContent = user.username;
+    document.getElementById('navbar-welcome').innerHTML = `<span style="font-size:24px;font-weight:800;background:linear-gradient(90deg,#1565C0,#e91e8c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Welcome, ${user.username}!</span>`;
+    document.getElementById('nav-right').innerHTML = `
+      <a href="/profile" style="color:#1565C0;font-weight:600;text-decoration:none;font-size:14px;">👤 ${user.username}</a>
+      <button onclick="handleLogout()" style="background:none;border:1.5px solid #e53935;color:#e53935;font-weight:700;font-size:13px;padding:7px 14px;border-radius:8px;cursor:pointer;">Logout</button>
+    `;
+  }
+});
+</script>
+
+<!-- Medical Facts Ticker -->
+<div style="background:#fff;border-bottom:1px solid #e4e8f0;padding:10px 20px;display:flex;align-items:center;gap:16px;min-height:44px;">
+  <div style="background:#1565C0;color:white;font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px;white-space:nowrap;flex-shrink:0;letter-spacing:0.5px;">💡 DID YOU KNOW?</div>
+  <div id="ticker-text" style="font-size:13px;color:#374151;transition:opacity 0.6s ease;flex:1;font-family:Arial,sans-serif;"></div>
+</div>
+ 
+<script>
+const FACTS = [
+  "🦷 Human teeth are comparable in strength to shark teeth — both are made of similar mineral compounds.",
+  "💅 The color of your nails can reveal a lot about your blood oxygen levels and circulation health.",
+  "🌡️ Cooler environments may help reduce inflammation and improve mental clarity and focus.",
+  "😴 Sleep needs vary widely — some people naturally function well on 6 hours, others need 9 or more.",
+  "🍊 <b>Grapefruit</b> can increase blood levels of certain medications by up to 10x — always check first.",
+  "💊 <b>Aspirin + Warfarin</b> together significantly raise bleeding risk — never combine without medical advice.",
+  "🧠 Your brain uses about 20% of your body's total energy despite being only 2% of your body weight.",
+  "🥛 <b>Milk and dairy</b> can block absorption of antibiotics like tetracycline — take on an empty stomach.",
+  "❤️ The human heart beats around 100,000 times a day — that's over 2.5 billion beats in a lifetime.",
+  "🌿 <b>St. John's Wort</b> reduces the effectiveness of birth control pills and antidepressants.",
+  "🦴 Bones are actually stronger than steel by weight — a cubic inch of bone can bear up to 19,000 lbs.",
+  "🍺 <b>Alcohol + Paracetamol</b> significantly increases the risk of liver damage — avoid combining.",
+  "🧬 The human body replaces most of its cells every 7–10 years — you're constantly rebuilding yourself.",
+  "🥬 <b>Spinach and kale</b> are rich in Vitamin K and can reduce the effectiveness of warfarin.",
+  "👁️ The human eye can distinguish approximately 10 million different colors.",
+  "💉 <b>Iron supplements</b> should not be taken with antacids — antacids block iron absorption.",
+  "🫁 The lungs contain about 300 million tiny air sacs — if unfolded, they'd cover a tennis court.",
+  "🩺 <b>NSAIDs like ibuprofen</b> can worsen kidney function in patients with diabetes or hypertension.",
+  "💤 Lack of sleep for just 17 hours impairs your coordination as much as a blood alcohol level of 0.05%.",
+  "🔬 <b>MediGuard</b> uses ML trained on 190,000+ drug interaction records to assess your medication safety.",
+  "🧪 The average adult body contains about 37 trillion cells — each with its own specific function.",
+  "🫀 <b>Beta-blockers</b> should never be stopped abruptly — always taper the dose under medical supervision.",
+  "🌞 Just 10–15 minutes of sunlight daily helps your body produce enough Vitamin D for the day.",
+  "🧄 <b>Garlic supplements</b> have blood-thinning properties and can interact with anticoagulants.",
+  "🏃 Regular physical activity can reduce the risk of over 35 chronic diseases including diabetes and cancer.",
+];
+ 
+let factIndex = 0;
+function showNextFact() {
+  const el = document.getElementById('ticker-text');
+  if (!el) return;
+  el.style.opacity = '0';
+  setTimeout(() => {
+    el.innerHTML = FACTS[factIndex];
+    factIndex = (factIndex + 1) % FACTS.length;
+    el.style.opacity = '1';
+  }, 600);
+}
+ 
+document.addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById('ticker-text');
+  if (!el) return;
+  el.innerHTML = FACTS[0];
+  factIndex = 1;
+  setInterval(showNextFact, 5000);
+});
+</script>
+
+<!-- Search Section -->
+<div class="search-section">
+  <h2>Search MediGuard Knowledgebase</h2>
+  <p style="color:#555;margin-bottom:16px;font-size:14px;">Ask our AI assistant about any drug, interaction or condition</p>
+  <div class="search-box">
+    <input type="text" id="kb-search" placeholder="e.g. Is Warfarin safe with Aspirin?" onkeydown="if(event.key==='Enter') goToChat()">
+    <button onclick="goToChat()">Ask AI 🤖</button>
+  </div>
+</div>
+
+<!-- Features -->
+<div class="features">
+
+  <div class="card" onclick="window.location.href='/chat?q='+encodeURIComponent('Explain Drug-Drug interactions and common risks')" style="cursor:pointer;">
+    💊 Drug-Drug Interaction
+  </div>
+  <div class="card" onclick="window.location.href='/chat?q='+encodeURIComponent('Explain Drug-Food interactions and what foods to avoid with medications')" style="cursor:pointer;">
+    🍽️ Drug-Food Interaction
+  </div>
+  <div class="card" onclick="window.location.href='/chat?q='+encodeURIComponent('Explain Drug-Condition interactions and medication safety for conditions')" style="cursor:pointer;">
+    🏥 Drug-Condition Interaction
+  </div>
+
+</div>
+<!-- Explore Section -->
+<div class="explore">
+
+  <h2>Why Explore MediGuard?</h2>
+
+  <div class="explore-grid">
+
+    <div class="explore-card">
+      <h3>Smart Interaction Engine</h3>
+      <p>
+        MediGuard analyzes drug, food, and condition interactions using an
+        AI-powered safety engine to prevent harmful combinations.
+      </p>
+    </div>
+
+    <div class="explore-card">
+      <h3>Personalized Safety Alerts</h3>
+      <p>
+        Get real-time warnings tailored to patient history, allergies,
+        and medical conditions.
+      </p>
+    </div>
+
+    <div class="explore-card">
+      <h3>Clinical Knowledgebase</h3>
+      <p>
+        A structured drug database designed to support patients,
+        pharmacists, and healthcare professionals.
+      </p>
+    </div>
+<div class="explore-highlight">
+  <h3>Safer Alternatives</h3>
+  <p>
+    MediGuard suggests clinically safer medication alternatives when a
+    drug poses risks due to allergies, interactions, or medical conditions.
+    Our AI compares safety profiles and recommends options that reduce
+    side effects and improve treatment confidence.
+  </p>
+</div>
+  </div>
+</div>
+
+<!-- Drug Information Section -->
+<div class="drug-info">
+
+  <h2>Understanding Your Medication</h2>
+
+  <div class="drug-row">
+
+    <div class="drug-text">
+      <h3>How to Use Medicines Safely</h3>
+      <p>
+        Always follow prescribed dosage instructions and never mix
+        medications without checking interactions. MediGuard helps you
+        verify drug safety, identify risks, and understand how medicines
+        affect your body. Proper usage reduces side effects and improves
+        treatment effectiveness.
+      </p>
+    </div>
+
+    <div class="drug-image">
+      <img src="drug1.jpg" alt="Medicine usage">
+    </div>
+
+  </div>
+
+  <div class="drug-row reverse">
+
+    <div class="drug-text">
+      <h3>Why Drug Knowledge Matters</h3>
+      <p>
+        Knowing how your medication works helps prevent overdose,
+        allergic reactions, and dangerous combinations. MediGuard provides
+        reliable safety information so patients and healthcare professionals
+        can make confident decisions.
+      </p>
+    </div>
+
+    <div class="drug-image">
+      <img src="drug2.jpg" alt="Drug awareness">
+    </div>
+
+  </div>
+
+</div>
+<!-- How MediGuard Works -->
+<div class="how-it-works">
+
+  <h2>How MediGuard Works</h2>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Secure Login & Health Profile</h3>
+      <p>
+        Users log in and provide health details such as age, gender,
+        allergies, and chronic conditions to personalize safety analysis.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Select Interaction Type</h3>
+      <p>
+        Choose what you want to check: Drug-Drug, Drug-Food,
+        or Drug-Condition interactions.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Search Medication</h3>
+      <p>
+        Enter the drug name to instantly scan the MediGuard
+        knowledgebase.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">4</div>
+      <h3>Understand the Risks</h3>
+      <p>
+        View warnings, severity levels, and safety explanations
+        generated by the AI engine.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">5</div>
+      <h3>Explore Safer Alternatives</h3>
+      <p>
+        MediGuard suggests safer options to support confident
+        treatment decisions.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+
+</body>
+
+<!-- MediGuard API Client -->
+<script src="mediguard-api.js"></script>
+<!-- Close page-wrap -->
+</div>
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  document.getElementById('page-wrap').classList.toggle('shifted');
+}
+function goToChat() {
+  const q = document.getElementById('kb-search')?.value?.trim();
+  window.location.href = q ? '/chat?q=' + encodeURIComponent(q) : '/chat';
+}
+async function handleLogout() {
+  await fetch('/api/logout', { method: 'POST', credentials: 'include' });
+  window.location.href = '/login';
+}
+</script>
+</body>
+</html>

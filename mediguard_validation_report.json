@@ -1,0 +1,694 @@
+{
+  "timestamp": "2026-03-23T17:53:31.680209",
+  "random_state": 42,
+  "thresholds": {
+    "ddi_min_accuracy": 50.0,
+    "dfi_min_detection": 60.0,
+    "dci_min_accuracy": 60.0
+  },
+  "validations": {
+    "DDI": {
+      "total_tests": 23,
+      "passed": 11,
+      "failed": 4,
+      "unknown_drugs": 0,
+      "known_interaction_tests": 15,
+      "known_interaction_passed": 11,
+      "unknown_pair_tests": 8,
+      "unknown_pair_none_predictions": 8,
+      "test_details": [
+        {
+          "type": "known_interaction",
+          "drug1": "Vigabatrin",
+          "drug2": "Brimonidine",
+          "prediction": "Low",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Captopril",
+          "drug2": "Atomoxetine",
+          "prediction": "High",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Dexamethasone",
+          "drug2": "Ceritinib",
+          "prediction": "High",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Oxycodone",
+          "drug2": "Ondansetron",
+          "prediction": "High",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Colchicine",
+          "drug2": "Doxycycline",
+          "prediction": "Moderate",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Ropivacaine",
+          "drug2": "Propoxycaine",
+          "prediction": "Moderate",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Dofetilide",
+          "drug2": "Indapamide",
+          "prediction": "High",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Methotrexate",
+          "drug2": "Fosphenytoin",
+          "prediction": "Moderate",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Amphetamine",
+          "drug2": "Nortriptyline",
+          "prediction": "High",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Levodopa",
+          "drug2": "Moclobemide",
+          "prediction": "High",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Ximelagatran",
+          "drug2": "Trolamine salicylate",
+          "prediction": "None",
+          "status": "fail"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Dexchlorpheniramine maleate",
+          "drug2": "Fusidic acid",
+          "prediction": "None",
+          "status": "fail"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Almasilate",
+          "drug2": "Misoprostol",
+          "prediction": "None",
+          "status": "fail"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Ranitidine",
+          "drug2": "Ritonavir",
+          "prediction": "Low",
+          "status": "pass"
+        },
+        {
+          "type": "known_interaction",
+          "drug1": "Fluticasone propionate",
+          "drug2": "Donepezil",
+          "prediction": "None",
+          "status": "fail"
+        },
+        {
+          "type": "unknown_pair",
+          "drug1": "aspirin",
+          "drug2": "glucose",
+          "prediction": "None",
+          "status": "tested"
+        },
+        {
+          "type": "unknown_pair",
+          "drug1": "water",
+          "drug2": "salt",
+          "prediction": "None",
+          "status": "tested"
+        },
+        {
+          "type": "unknown_pair",
+          "drug1": "vitamin-c",
+          "drug2": "orange-juice",
+          "prediction": "None",
+          "status": "tested"
+        },
+        {
+          "type": "unknown_pair",
+          "drug1": "paracetamol",
+          "drug2": "milk",
+          "prediction": "None",
+          "status": "tested"
+        },
+        {
+          "type": "unknown_pair",
+          "drug1": "ibuprofen",
+          "drug2": "bread",
+          "prediction": "None",
+          "status": "tested"
+        },
+        {
+          "type": "unknown_pair",
+          "drug1": "metformin",
+          "drug2": "rice",
+          "prediction": "None",
+          "status": "tested"
+        },
+        {
+          "type": "unknown_pair",
+          "drug1": "lisinopril",
+          "drug2": "sugar",
+          "prediction": "None",
+          "status": "tested"
+        },
+        {
+          "type": "unknown_pair",
+          "drug1": "amoxicillin",
+          "drug2": "honey",
+          "prediction": "None",
+          "status": "tested"
+        }
+      ]
+    },
+    "DFI": {
+      "total_drugs_tested": 32,
+      "found_interactions": 20,
+      "not_found": 0,
+      "risk_distribution": {
+        "Low": 7,
+        "High": 13
+      },
+      "test_details": [
+        {
+          "drug": "ebastine",
+          "prediction": "Low",
+          "db_count": 1,
+          "db_risks": [
+            "Low"
+          ]
+        },
+        {
+          "drug": "saquinavir",
+          "prediction": "High",
+          "db_count": 2,
+          "db_risks": [
+            "High",
+            "Low"
+          ]
+        },
+        {
+          "drug": "bismuth subcitrate potassium",
+          "prediction": "High",
+          "db_count": 2,
+          "db_risks": [
+            "High",
+            "Low"
+          ]
+        },
+        {
+          "drug": "levomilnacipran",
+          "prediction": "High",
+          "db_count": 5,
+          "db_risks": [
+            "High",
+            "Moderate",
+            "Low"
+          ]
+        },
+        {
+          "drug": "betaine",
+          "prediction": "Low",
+          "db_count": 1,
+          "db_risks": [
+            "Low"
+          ]
+        },
+        {
+          "drug": "doxorubicin",
+          "prediction": "High",
+          "db_count": 2,
+          "db_risks": [
+            "High",
+            "Moderate"
+          ]
+        },
+        {
+          "drug": "enzalutamide",
+          "prediction": "High",
+          "db_count": 2,
+          "db_risks": [
+            "High",
+            "Low"
+          ]
+        },
+        {
+          "drug": "spirapril",
+          "prediction": "High",
+          "db_count": 3,
+          "db_risks": [
+            "High",
+            "Moderate"
+          ]
+        },
+        {
+          "drug": "pregabalin",
+          "prediction": "High",
+          "db_count": 2,
+          "db_risks": [
+            "High",
+            "Low"
+          ]
+        },
+        {
+          "drug": "hydromorphone",
+          "prediction": "High",
+          "db_count": 2,
+          "db_risks": [
+            "High",
+            "Low"
+          ]
+        },
+        {
+          "drug": "ganaxolone",
+          "prediction": "Low",
+          "db_count": 1,
+          "db_risks": [
+            "Low"
+          ]
+        },
+        {
+          "drug": "chloramphenicol",
+          "prediction": "Low",
+          "db_count": 1,
+          "db_risks": [
+            "Low"
+          ]
+        },
+        {
+          "drug": "glipizide",
+          "prediction": "High",
+          "db_count": 2,
+          "db_risks": [
+            "High",
+            "Low"
+          ]
+        },
+        {
+          "drug": "ciprofloxacin",
+          "prediction": "High",
+          "db_count": 3,
+          "db_risks": [
+            "High",
+            "Moderate",
+            "Low"
+          ]
+        },
+        {
+          "drug": "xanomeline",
+          "prediction": "Low",
+          "db_count": 1,
+          "db_risks": [
+            "Low"
+          ]
+        },
+        {
+          "drug": "netupitant",
+          "prediction": "High",
+          "db_count": 3,
+          "db_risks": [
+            "High",
+            "Low"
+          ]
+        },
+        {
+          "drug": "flurazepam",
+          "prediction": "High",
+          "db_count": 2,
+          "db_risks": [
+            "High",
+            "Low"
+          ]
+        },
+        {
+          "drug": "mesalazine",
+          "prediction": "Low",
+          "db_count": 1,
+          "db_risks": [
+            "Low"
+          ]
+        },
+        {
+          "drug": "tinidazole",
+          "prediction": "High",
+          "db_count": 2,
+          "db_risks": [
+            "High",
+            "Low"
+          ]
+        },
+        {
+          "drug": "oseltamivir",
+          "prediction": "Low",
+          "db_count": 1,
+          "db_risks": [
+            "Low"
+          ]
+        },
+        {
+          "drug": "water",
+          "prediction": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "salt",
+          "prediction": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "sugar",
+          "prediction": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "rice",
+          "prediction": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "bread",
+          "prediction": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "unknown_drug_xyz",
+          "prediction": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "fake_medicine",
+          "prediction": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "vitamin_d",
+          "prediction": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "calcium",
+          "prediction": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "iron",
+          "prediction": "Low",
+          "type": "unknown"
+        },
+        {
+          "drug": "zinc",
+          "prediction": "High",
+          "type": "unknown"
+        },
+        {
+          "drug": "magnesium",
+          "prediction": "Low",
+          "type": "unknown"
+        }
+      ]
+    },
+    "DCI": {
+      "total_tests": 37,
+      "correct_predictions": 23,
+      "incorrect_predictions": 2,
+      "risk_distribution": {},
+      "test_details": [
+        {
+          "drug": "phenytoin",
+          "condition": "hypopigmentation",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "carvedilol",
+          "condition": "ventricular dysfunction, right",
+          "expected": "Low",
+          "predicted": "Low",
+          "correct": true
+        },
+        {
+          "drug": "methyleugenol",
+          "condition": "chemical and drug induced liver injury",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "quercetin",
+          "condition": "carcinoma, pancreatic ductal",
+          "expected": "Low",
+          "predicted": "Low",
+          "correct": true
+        },
+        {
+          "drug": "thioridazine",
+          "condition": "jaundice, obstructive",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "vitamin b 12",
+          "condition": "hemolytic-uremic syndrome",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "y 27632",
+          "condition": "glaucoma",
+          "expected": "Low",
+          "predicted": "Low",
+          "correct": true
+        },
+        {
+          "drug": "butylated hydroxyanisole",
+          "condition": "nerve degeneration",
+          "expected": "Low",
+          "predicted": "None",
+          "correct": false
+        },
+        {
+          "drug": "dactinomycin",
+          "condition": "hypoproteinemia",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "dextromethorphan",
+          "condition": "pain",
+          "expected": "Low",
+          "predicted": "Low",
+          "correct": true
+        },
+        {
+          "drug": "amoxicillin-potassium clavulanate combination",
+          "condition": "intraoperative complications",
+          "expected": "Moderate",
+          "predicted": "None",
+          "correct": false
+        },
+        {
+          "drug": "cefuroxime",
+          "condition": "kidney tubular necrosis, acute",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "plant extracts",
+          "condition": "seizures",
+          "expected": "Low",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "diphenylarsinic acid",
+          "condition": "hyperplasia",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "pancuronium",
+          "condition": "hypertension",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "daunorubicin",
+          "condition": "thymus hyperplasia",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "zinc",
+          "condition": "esophageal squamous cell carcinoma",
+          "expected": "Low",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "raloxifene hydrochloride",
+          "condition": "ovarian diseases",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "plant preparations",
+          "condition": "cognition disorders",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "cholecalciferol",
+          "condition": "coronary artery disease",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "scopolamine",
+          "condition": "weight loss",
+          "expected": "Low",
+          "predicted": "Low",
+          "correct": true
+        },
+        {
+          "drug": "hydrochlorothiazide",
+          "condition": "hypertrophy, left ventricular",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "amantadine",
+          "condition": "vision disorders",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "vitamin b 12",
+          "condition": "fatty liver, alcoholic",
+          "expected": "Low",
+          "predicted": "Low",
+          "correct": true
+        },
+        {
+          "drug": "2,2',4,4',5-brominated diphenyl ether",
+          "condition": "chemical and drug induced liver injury",
+          "expected": "Moderate",
+          "predicted": "Moderate",
+          "correct": true
+        },
+        {
+          "drug": "water",
+          "condition": "diabetes",
+          "predicted": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "salt",
+          "condition": "hypertension",
+          "predicted": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "unknown_drug",
+          "condition": "fever",
+          "predicted": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "unknown_medicine",
+          "condition": "headache",
+          "predicted": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "sugar",
+          "condition": "obesity",
+          "predicted": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "bread",
+          "condition": "celiac disease",
+          "predicted": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "milk",
+          "condition": "lactose intolerance",
+          "predicted": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "vitamin_c",
+          "condition": "scurvy",
+          "predicted": "None",
+          "type": "unknown"
+        },
+        {
+          "drug": "iron",
+          "condition": "anemia",
+          "predicted": "Moderate",
+          "type": "unknown"
+        },
+        {
+          "drug": "calcium",
+          "condition": "osteoporosis",
+          "predicted": "Low",
+          "type": "unknown"
+        },
+        {
+          "drug": "magnesium",
+          "condition": "migraine",
+          "predicted": "Low",
+          "type": "unknown"
+        },
+        {
+          "drug": "zinc",
+          "condition": "cold",
+          "predicted": "None",
+          "type": "unknown"
+        }
+      ]
+    }
+  },
+  "gate": {
+    "ddi_accuracy": 73.33,
+    "dfi_detection": 62.5,
+    "dci_accuracy": 62.16,
+    "ddi_pass": true,
+    "dfi_pass": true,
+    "dci_pass": true,
+    "deployment_ready": true
+  }
+}

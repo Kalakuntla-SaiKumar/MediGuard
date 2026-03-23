@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MediGuard — Sign In</title>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  background: #f0f4ff;
+}
+
+/* ── LEFT PANEL ── */
+.left-panel {
+  width: 45%;
+  background: linear-gradient(145deg, #0D47A1 0%, #1565C0 45%, #1976D2 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.left-panel::before {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+  top: -100px; right: -100px;
+}
+
+.left-panel::after {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 50%;
+  bottom: -80px; left: -80px;
+}
+
+.left-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 48px;
+  z-index: 1;
+}
+
+.left-logo img { height: 64px; filter: brightness(0) invert(1); }
+
+.left-logo-text {
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+.left-logo-text span { color: #90CAF9; }
+
+.left-tagline {
+  font-family: Arial, sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 24px;
+  text-align: center;
+  z-index: 1;
+}
+
+.left-tagline span {
+  color: #90CAF9;
+}
+
+.left-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+  line-height: 1.7;
+  max-width: 320px;
+  z-index: 1;
+}
+
+.left-features {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  z-index: 1;
+  width: 100%;
+  max-width: 320px;
+}
+
+.left-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.left-feature-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.left-feature-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+}
+
+/* ── RIGHT PANEL ── */
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 40px;
+  background: white;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 420px;
+}
+
+.form-header {
+  margin-bottom: 36px;
+}
+
+.form-header h1 {
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #0D47A1;
+  margin-bottom: 8px;
+}
+
+.form-header p {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.form-header p a {
+  color: #1565C0;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.form-header p a:hover { text-decoration: underline; }
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 7px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  color: #111827;
+  background: #fafafa;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #1565C0;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(21,101,192,0.1);
+}
+
+.forgot-link {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  color: #1565C0;
+  text-decoration: none;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.forgot-link:hover { text-decoration: underline; }
+
+.btn-signin {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #1565C0, #0D47A1);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+  box-shadow: 0 4px 14px rgba(21,101,192,0.35);
+}
+
+.btn-signin:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(21,101,192,0.45);
+}
+
+.btn-signin:active { transform: scale(0.99); }
+.btn-signin:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0;
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.btn-register {
+  width: 100%;
+  padding: 13px;
+  background: white;
+  color: #1565C0;
+  border: 1.5px solid #1565C0;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-register:hover {
+  background: #E3F2FD;
+  transform: translateY(-1px);
+}
+
+.msg {
+  display: none;
+  padding: 11px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.msg.show { display: block; }
+.msg.error { background: #FFEBEE; color: #C62828; border-left: 4px solid #C62828; }
+.msg.success { background: #E8F5E9; color: #2E7D32; border-left: 4px solid #2E7D32; }
+
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 28px;
+  font-size: 13px;
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-home:hover { color: #1565C0; }
+
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .left-panel { width: 100%; padding: 40px 24px; min-height: auto; }
+  .left-tagline { font-size: 22px; }
+  .left-features { display: none; }
+  .right-panel { padding: 40px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LEFT PANEL -->
+<div class="left-panel">
+  <div class="left-logo">
+    <img src="/Logo.png" alt="MediGuard" style="height:80px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3));">
+  </div>
+
+  <div class="left-tagline">
+    Your Personal<br><span>Medication Safety</span><br>Guardian
+  </div>
+
+  <p class="left-sub">
+    Check drug interactions, get AI-powered safety analysis, and protect your health with personalized alerts.
+  </p>
+
+  <div class="left-features">
+    <div class="left-feature">
+      <span class="left-feature-icon">💊</span>
+      <span class="left-feature-text">Drug–Drug interaction checker with ML risk scoring</span>
+    </div>
+    <div class="left-feature">
+      <span class="left-feature-icon">🥗</span>
+      <span class="left-feature-text">Food & supplement safety for your medications</span>
+    </div>
+    <div class="left-feature">
+      <span class="left-feature-icon">👤</span>
+      <span class="left-feature-text">Personalized risk analysis based on your health profile</span>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="right-panel">
+  <div class="form-container">
+
+    <div class="form-header">
+      <h1>Welcome back</h1>
+      <p>New to MediGuard? <a href="/register">Create an account</a></p>
+    </div>
+
+    <div class="msg" id="msg-error"></div>
+    <div class="msg" id="msg-success"></div>
+
+    <div class="form-group">
+      <label>Email address</label>
+      <input type="email" id="login-email" placeholder="you@example.com" autocomplete="email">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password"
+             onkeydown="if(event.key==='Enter') handleLogin()">
+      <a href="/forgot-password" class="forgot-link">Forgot password?</a>
+    </div>
+
+    <button class="btn-signin" id="signin-btn" onclick="handleLogin()">Sign In</button>
+
+    <div class="divider">or</div>
+
+    <button class="btn-register" onclick="window.location.href='/register'">Create New Account</button>
+
+    <a href="/" class="back-home">← Back to home</a>
+
+  </div>
+</div>
+
+<script src="auth.js"></script>
+<script>
+async function handleLogin() {
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const btn      = document.getElementById('signin-btn');
+
+  if (!email || !password) {
+    showMsg('error', 'Please enter your email and password.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Signing in...';
+
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.status === 'success') {
+      showMsg('success', '✓ Signed in! Redirecting...');
+      setTimeout(() => window.location.href = '/', 800);
+    } else {
+      showMsg('error', data.error || 'Invalid email or password.');
+    }
+  } catch(e) {
+    showMsg('error', 'Network error. Is Flask running?');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Sign In';
+  }
+}
+
+function showMsg(type, text) {
+  document.getElementById('msg-error').className = 'msg';
+  document.getElementById('msg-success').className = 'msg';
+  const el = document.getElementById(`msg-${type}`);
+  el.textContent = text;
+  el.className = `msg ${type} show`;
+}
+
+// Auto-redirect if already logged in
+(async () => {
+  const user = await getCurrentUser();
+  if (user) window.location.href = '/';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MediGuard Register</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blue: #1565C0;
+  --blue-dark: #0D47A1;
+  --blue-light: #E3F2FD;
+  --green: #2E7D32;
+  --green-bg: #E8F5E9;
+  --red: #C62828;
+  --gray: #f5f7fa;
+  --border: #e0e0e0;
+  --text: #1a1a2e;
+  --muted: #666;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--gray);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 32px;
+  background: white;
+  box-shadow: 0 1px 0 var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar img { height: 72px; }
+.nav-link { color: var(--blue); text-decoration: none; font-weight: 600; font-size: 14px; }
+
+/* Page */
+.page {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+/* Card */
+.card {
+  background: white;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+  padding: 44px 40px;
+  animation: rise 0.5s ease;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.card-logo img { height: 64px; }
+
+h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: 24px;
+  color: var(--blue-dark);
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+
+.subtitle a { color: var(--blue); font-weight: 600; text-decoration: none; }
+.subtitle a:hover { text-decoration: underline; }
+
+/* Section divider */
+.section-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 28px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--blue-light);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 6px;
+  margin-top: 16px;
+}
+
+label:first-of-type { margin-top: 0; }
+
+.input-wrap { position: relative; }
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fafafa;
+  color: var(--text);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--blue);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(21,101,192,0.12);
+}
+
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #999;
+  padding: 0;
+  width: auto;
+  margin: 0;
+  box-shadow: none;
+}
+.eye-btn:hover { color: var(--blue); transform: translateY(-50%); box-shadow: none; background: none; }
+
+.hint { font-size: 11.5px; color: #999; margin-top: 4px; }
+
+/* Security box */
+.security-box {
+  background: var(--blue-light);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 4px;
+}
+
+.security-box p {
+  font-size: 12px;
+  color: var(--blue-dark);
+  margin-bottom: 12px;
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--blue);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.terms-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #555;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.terms-row a { color: var(--blue); font-weight: 600; text-decoration: none; }
+
+/* Button */
+.btn {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--blue);
+  color: white;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--blue-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(21,101,192,0.35);
+}
+
+.btn:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* Messages */
+.msg {
+  display: none;
+  padding: 11px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.msg.show { display: block; }
+.msg.error   { background: #FFEBEE; color: var(--red);   border-left: 4px solid var(--red); }
+.msg.success { background: var(--green-bg); color: var(--green); border-left: 4px solid var(--green); }
+
+.footer-text {
+  font-size: 12px;
+  color: #999;
+  margin-top: 16px;
+  text-align: center;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <img src="Logo.png" alt="MediGuard">
+  <a href="/login" class="nav-link">Sign in →</a>
+</nav>
+
+<div class="page">
+<div class="card">
+
+  <div class="card-logo">
+    <img src="Logo.png" alt="MediGuard Logo">
+  </div>
+
+  <h1>Create Account</h1>
+  <p class="subtitle">Already have an account? <a href="/login">Sign in here</a></p>
+
+  <div class="msg" id="msg-error"></div>
+  <div class="msg" id="msg-success"></div>
+
+  <form id="register_form" onsubmit="handleRegister(event)">
+
+    <!-- Account Details -->
+    <div class="section-label">Account Details</div>
+
+    <label>Email Address <span style="color:red">*</span></label>
+    <input type="email" id="register_email" placeholder="you@example.com" required autocomplete="email">
+
+    <label>Username <span style="color:red">*</span></label>
+    <input type="text" id="register_username" placeholder="Choose a username" required autocomplete="username">
+    <div class="hint">At least 3 characters</div>
+
+    <label>Password <span style="color:red">*</span></label>
+    <div class="input-wrap">
+      <input type="password" id="register_password" placeholder="Create a password" required autocomplete="new-password">
+      <button type="button" class="eye-btn" onclick="toggleVis('register_password', this)">👁</button>
+    </div>
+    <div class="hint">At least 8 characters</div>
+
+    <!-- Security Questions -->
+    <div class="section-label">Password Recovery</div>
+
+    <div class="security-box">
+      <p>🔐 These answers help you reset your password if you ever forget it. Keep them memorable!</p>
+
+      <label>What city were you born in? <span style="color:red">*</span></label>
+      <input type="text" id="register_security_answer_1" placeholder="e.g., Hyderabad" required autocomplete="off">
+      <div class="hint">Case-insensitive</div>
+
+      <label style="margin-top:14px;">What is your favorite color? <span style="color:red">*</span></label>
+      <input type="text" id="register_security_answer_2" placeholder="e.g., Blue" required autocomplete="off">
+      <div class="hint">Case-insensitive</div>
+    </div>
+
+    <!-- Terms -->
+    <label class="terms-row">
+      <input type="checkbox" required>
+      I accept MediGuard <a href="#">Terms & Privacy Policy</a>
+    </label>
+
+    <button type="submit" class="btn" id="reg-btn">Create Account</button>
+
+    <div class="footer-text">
+      After registering, you can fill in your health profile from your account dashboard.
+    </div>
+
+  </form>
+</div>
+</div>
+
+<script src="auth.js"></script>
+<script>
+function toggleVis(id, btn) {
+  const inp = document.getElementById(id);
+  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; btn.textContent = '👁'; }
+}
+
+async function handleRegister(event) {
+  event.preventDefault();
+
+  const errEl = document.getElementById('msg-error');
+  const sucEl = document.getElementById('msg-success');
+  const btn   = document.getElementById('reg-btn');
+
+  // Reset messages
+  errEl.className = 'msg';
+  sucEl.className = 'msg';
+
+  const email    = document.getElementById('register_email').value.trim();
+  const username = document.getElementById('register_username').value.trim();
+  const password = document.getElementById('register_password').value;
+  const answer1  = document.getElementById('register_security_answer_1').value.trim();
+  const answer2  = document.getElementById('register_security_answer_2').value.trim();
+
+  // Basic validation
+  if (!email || !username || !password || !answer1 || !answer2) {
+    errEl.textContent = 'Please fill in all required fields.';
+    errEl.className = 'msg error show';
+    return;
+  }
+
+  if (username.length < 3) {
+    errEl.textContent = 'Username must be at least 3 characters.';
+    errEl.className = 'msg error show';
+    return;
+  }
+
+  if (password.length < 8) {
+    errEl.textContent = 'Password must be at least 8 characters.';
+    errEl.className = 'msg error show';
+    return;
+  }
+
+  // Disable button
+  btn.disabled = true;
+  btn.textContent = 'Creating account...';
+
+  const result = await registerUser({
+    email,
+    username,
+    password,
+    security_question_1: 'What city were you born in?',
+    security_answer_1: answer1,
+    security_question_2: 'What is your favorite color?',
+    security_answer_2: answer2
+  });
+
+  if (result.success) {
+    sucEl.textContent = '✓ Account created! Redirecting to login...';
+    sucEl.className = 'msg success show';
+    setTimeout(() => window.location.href = '/login', 2000);
+  } else {
+    errEl.textContent = result.error || 'Registration failed. Please try again.';
+    errEl.className = 'msg error show';
+    btn.disabled = false;
+    btn.textContent = 'Create Account';
+  }
+}
+</script>
+</body>
+</html>

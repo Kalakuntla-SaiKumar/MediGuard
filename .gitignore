@@ -218,3 +218,6 @@ data/processed/
 models/
 *.pkl
 *.joblib
+
+# Local app database
+mediguard.db
