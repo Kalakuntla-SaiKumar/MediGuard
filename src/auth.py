@@ -9,6 +9,8 @@ from flask import Blueprint, request, jsonify, session, current_app
 from werkzeug.security import generate_password_hash
 import logging
 import requests
+from sqlalchemy import func
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
 # Choose auth backend based on environment
 USE_SUPABASE = os.getenv('SUPABASE_URL') is not None
@@ -36,12 +38,12 @@ auth_bp = Blueprint('auth', __name__, url_prefix='/api')
 @auth_bp.route('/register', methods=['POST'])
 def register():
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True) or {}
         
         if not data:
             return jsonify({"error": "No data provided"}), 400
         
-        email = data.get('email', '').strip()
+        email = data.get('email', '').strip().lower()
         username = data.get('username', '').strip()
         password = data.get('password', '').strip()
         age = data.get('age')
@@ -62,7 +64,7 @@ def register():
         if len(username) < 3:
             return jsonify({"error": "Username must be at least 3 characters"}), 400
         
-        if User.query.filter_by(email=email).first():
+        if User.query.filter(func.lower(User.email) == email).first():
             return jsonify({"error": "Email already registered"}), 409
         
         if User.query.filter_by(username=username).first():
@@ -96,14 +98,25 @@ def register():
             return jsonify({
                 "status": "success",
                 "message": "Account created successfully",
-                "user": user.to_dict()
+                "user": {
+                    "id": str(user.id),
+                    "email": user.email,
+                    "username": user.username,
+                }
             }), 201
         
         except ValueError as e:
             return jsonify({"error": str(e)}), 400
+        except IntegrityError:
+            db.session.rollback()
+            return jsonify({"error": "Email or username already exists"}), 409
+        except SQLAlchemyError as db_err:
+            db.session.rollback()
+            logger.exception(f"✗ Registration DB error: {str(db_err)}")
+            return jsonify({"error": "Registration unavailable. Please try again."}), 503
     
     except Exception as e:
-        logger.error(f"✗ Registration error: {str(e)}")
+        logger.exception(f"✗ Registration error: {str(e)}")
         return jsonify({"error": "Registration failed"}), 500
 
 
