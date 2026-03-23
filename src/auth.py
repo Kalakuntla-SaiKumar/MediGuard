@@ -638,6 +638,21 @@ def get_food_list():
 @auth_bp.route('/drugs', methods=['GET'])
 def get_drug_list():
     """Serve full drug list from ML encoder + brand names"""
+    brand_names = [
+        'dolo', 'crocin', 'calpol', 'tylenol', 'panadol', 'febrex',
+        'brufen', 'combiflam', 'advil', 'ecosprin', 'disprin',
+        'glycomet', 'glucophage', 'lipitor', 'atorva', 'norvasc',
+        'amlip', 'omez', 'pan', 'pantop', 'azee', 'azithral',
+        'cipro', 'ciplox', 'coumadin', 'warf', 'valium', 'wysolone',
+        'decadron', 'cozaar', 'losar', 'betaloc', 'zocor', 'neurontin',
+        'gabapin', 'zoloft', 'serta', 'prozac', 'fludac', 'plavix',
+        'clopilet', 'synthroid', 'eltroxin', 'thyronorm', 'lasix',
+        'frusemide', 'lanoxin', 'cardace', 'aldactone', 'rheumatrex',
+        'folitrax', 'neoral', 'prograf', 'seroquel', 'risperdal',
+        'xanax', 'alprax', 'ativan', 'lamictal', 'lamitor', 'depakote',
+        'valparin', 'capoten', 'ultram', 'paracetamol', 'acetaminophen',
+        'ibuprofen', 'warfarin', 'aspirin', 'metformin', 'amoxicillin'
+    ]
     try:
         import pickle
         import os
@@ -652,27 +667,16 @@ def get_drug_list():
         # Get encoder drugs (Title Case generic names)
         encoder_drugs = sorted(encoder.classes_.tolist())
 
-        # Add brand names / Indian names
-        brand_names = [
-            'dolo', 'crocin', 'calpol', 'tylenol', 'panadol', 'febrex',
-            'brufen', 'combiflam', 'advil', 'ecosprin', 'disprin',
-            'glycomet', 'glucophage', 'lipitor', 'atorva', 'norvasc',
-            'amlip', 'omez', 'pan', 'pantop', 'azee', 'azithral',
-            'cipro', 'ciplox', 'coumadin', 'warf', 'valium', 'wysolone',
-            'decadron', 'cozaar', 'losar', 'betaloc', 'zocor', 'neurontin',
-            'gabapin', 'zoloft', 'serta', 'prozac', 'fludac', 'plavix',
-            'clopilet', 'synthroid', 'eltroxin', 'thyronorm', 'lasix',
-            'frusemide', 'lanoxin', 'cardace', 'aldactone', 'rheumatrex',
-            'folitrax', 'neoral', 'prograf', 'seroquel', 'risperdal',
-            'xanax', 'alprax', 'ativan', 'lamictal', 'lamitor', 'depakote',
-            'valparin', 'capoten', 'ultram', 'paracetamol', 'acetaminophen',
-            'ibuprofen', 'warfarin', 'aspirin', 'metformin', 'amoxicillin'
-        ]
-
         all_drugs = sorted(list(set(encoder_drugs + brand_names)))
         return jsonify({"status": "success", "drugs": all_drugs, "count": len(all_drugs)}), 200
     except Exception as e:
-        return jsonify({"status": "error", "drugs": [], "message": str(e)}), 200
+        fallback = sorted(list(set(brand_names)))
+        return jsonify({
+            "status": "fallback",
+            "drugs": fallback,
+            "count": len(fallback),
+            "message": f"Using fallback list: {str(e)}"
+        }), 200
  
 @auth_bp.route('/config', methods=['GET'])
 def get_config():

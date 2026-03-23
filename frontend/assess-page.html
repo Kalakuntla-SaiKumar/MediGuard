@@ -321,11 +321,15 @@ let groqKeyPromise = fetch(`${API}/api/config`, { credentials: 'include' })
 const GROQ_MODEL = 'llama-3.3-70b-versatile';
 
 let DRUGS = [];
+const DRUGS_FALLBACK = ['warfarin','aspirin','metformin','ibuprofen','paracetamol','acetaminophen','amoxicillin','tramadol','atorvastatin','amlodipine'];
 fetch(`${API}/api/drugs`, { credentials: 'include' })
   .then(r => r.json())
-  .then(data => { DRUGS = data.drugs || []; })
+  .then(data => {
+    const list = Array.isArray(data.drugs) ? data.drugs : [];
+    DRUGS = list.length ? list : DRUGS_FALLBACK;
+  })
   .catch(() => {
-    DRUGS = ['warfarin','aspirin','metformin','ibuprofen','paracetamol'];
+    DRUGS = DRUGS_FALLBACK;
   });
 
 const CONDITIONS = Array.from(new Set([
