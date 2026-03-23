@@ -356,13 +356,13 @@ def save_assessment():
 @auth_bp.route('/forgot-password', methods=['POST'])
 def forgot_password():
     try:
-        data = request.get_json()
-        email = data.get('email', '').strip()
+        data = request.get_json(silent=True) or {}
+        email = data.get('email', '').strip().lower()
         
         if not email:
             return jsonify({"error": "Email is required"}), 400
         
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter(func.lower(User.email) == email).first()
         
         if not user:
             return jsonify({
@@ -373,8 +373,8 @@ def forgot_password():
         
         return jsonify({
             "message": "Please answer the security questions to reset your password",
-            "security_question_1": user.security_question_1,
-            "security_question_2": user.security_question_2,
+            "security_question_1": getattr(user, 'security_question_1', None) or "What city were you born in?",
+            "security_question_2": getattr(user, 'security_question_2', None) or "What is your favorite color?",
             "found": True
         }), 200
     

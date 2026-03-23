@@ -20,7 +20,7 @@ from src.engine.mediguard_engine import mediguard_assess
 USE_SUPABASE = os.getenv('SUPABASE_URL') is not None
 
 if USE_SUPABASE:
-    from src.supabase_config import db, init_supabase, get_db_uri
+    from src.supabase_config import db, init_supabase, get_db_uri, ensure_supabase_schema
     from src.supabase_models import User, AssessmentHistory
 else:
     from src.models import db, User, AssessmentHistory
@@ -75,6 +75,8 @@ db.init_app(app)
 
 if USE_SUPABASE:
     init_supabase()
+    with app.app_context():
+        ensure_supabase_schema()
 
 cors_origins_env = os.getenv('CORS_ORIGINS', '')
 if cors_origins_env.strip():

@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 from supabase import create_client, Client
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.pool import NullPool
+from sqlalchemy import inspect, text
 import logging
 
 logger = logging.getLogger(__name__)
@@ -51,7 +52,48 @@ def init_db(app):
         db.create_all()
         logger.info("✓ Database initialized (PostgreSQL via Supabase)")
 
+
+def ensure_supabase_schema():
+    """Best-effort schema sync for production Supabase deployments."""
+    try:
+        inspector = inspect(db.engine)
+        existing = {col['name'] for col in inspector.get_columns('users')}
+
+        required_user_columns = {
+            'full_name': 'VARCHAR(120)',
+            'weight': 'FLOAT',
+            'blood_group': 'VARCHAR(10)',
+            'phone': 'VARCHAR(20)',
+            'medications': 'VARCHAR(1000)',
+            'age': 'INTEGER',
+            'gender': 'VARCHAR(20)',
+            'pregnancy_status': 'VARCHAR(20)',
+            'health_conditions': 'VARCHAR(500)',
+            'allergies': 'VARCHAR(500)',
+            'is_active': 'BOOLEAN DEFAULT TRUE',
+            'google_id': 'VARCHAR(255)',
+            'google_email': 'VARCHAR(120)',
+            'auth_method': "VARCHAR(20) DEFAULT 'email'",
+            'security_question_1': 'VARCHAR(255)',
+            'security_answer_1': 'VARCHAR(255)',
+            'security_question_2': 'VARCHAR(255)',
+            'security_answer_2': 'VARCHAR(255)',
+            'reset_token': 'VARCHAR(255)',
+            'reset_token_expiry': 'TIMESTAMP',
+            'password_reset_requested_at': 'TIMESTAMP',
+        }
+
+        with db.engine.begin() as conn:
+            for col_name, col_type in required_user_columns.items():
+                if col_name not in existing:
+                    conn.execute(text(f"ALTER TABLE users ADD COLUMN IF NOT EXISTS {col_name} {col_type}"))
+
+        logger.info("✓ Supabase schema sync complete")
+    except Exception as e:
+        # Do not block app startup if sync fails; existing schema might already be valid.
+        logger.warning(f"⚠ Supabase schema sync skipped: {str(e)}")
+
 # Import models after db is initialized
 from src.supabase_models import User, AssessmentHistory
 
-__all__ = ['db', 'supabase', 'init_supabase', 'get_db_uri', 'init_db', 'User', 'AssessmentHistory']
+__all__ = ['db', 'supabase', 'init_supabase', 'get_db_uri', 'init_db', 'ensure_supabase_schema', 'User', 'AssessmentHistory']
