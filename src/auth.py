@@ -146,8 +146,9 @@ def login():
         if not user.is_active:
             return jsonify({"error": "Account is inactive"}), 403
         
-        session['user_id'] = user.id
-        session['username'] = user.username
+        # Supabase user IDs are UUIDs; keep session values JSON-serializable.
+        session['user_id'] = str(user.id)
+        session['username'] = str(user.username)
         session.permanent = True
         
         logger.info(f"✓ User logged in: {user.username}")
