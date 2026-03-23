@@ -8,6 +8,7 @@ import os
 from flask import Blueprint, request, jsonify, session, current_app
 from werkzeug.security import generate_password_hash
 import logging
+import requests
 
 # Choose auth backend based on environment
 USE_SUPABASE = os.getenv('SUPABASE_URL') is not None
@@ -643,6 +644,46 @@ def get_config():
     return jsonify({
         "groq_key": os.environ.get('GROQ_API_KEY', '')
     }), 200
+
+
+@auth_bp.route('/chat-completions', methods=['POST'])
+def chat_completions():
+    """Proxy chat-completions to Groq using server-side API key."""
+    try:
+        groq_key = os.getenv('GROQ_API_KEY') or os.getenv('GROQ_KEY')
+        if not groq_key:
+            return jsonify({"error": "Groq API key is not configured on server"}), 500
+
+        data = request.get_json() or {}
+        messages = data.get('messages')
+        if not isinstance(messages, list) or not messages:
+            return jsonify({"error": "messages array is required"}), 400
+
+        payload = {
+            "model": data.get('model', 'llama-3.3-70b-versatile'),
+            "messages": messages,
+            "max_tokens": int(data.get('max_tokens', 1024)),
+            "temperature": float(data.get('temperature', 0.4)),
+        }
+
+        resp = requests.post(
+            'https://api.groq.com/openai/v1/chat/completions',
+            headers={
+                'Content-Type': 'application/json',
+                'Authorization': f'Bearer {groq_key}'
+            },
+            json=payload,
+            timeout=45,
+        )
+
+        return jsonify(resp.json()), resp.status_code
+
+    except requests.RequestException as e:
+        logger.error(f"✗ Groq request error: {str(e)}")
+        return jsonify({"error": "Failed to connect to Groq service"}), 502
+    except Exception as e:
+        logger.error(f"✗ Chat proxy error: {str(e)}")
+        return jsonify({"error": "Chat proxy failed"}), 500
 
  
 @auth_bp.route('/dfi/lookup', methods=['POST'])
