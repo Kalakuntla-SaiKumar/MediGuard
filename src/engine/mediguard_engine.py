@@ -69,6 +69,50 @@ except Exception as e:
     degree_map = {}
 
 
+def _ddi_pair_key(drug_a, drug_b):
+    return tuple(sorted([(drug_a or "").strip().lower(), (drug_b or "").strip().lower()]))
+
+
+def _infer_ddi_risk_from_text(text):
+    t = (text or "").lower()
+    high_markers = [
+        "anticoagulant", "bleeding", "hemorrhage", "cardiotoxic", "serotonin syndrome",
+        "qt", "torsade", "life-threatening", "contraindicated"
+    ]
+    moderate_markers = [
+        "risk or severity", "serum concentration", "metabolism", "adverse effects",
+        "cns depression", "hypotension", "hypertension"
+    ]
+    if any(k in t for k in high_markers):
+        return "High"
+    if any(k in t for k in moderate_markers):
+        return "Moderate"
+    return "Low"
+
+
+# Lookup of known pair interactions from curated dataset (order-independent).
+ddi_pair_lookup = {}
+try:
+    for _, row in df_ddi_raw.iterrows():
+        d1 = str(row.get("Drug 1", "")).strip()
+        d2 = str(row.get("Drug 2", "")).strip()
+        desc = str(row.get("Interaction Description", "")).strip()
+        if not d1 or not d2:
+            continue
+        key = _ddi_pair_key(d1, d2)
+        ddi_pair_lookup[key] = desc
+except Exception as e:
+    logger.warning(f"⚠ Could not build DDI pair lookup: {str(e)}")
+
+
+def lookup_ddi_dataset_risk(drug1, drug2):
+    key = _ddi_pair_key(drug1, drug2)
+    desc = ddi_pair_lookup.get(key)
+    if not desc:
+        return "None"
+    return _infer_ddi_risk_from_text(desc)
+
+
 # ============================================
 # DDI PREDICTION
 # ============================================
@@ -121,16 +165,19 @@ def format_ddi_features(features, model=None):
 
 
 def predict_ddi(drug1, drug2):
-    if rf_model is None:
-        return "None"
-
     # Accept raw/common inputs and map them to encoder-compatible labels.
     drug1 = normalize_drug(drug1)
     drug2 = normalize_drug(drug2)
 
+    dataset_risk = lookup_ddi_dataset_risk(drug1, drug2)
+
+    # If model artifact is missing in deployment, use dataset-backed risk.
+    if rf_model is None:
+        return dataset_risk
+
     features = compute_ddi_features(drug1, drug2)
     if features is None:
-        return "None"
+        return dataset_risk
 
     try:
         feature_frame = format_ddi_features(features, rf_model)
@@ -140,12 +187,16 @@ def predict_ddi(drug1, drug2):
         if prediction == 1:
             if probability > 0.75:   return "High"
             elif probability > 0.65: return "Moderate"
-            else:                    return "Low"
+            else:                    ml_risk = "Low"
         else:
-            return "None"
+            ml_risk = "None"
+
+        # Safety floor: do not understate known curated interactions.
+        order = {"None": 0, "Low": 1, "Moderate": 2, "High": 3}
+        return dataset_risk if order.get(dataset_risk, 0) > order.get(ml_risk, 0) else ml_risk
     except Exception as e:
         logger.error(f"DDI prediction error: {str(e)}")
-        return "None"
+        return dataset_risk
 
 
 # ============================================
