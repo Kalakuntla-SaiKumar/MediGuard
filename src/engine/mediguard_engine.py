@@ -30,7 +30,7 @@ try:
     label_encoder = joblib.load(encoder_path)
     logger.info("✓ DDI Model and Encoder loaded successfully")
 except Exception as e:
-    logger.error(f"✗ Failed to load DDI model: {str(e)}")
+    logger.warning(f"⚠ DDI model not found. Falling back to rule/data-only checks: {str(e)}")
     rf_model      = None
     label_encoder = None
 
