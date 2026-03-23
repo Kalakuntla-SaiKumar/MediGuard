@@ -114,7 +114,7 @@ def register():
 @auth_bp.route('/login', methods=['POST'])
 def login():
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True) or {}
         
         if not data:
             return jsonify({"error": "No data provided"}), 400
@@ -153,15 +153,26 @@ def login():
         
         logger.info(f"✓ User logged in: {user.username}")
         
+        try:
+            user_payload = user.to_dict()
+        except Exception as serialize_err:
+            logger.warning(f"User serialization warning for {email}: {str(serialize_err)}")
+            user_payload = {
+                "id": str(user.id),
+                "email": user.email,
+                "username": user.username,
+                "is_active": bool(user.is_active),
+            }
+
         return jsonify({
             "status": "success",
             "message": "Login successful",
-            "user": user.to_dict()
+            "user": user_payload
         }), 200
     
     except Exception as e:
-        logger.error(f"✗ Login error: {str(e)}")
-        return jsonify({"error": "Login failed"}), 500
+        logger.exception(f"✗ Login error: {str(e)}")
+        return jsonify({"error": "Invalid email or password"}), 401
 
 
 # ============================================

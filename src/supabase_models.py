@@ -82,7 +82,7 @@ class User(db.Model):
             'pregnancy_status': self.pregnancy_status,
             'health_conditions': self.health_conditions,
             'allergies': self.allergies,
-            'created_at': self.created_at.isoformat(),
+            'created_at': self.created_at.isoformat() if self.created_at else None,
             'is_active': self.is_active,
             'auth_method': self.auth_method,
             'full_name': self.full_name,
