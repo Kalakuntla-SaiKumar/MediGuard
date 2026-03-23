@@ -9,3 +9,6 @@ Flask-Mail==0.9.1
 requests==2.31.0
 groq==0.4.1
 gunicorn==21.2.0
+joblib==1.4.2
+pandas==2.2.3
+scikit-learn==1.5.2
