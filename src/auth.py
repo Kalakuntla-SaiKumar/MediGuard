@@ -126,8 +126,21 @@ def login():
             return jsonify({"error": "Email and password are required"}), 400
         
         user = User.query.filter_by(email=email).first()
-        
-        if not user or not user.check_password(password):
+
+        password_ok = False
+        if user:
+            try:
+                password_ok = user.check_password(password)
+            except Exception as check_err:
+                # Support legacy rows that may store plaintext passwords.
+                logger.warning(f"Password hash check failed for {email}: {str(check_err)}")
+                stored = (getattr(user, 'password_hash', '') or '').strip()
+                if stored and stored == password:
+                    user.set_password(password)
+                    db.session.commit()
+                    password_ok = True
+
+        if not user or not password_ok:
             return jsonify({"error": "Invalid email or password"}), 401
         
         if not user.is_active:
