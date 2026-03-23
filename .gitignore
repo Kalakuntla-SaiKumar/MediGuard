@@ -214,6 +214,14 @@ data/processed/
 *.tsv
 *.gz
 
+# Keep required processed artifacts for production inference
+!data/processed/
+!data/processed/cleaned_drug_condition_interactions.csv
+!data/processed/cleaned_drug_food_interactions.csv
+!data/processed/db_drug_interactions.csv
+!data/processed/drug_food_lookup.json
+!data/processed/food_list.json
+
 # Trained models
 models/
 *.pkl

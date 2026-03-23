@@ -1,0 +1,1738 @@
+{
+  "warfarin+spinach": {
+    "risk": "High",
+    "mechanism": "Spinach is very high in Vitamin K which directly reduces warfarin's anticoagulant effect"
+  },
+  "spinach+warfarin": {
+    "risk": "High",
+    "mechanism": "Spinach is very high in Vitamin K which directly reduces warfarin's anticoagulant effect"
+  },
+  "warfarin+kale": {
+    "risk": "High",
+    "mechanism": "Kale is extremely high in Vitamin K \u2014 significantly reduces warfarin effectiveness"
+  },
+  "kale+warfarin": {
+    "risk": "High",
+    "mechanism": "Kale is extremely high in Vitamin K \u2014 significantly reduces warfarin effectiveness"
+  },
+  "warfarin+chicken liver": {
+    "risk": "High",
+    "mechanism": "Chicken liver is very high in Vitamin K, reducing warfarin's anticoagulant effect"
+  },
+  "chicken liver+warfarin": {
+    "risk": "High",
+    "mechanism": "Chicken liver is very high in Vitamin K, reducing warfarin's anticoagulant effect"
+  },
+  "warfarin+beef liver": {
+    "risk": "High",
+    "mechanism": "Beef liver is very high in Vitamin K, reducing warfarin's anticoagulant effect"
+  },
+  "beef liver+warfarin": {
+    "risk": "High",
+    "mechanism": "Beef liver is very high in Vitamin K, reducing warfarin's anticoagulant effect"
+  },
+  "warfarin+liver": {
+    "risk": "High",
+    "mechanism": "Liver is very high in Vitamin K, directly antagonizing warfarin"
+  },
+  "liver+warfarin": {
+    "risk": "High",
+    "mechanism": "Liver is very high in Vitamin K, directly antagonizing warfarin"
+  },
+  "warfarin+broccoli": {
+    "risk": "High",
+    "mechanism": "Broccoli is very high in Vitamin K \u2014 reduces warfarin effectiveness significantly"
+  },
+  "broccoli+warfarin": {
+    "risk": "High",
+    "mechanism": "Broccoli is very high in Vitamin K \u2014 reduces warfarin effectiveness significantly"
+  },
+  "warfarin+cabbage": {
+    "risk": "High",
+    "mechanism": "Cabbage contains high Vitamin K \u2014 reduces warfarin's anticoagulant effect"
+  },
+  "cabbage+warfarin": {
+    "risk": "High",
+    "mechanism": "Cabbage contains high Vitamin K \u2014 reduces warfarin's anticoagulant effect"
+  },
+  "warfarin+brussels sprouts": {
+    "risk": "High",
+    "mechanism": "Very high Vitamin K content reduces warfarin effectiveness"
+  },
+  "brussels sprouts+warfarin": {
+    "risk": "High",
+    "mechanism": "Very high Vitamin K content reduces warfarin effectiveness"
+  },
+  "warfarin+lettuce": {
+    "risk": "Moderate",
+    "mechanism": "Contains moderate Vitamin K \u2014 can affect warfarin levels"
+  },
+  "lettuce+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Contains moderate Vitamin K \u2014 can affect warfarin levels"
+  },
+  "warfarin+green tea": {
+    "risk": "Moderate",
+    "mechanism": "Contains Vitamin K and may affect warfarin metabolism"
+  },
+  "green tea+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Contains Vitamin K and may affect warfarin metabolism"
+  },
+  "warfarin+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol alters warfarin metabolism \u2014 increases bleeding risk significantly"
+  },
+  "alcohol+warfarin": {
+    "risk": "High",
+    "mechanism": "Alcohol alters warfarin metabolism \u2014 increases bleeding risk significantly"
+  },
+  "warfarin+beer": {
+    "risk": "High",
+    "mechanism": "Alcohol in beer alters warfarin metabolism \u2014 increases bleeding risk"
+  },
+  "beer+warfarin": {
+    "risk": "High",
+    "mechanism": "Alcohol in beer alters warfarin metabolism \u2014 increases bleeding risk"
+  },
+  "warfarin+wine": {
+    "risk": "High",
+    "mechanism": "Alcohol in wine alters warfarin metabolism \u2014 increases bleeding risk"
+  },
+  "wine+warfarin": {
+    "risk": "High",
+    "mechanism": "Alcohol in wine alters warfarin metabolism \u2014 increases bleeding risk"
+  },
+  "warfarin+grapefruit": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit inhibits CYP3A4 which can increase warfarin levels"
+  },
+  "grapefruit+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit inhibits CYP3A4 which can increase warfarin levels"
+  },
+  "warfarin+grapefruit juice": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit juice inhibits CYP3A4 which can increase warfarin levels"
+  },
+  "grapefruit juice+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit juice inhibits CYP3A4 which can increase warfarin levels"
+  },
+  "warfarin+cranberry juice": {
+    "risk": "High",
+    "mechanism": "Cranberry juice can potentiate warfarin effect \u2014 increases bleeding risk"
+  },
+  "cranberry juice+warfarin": {
+    "risk": "High",
+    "mechanism": "Cranberry juice can potentiate warfarin effect \u2014 increases bleeding risk"
+  },
+  "warfarin+cranberry": {
+    "risk": "High",
+    "mechanism": "Cranberry can potentiate warfarin effect \u2014 significantly increases INR"
+  },
+  "cranberry+warfarin": {
+    "risk": "High",
+    "mechanism": "Cranberry can potentiate warfarin effect \u2014 significantly increases INR"
+  },
+  "warfarin+garlic": {
+    "risk": "Moderate",
+    "mechanism": "Garlic has antiplatelet properties \u2014 increases bleeding risk with warfarin"
+  },
+  "garlic+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Garlic has antiplatelet properties \u2014 increases bleeding risk with warfarin"
+  },
+  "warfarin+ginger": {
+    "risk": "Moderate",
+    "mechanism": "Ginger has antiplatelet properties \u2014 can increase warfarin effect"
+  },
+  "ginger+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Ginger has antiplatelet properties \u2014 can increase warfarin effect"
+  },
+  "warfarin+turmeric": {
+    "risk": "Moderate",
+    "mechanism": "Turmeric has anticoagulant properties \u2014 can potentiate warfarin"
+  },
+  "turmeric+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Turmeric has anticoagulant properties \u2014 can potentiate warfarin"
+  },
+  "warfarin+avocado": {
+    "risk": "Moderate",
+    "mechanism": "Avocado contains Vitamin K and may reduce warfarin effectiveness"
+  },
+  "avocado+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Avocado contains Vitamin K and may reduce warfarin effectiveness"
+  },
+  "warfarin+mango": {
+    "risk": "Moderate",
+    "mechanism": "Mango may increase warfarin effect through unknown mechanism"
+  },
+  "mango+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Mango may increase warfarin effect through unknown mechanism"
+  },
+  "warfarin+papaya": {
+    "risk": "High",
+    "mechanism": "Papaya contains papain which potentiates warfarin \u2014 increases bleeding risk"
+  },
+  "papaya+warfarin": {
+    "risk": "High",
+    "mechanism": "Papaya contains papain which potentiates warfarin \u2014 increases bleeding risk"
+  },
+  "warfarin+flaxseed": {
+    "risk": "Moderate",
+    "mechanism": "Flaxseeds have anticoagulant properties \u2014 can potentiate warfarin"
+  },
+  "flaxseed+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Flaxseeds have anticoagulant properties \u2014 can potentiate warfarin"
+  },
+  "warfarin+fish oil": {
+    "risk": "Moderate",
+    "mechanism": "Fish oil has antiplatelet effects \u2014 increases bleeding risk with warfarin"
+  },
+  "fish oil+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Fish oil has antiplatelet effects \u2014 increases bleeding risk with warfarin"
+  },
+  "warfarin+omega-3": {
+    "risk": "Moderate",
+    "mechanism": "Omega-3 fatty acids have antiplatelet effects \u2014 potentiates warfarin"
+  },
+  "omega-3+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Omega-3 fatty acids have antiplatelet effects \u2014 potentiates warfarin"
+  },
+  "warfarin+vitamin e": {
+    "risk": "Moderate",
+    "mechanism": "High dose Vitamin E can potentiate warfarin anticoagulant effect"
+  },
+  "vitamin e+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "High dose Vitamin E can potentiate warfarin anticoagulant effect"
+  },
+  "warfarin+onion": {
+    "risk": "Moderate",
+    "mechanism": "Onion has antiplatelet properties \u2014 may increase bleeding risk"
+  },
+  "onion+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Onion has antiplatelet properties \u2014 may increase bleeding risk"
+  },
+  "warfarin+methi": {
+    "risk": "Moderate",
+    "mechanism": "Fenugreek has anticoagulant properties \u2014 can potentiate warfarin"
+  },
+  "methi+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Fenugreek has anticoagulant properties \u2014 can potentiate warfarin"
+  },
+  "warfarin+fenugreek": {
+    "risk": "Moderate",
+    "mechanism": "Fenugreek has anticoagulant properties \u2014 can potentiate warfarin"
+  },
+  "fenugreek+warfarin": {
+    "risk": "Moderate",
+    "mechanism": "Fenugreek has anticoagulant properties \u2014 can potentiate warfarin"
+  },
+  "warfarin+coconut water": {
+    "risk": "Low",
+    "mechanism": "Coconut water is generally safe but monitor INR if consumed regularly"
+  },
+  "coconut water+warfarin": {
+    "risk": "Low",
+    "mechanism": "Coconut water is generally safe but monitor INR if consumed regularly"
+  },
+  "warfarin+biryani": {
+    "risk": "Low",
+    "mechanism": "Biryani itself has no direct warfarin interaction \u2014 spices are at normal food quantities"
+  },
+  "biryani+warfarin": {
+    "risk": "Low",
+    "mechanism": "Biryani itself has no direct warfarin interaction \u2014 spices are at normal food quantities"
+  },
+  "warfarin+rice": {
+    "risk": "None",
+    "mechanism": "Rice has no significant interaction with warfarin"
+  },
+  "rice+warfarin": {
+    "risk": "None",
+    "mechanism": "Rice has no significant interaction with warfarin"
+  },
+  "warfarin+chicken": {
+    "risk": "None",
+    "mechanism": "Plain chicken has no significant interaction with warfarin"
+  },
+  "chicken+warfarin": {
+    "risk": "None",
+    "mechanism": "Plain chicken has no significant interaction with warfarin"
+  },
+  "atorvastatin+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 significantly increases atorvastatin blood levels, risk of myopathy"
+  },
+  "grapefruit+atorvastatin": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 significantly increases atorvastatin blood levels, risk of myopathy"
+  },
+  "atorvastatin+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice inhibits CYP3A4 \u2014 increases atorvastatin levels, muscle damage risk"
+  },
+  "grapefruit juice+atorvastatin": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice inhibits CYP3A4 \u2014 increases atorvastatin levels, muscle damage risk"
+  },
+  "atorvastatin+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol combined with atorvastatin increases risk of liver damage"
+  },
+  "alcohol+atorvastatin": {
+    "risk": "High",
+    "mechanism": "Alcohol combined with atorvastatin increases risk of liver damage"
+  },
+  "atorvastatin+pomelo": {
+    "risk": "High",
+    "mechanism": "Pomelo contains furanocoumarins like grapefruit \u2014 inhibits CYP3A4"
+  },
+  "pomelo+atorvastatin": {
+    "risk": "High",
+    "mechanism": "Pomelo contains furanocoumarins like grapefruit \u2014 inhibits CYP3A4"
+  },
+  "simvastatin+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 greatly increases simvastatin levels, rhabdomyolysis risk"
+  },
+  "grapefruit+simvastatin": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 greatly increases simvastatin levels, rhabdomyolysis risk"
+  },
+  "simvastatin+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice greatly increases simvastatin blood levels \u2014 muscle damage risk"
+  },
+  "grapefruit juice+simvastatin": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice greatly increases simvastatin blood levels \u2014 muscle damage risk"
+  },
+  "simvastatin+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol with simvastatin increases liver damage risk"
+  },
+  "alcohol+simvastatin": {
+    "risk": "High",
+    "mechanism": "Alcohol with simvastatin increases liver damage risk"
+  },
+  "simvastatin+pomelo": {
+    "risk": "High",
+    "mechanism": "Pomelo inhibits CYP3A4 like grapefruit \u2014 increases simvastatin toxicity"
+  },
+  "pomelo+simvastatin": {
+    "risk": "High",
+    "mechanism": "Pomelo inhibits CYP3A4 like grapefruit \u2014 increases simvastatin toxicity"
+  },
+  "simvastatin+large meals": {
+    "risk": "Low",
+    "mechanism": "High fat meals may slightly increase simvastatin absorption"
+  },
+  "large meals+simvastatin": {
+    "risk": "Low",
+    "mechanism": "High fat meals may slightly increase simvastatin absorption"
+  },
+  "lovastatin+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 metabolism of lovastatin \u2014 toxicity risk"
+  },
+  "grapefruit+lovastatin": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 metabolism of lovastatin \u2014 toxicity risk"
+  },
+  "lovastatin+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice significantly increases lovastatin blood levels"
+  },
+  "grapefruit juice+lovastatin": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice significantly increases lovastatin blood levels"
+  },
+  "rosuvastatin+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol increases risk of liver toxicity with rosuvastatin"
+  },
+  "alcohol+rosuvastatin": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol increases risk of liver toxicity with rosuvastatin"
+  },
+  "rosuvastatin+antacids": {
+    "risk": "Moderate",
+    "mechanism": "Antacids containing aluminum/magnesium reduce rosuvastatin absorption by 50%"
+  },
+  "antacids+rosuvastatin": {
+    "risk": "Moderate",
+    "mechanism": "Antacids containing aluminum/magnesium reduce rosuvastatin absorption by 50%"
+  },
+  "lisinopril+potassium rich foods": {
+    "risk": "High",
+    "mechanism": "ACE inhibitors increase potassium levels \u2014 high potassium foods risk dangerous hyperkalemia"
+  },
+  "potassium rich foods+lisinopril": {
+    "risk": "High",
+    "mechanism": "ACE inhibitors increase potassium levels \u2014 high potassium foods risk dangerous hyperkalemia"
+  },
+  "lisinopril+bananas": {
+    "risk": "Moderate",
+    "mechanism": "Bananas are high in potassium \u2014 ACE inhibitors can cause hyperkalemia"
+  },
+  "bananas+lisinopril": {
+    "risk": "Moderate",
+    "mechanism": "Bananas are high in potassium \u2014 ACE inhibitors can cause hyperkalemia"
+  },
+  "lisinopril+avocado": {
+    "risk": "Moderate",
+    "mechanism": "Avocado is high in potassium \u2014 risk of hyperkalemia with ACE inhibitors"
+  },
+  "avocado+lisinopril": {
+    "risk": "Moderate",
+    "mechanism": "Avocado is high in potassium \u2014 risk of hyperkalemia with ACE inhibitors"
+  },
+  "lisinopril+salt substitutes": {
+    "risk": "High",
+    "mechanism": "Salt substitutes contain potassium chloride \u2014 dangerous hyperkalemia risk"
+  },
+  "salt substitutes+lisinopril": {
+    "risk": "High",
+    "mechanism": "Salt substitutes contain potassium chloride \u2014 dangerous hyperkalemia risk"
+  },
+  "lisinopril+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances blood pressure lowering effect \u2014 risk of hypotension"
+  },
+  "alcohol+lisinopril": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances blood pressure lowering effect \u2014 risk of hypotension"
+  },
+  "ramipril+bananas": {
+    "risk": "Moderate",
+    "mechanism": "Bananas are high in potassium \u2014 ACE inhibitors increase hyperkalemia risk"
+  },
+  "bananas+ramipril": {
+    "risk": "Moderate",
+    "mechanism": "Bananas are high in potassium \u2014 ACE inhibitors increase hyperkalemia risk"
+  },
+  "ramipril+potassium rich foods": {
+    "risk": "High",
+    "mechanism": "High potassium foods increase hyperkalemia risk with ACE inhibitors"
+  },
+  "potassium rich foods+ramipril": {
+    "risk": "High",
+    "mechanism": "High potassium foods increase hyperkalemia risk with ACE inhibitors"
+  },
+  "ramipril+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances hypotensive effect \u2014 dizziness and fainting risk"
+  },
+  "alcohol+ramipril": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances hypotensive effect \u2014 dizziness and fainting risk"
+  },
+  "captopril+food": {
+    "risk": "Low",
+    "mechanism": "Food reduces captopril absorption by 30-40% \u2014 best taken on empty stomach"
+  },
+  "food+captopril": {
+    "risk": "Low",
+    "mechanism": "Food reduces captopril absorption by 30-40% \u2014 best taken on empty stomach"
+  },
+  "captopril+potassium rich foods": {
+    "risk": "High",
+    "mechanism": "High potassium foods increase hyperkalemia risk with captopril"
+  },
+  "potassium rich foods+captopril": {
+    "risk": "High",
+    "mechanism": "High potassium foods increase hyperkalemia risk with captopril"
+  },
+  "metoprolol+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances metoprolol's blood pressure lowering effect \u2014 severe hypotension risk"
+  },
+  "alcohol+metoprolol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances metoprolol's blood pressure lowering effect \u2014 severe hypotension risk"
+  },
+  "metoprolol+natural licorice": {
+    "risk": "High",
+    "mechanism": "Licorice causes sodium retention and hypertension, opposing metoprolol's effect"
+  },
+  "natural licorice+metoprolol": {
+    "risk": "High",
+    "mechanism": "Licorice causes sodium retention and hypertension, opposing metoprolol's effect"
+  },
+  "metoprolol+licorice": {
+    "risk": "High",
+    "mechanism": "Licorice causes sodium retention opposing metoprolol's antihypertensive effect"
+  },
+  "licorice+metoprolol": {
+    "risk": "High",
+    "mechanism": "Licorice causes sodium retention opposing metoprolol's antihypertensive effect"
+  },
+  "metoprolol+high fat meal": {
+    "risk": "Low",
+    "mechanism": "High fat meals increase metoprolol absorption \u2014 slightly higher blood levels"
+  },
+  "high fat meal+metoprolol": {
+    "risk": "Low",
+    "mechanism": "High fat meals increase metoprolol absorption \u2014 slightly higher blood levels"
+  },
+  "metoprolol+biryani": {
+    "risk": "None",
+    "mechanism": "Biryani has no significant interaction with metoprolol"
+  },
+  "biryani+metoprolol": {
+    "risk": "None",
+    "mechanism": "Biryani has no significant interaction with metoprolol"
+  },
+  "propranolol+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances hypotensive effect of propranolol \u2014 dangerous blood pressure drop"
+  },
+  "alcohol+propranolol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances hypotensive effect of propranolol \u2014 dangerous blood pressure drop"
+  },
+  "propranolol+licorice": {
+    "risk": "High",
+    "mechanism": "Licorice opposes propranolol's antihypertensive effect"
+  },
+  "licorice+propranolol": {
+    "risk": "High",
+    "mechanism": "Licorice opposes propranolol's antihypertensive effect"
+  },
+  "propranolol+high fat meal": {
+    "risk": "Low",
+    "mechanism": "High fat meals increase propranolol absorption by up to 50%"
+  },
+  "high fat meal+propranolol": {
+    "risk": "Low",
+    "mechanism": "High fat meals increase propranolol absorption by up to 50%"
+  },
+  "atenolol+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances blood pressure lowering effect of atenolol"
+  },
+  "alcohol+atenolol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances blood pressure lowering effect of atenolol"
+  },
+  "atenolol+antacids": {
+    "risk": "Moderate",
+    "mechanism": "Antacids containing aluminum reduce atenolol absorption"
+  },
+  "antacids+atenolol": {
+    "risk": "Moderate",
+    "mechanism": "Antacids containing aluminum reduce atenolol absorption"
+  },
+  "metformin+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol increases risk of lactic acidosis \u2014 potentially fatal combination"
+  },
+  "alcohol+metformin": {
+    "risk": "High",
+    "mechanism": "Alcohol increases risk of lactic acidosis \u2014 potentially fatal combination"
+  },
+  "metformin+beer": {
+    "risk": "High",
+    "mechanism": "Alcohol in beer increases lactic acidosis risk with metformin"
+  },
+  "beer+metformin": {
+    "risk": "High",
+    "mechanism": "Alcohol in beer increases lactic acidosis risk with metformin"
+  },
+  "metformin+wine": {
+    "risk": "High",
+    "mechanism": "Alcohol in wine significantly increases lactic acidosis risk"
+  },
+  "wine+metformin": {
+    "risk": "High",
+    "mechanism": "Alcohol in wine significantly increases lactic acidosis risk"
+  },
+  "metformin+karela": {
+    "risk": "Moderate",
+    "mechanism": "Karela (bitter gourd) lowers blood sugar \u2014 hypoglycemia risk with metformin"
+  },
+  "karela+metformin": {
+    "risk": "Moderate",
+    "mechanism": "Karela (bitter gourd) lowers blood sugar \u2014 hypoglycemia risk with metformin"
+  },
+  "metformin+bitter gourd": {
+    "risk": "Moderate",
+    "mechanism": "Bitter gourd lowers blood sugar \u2014 hypoglycemia risk when combined"
+  },
+  "bitter gourd+metformin": {
+    "risk": "Moderate",
+    "mechanism": "Bitter gourd lowers blood sugar \u2014 hypoglycemia risk when combined"
+  },
+  "metformin+fenugreek": {
+    "risk": "Moderate",
+    "mechanism": "Fenugreek lowers blood glucose \u2014 additive hypoglycemic effect"
+  },
+  "fenugreek+metformin": {
+    "risk": "Moderate",
+    "mechanism": "Fenugreek lowers blood glucose \u2014 additive hypoglycemic effect"
+  },
+  "metformin+methi": {
+    "risk": "Moderate",
+    "mechanism": "Fenugreek lowers blood glucose \u2014 additive hypoglycemic effect with metformin"
+  },
+  "methi+metformin": {
+    "risk": "Moderate",
+    "mechanism": "Fenugreek lowers blood glucose \u2014 additive hypoglycemic effect with metformin"
+  },
+  "metformin+large meal": {
+    "risk": "Low",
+    "mechanism": "Take metformin with food to reduce gastrointestinal side effects"
+  },
+  "large meal+metformin": {
+    "risk": "Low",
+    "mechanism": "Take metformin with food to reduce gastrointestinal side effects"
+  },
+  "metformin+sugar": {
+    "risk": "Moderate",
+    "mechanism": "High sugar foods worsen glycemic control in diabetic patients"
+  },
+  "sugar+metformin": {
+    "risk": "Moderate",
+    "mechanism": "High sugar foods worsen glycemic control in diabetic patients"
+  },
+  "metformin+jaggery": {
+    "risk": "Moderate",
+    "mechanism": "High sugar content worsens glycemic control"
+  },
+  "jaggery+metformin": {
+    "risk": "Moderate",
+    "mechanism": "High sugar content worsens glycemic control"
+  },
+  "glipizide+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol causes disulfiram-like reaction and severe hypoglycemia with sulfonylureas"
+  },
+  "alcohol+glipizide": {
+    "risk": "High",
+    "mechanism": "Alcohol causes disulfiram-like reaction and severe hypoglycemia with sulfonylureas"
+  },
+  "glimepiride+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol can cause severe hypoglycemia and flushing with glimepiride"
+  },
+  "alcohol+glimepiride": {
+    "risk": "High",
+    "mechanism": "Alcohol can cause severe hypoglycemia and flushing with glimepiride"
+  },
+  "insulin+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol masks hypoglycemia symptoms and worsens insulin-induced low blood sugar"
+  },
+  "alcohol+insulin": {
+    "risk": "High",
+    "mechanism": "Alcohol masks hypoglycemia symptoms and worsens insulin-induced low blood sugar"
+  },
+  "insulin+karela": {
+    "risk": "High",
+    "mechanism": "Bitter gourd adds hypoglycemic effect \u2014 severe low blood sugar risk"
+  },
+  "karela+insulin": {
+    "risk": "High",
+    "mechanism": "Bitter gourd adds hypoglycemic effect \u2014 severe low blood sugar risk"
+  },
+  "ciprofloxacin+milk": {
+    "risk": "High",
+    "mechanism": "Dairy products containing calcium chelate ciprofloxacin \u2014 reduces absorption by up to 50%"
+  },
+  "milk+ciprofloxacin": {
+    "risk": "High",
+    "mechanism": "Dairy products containing calcium chelate ciprofloxacin \u2014 reduces absorption by up to 50%"
+  },
+  "ciprofloxacin+dairy": {
+    "risk": "High",
+    "mechanism": "Calcium in dairy chelates ciprofloxacin \u2014 significantly reduces antibiotic absorption"
+  },
+  "dairy+ciprofloxacin": {
+    "risk": "High",
+    "mechanism": "Calcium in dairy chelates ciprofloxacin \u2014 significantly reduces antibiotic absorption"
+  },
+  "ciprofloxacin+curd": {
+    "risk": "High",
+    "mechanism": "Calcium in curd chelates ciprofloxacin \u2014 take 2 hours before or after dairy"
+  },
+  "curd+ciprofloxacin": {
+    "risk": "High",
+    "mechanism": "Calcium in curd chelates ciprofloxacin \u2014 take 2 hours before or after dairy"
+  },
+  "ciprofloxacin+antacids": {
+    "risk": "High",
+    "mechanism": "Antacids with calcium/magnesium chelate ciprofloxacin \u2014 greatly reduce absorption"
+  },
+  "antacids+ciprofloxacin": {
+    "risk": "High",
+    "mechanism": "Antacids with calcium/magnesium chelate ciprofloxacin \u2014 greatly reduce absorption"
+  },
+  "ciprofloxacin+calcium": {
+    "risk": "High",
+    "mechanism": "Calcium chelates ciprofloxacin reducing absorption significantly"
+  },
+  "calcium+ciprofloxacin": {
+    "risk": "High",
+    "mechanism": "Calcium chelates ciprofloxacin reducing absorption significantly"
+  },
+  "ciprofloxacin+iron": {
+    "risk": "High",
+    "mechanism": "Iron chelates fluoroquinolones \u2014 reduces ciprofloxacin absorption"
+  },
+  "iron+ciprofloxacin": {
+    "risk": "High",
+    "mechanism": "Iron chelates fluoroquinolones \u2014 reduces ciprofloxacin absorption"
+  },
+  "ciprofloxacin+caffeine": {
+    "risk": "High",
+    "mechanism": "Ciprofloxacin inhibits caffeine metabolism \u2014 caffeine toxicity risk"
+  },
+  "caffeine+ciprofloxacin": {
+    "risk": "High",
+    "mechanism": "Ciprofloxacin inhibits caffeine metabolism \u2014 caffeine toxicity risk"
+  },
+  "ciprofloxacin+coffee": {
+    "risk": "High",
+    "mechanism": "Coffee caffeine levels increase significantly with ciprofloxacin \u2014 palpitations, anxiety"
+  },
+  "coffee+ciprofloxacin": {
+    "risk": "High",
+    "mechanism": "Coffee caffeine levels increase significantly with ciprofloxacin \u2014 palpitations, anxiety"
+  },
+  "amoxicillin+alcohol": {
+    "risk": "Low",
+    "mechanism": "Alcohol has minimal direct interaction but may reduce recovery from infection"
+  },
+  "alcohol+amoxicillin": {
+    "risk": "Low",
+    "mechanism": "Alcohol has minimal direct interaction but may reduce recovery from infection"
+  },
+  "amoxicillin+food": {
+    "risk": "None",
+    "mechanism": "Food does not significantly affect amoxicillin absorption"
+  },
+  "food+amoxicillin": {
+    "risk": "None",
+    "mechanism": "Food does not significantly affect amoxicillin absorption"
+  },
+  "azithromycin+antacids": {
+    "risk": "Moderate",
+    "mechanism": "Aluminum/magnesium antacids reduce azithromycin absorption"
+  },
+  "antacids+azithromycin": {
+    "risk": "Moderate",
+    "mechanism": "Aluminum/magnesium antacids reduce azithromycin absorption"
+  },
+  "azithromycin+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol may reduce immune function and slow recovery"
+  },
+  "alcohol+azithromycin": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol may reduce immune function and slow recovery"
+  },
+  "tetracycline+milk": {
+    "risk": "High",
+    "mechanism": "Calcium in milk chelates tetracycline \u2014 reduces absorption by 65%"
+  },
+  "milk+tetracycline": {
+    "risk": "High",
+    "mechanism": "Calcium in milk chelates tetracycline \u2014 reduces absorption by 65%"
+  },
+  "tetracycline+dairy": {
+    "risk": "High",
+    "mechanism": "Dairy products chelate tetracycline \u2014 take on completely empty stomach"
+  },
+  "dairy+tetracycline": {
+    "risk": "High",
+    "mechanism": "Dairy products chelate tetracycline \u2014 take on completely empty stomach"
+  },
+  "tetracycline+iron": {
+    "risk": "High",
+    "mechanism": "Iron chelates tetracycline \u2014 take 2-3 hours apart"
+  },
+  "iron+tetracycline": {
+    "risk": "High",
+    "mechanism": "Iron chelates tetracycline \u2014 take 2-3 hours apart"
+  },
+  "tetracycline+calcium": {
+    "risk": "High",
+    "mechanism": "Calcium chelates tetracycline reducing absorption drastically"
+  },
+  "calcium+tetracycline": {
+    "risk": "High",
+    "mechanism": "Calcium chelates tetracycline reducing absorption drastically"
+  },
+  "doxycycline+milk": {
+    "risk": "Moderate",
+    "mechanism": "Dairy reduces doxycycline absorption moderately \u2014 take with water"
+  },
+  "milk+doxycycline": {
+    "risk": "Moderate",
+    "mechanism": "Dairy reduces doxycycline absorption moderately \u2014 take with water"
+  },
+  "doxycycline+iron": {
+    "risk": "High",
+    "mechanism": "Iron chelates doxycycline \u2014 take 2-3 hours apart from iron"
+  },
+  "iron+doxycycline": {
+    "risk": "High",
+    "mechanism": "Iron chelates doxycycline \u2014 take 2-3 hours apart from iron"
+  },
+  "doxycycline+antacids": {
+    "risk": "High",
+    "mechanism": "Antacids chelate doxycycline \u2014 avoid or take 2 hours apart"
+  },
+  "antacids+doxycycline": {
+    "risk": "High",
+    "mechanism": "Antacids chelate doxycycline \u2014 avoid or take 2 hours apart"
+  },
+  "metronidazole+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol causes severe disulfiram-like reaction \u2014 nausea, vomiting, flushing"
+  },
+  "alcohol+metronidazole": {
+    "risk": "High",
+    "mechanism": "Alcohol causes severe disulfiram-like reaction \u2014 nausea, vomiting, flushing"
+  },
+  "metronidazole+beer": {
+    "risk": "High",
+    "mechanism": "Any alcohol causes severe disulfiram reaction \u2014 avoid completely"
+  },
+  "beer+metronidazole": {
+    "risk": "High",
+    "mechanism": "Any alcohol causes severe disulfiram reaction \u2014 avoid completely"
+  },
+  "metronidazole+wine": {
+    "risk": "High",
+    "mechanism": "Alcohol in wine causes disulfiram-like reaction with metronidazole"
+  },
+  "wine+metronidazole": {
+    "risk": "High",
+    "mechanism": "Alcohol in wine causes disulfiram-like reaction with metronidazole"
+  },
+  "sertraline+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol worsens depression and increases sedation with sertraline"
+  },
+  "alcohol+sertraline": {
+    "risk": "High",
+    "mechanism": "Alcohol worsens depression and increases sedation with sertraline"
+  },
+  "sertraline+grapefruit": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 may increase sertraline blood levels"
+  },
+  "grapefruit+sertraline": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 may increase sertraline blood levels"
+  },
+  "fluoxetine+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol increases sedation and CNS depression with fluoxetine"
+  },
+  "alcohol+fluoxetine": {
+    "risk": "High",
+    "mechanism": "Alcohol increases sedation and CNS depression with fluoxetine"
+  },
+  "fluoxetine+grapefruit": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit may increase fluoxetine levels via CYP3A4 inhibition"
+  },
+  "grapefruit+fluoxetine": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit may increase fluoxetine levels via CYP3A4 inhibition"
+  },
+  "fluoxetine+st johns wort": {
+    "risk": "High",
+    "mechanism": "St John's Wort with SSRIs causes serotonin syndrome \u2014 dangerous"
+  },
+  "st johns wort+fluoxetine": {
+    "risk": "High",
+    "mechanism": "St John's Wort with SSRIs causes serotonin syndrome \u2014 dangerous"
+  },
+  "phenelzine+aged cheese": {
+    "risk": "High",
+    "mechanism": "Aged cheese is very high in tyramine \u2014 MAOIs cause hypertensive crisis"
+  },
+  "aged cheese+phenelzine": {
+    "risk": "High",
+    "mechanism": "Aged cheese is very high in tyramine \u2014 MAOIs cause hypertensive crisis"
+  },
+  "phenelzine+cheddar": {
+    "risk": "High",
+    "mechanism": "Cheddar is high in tyramine \u2014 dangerous hypertensive crisis with MAOIs"
+  },
+  "cheddar+phenelzine": {
+    "risk": "High",
+    "mechanism": "Cheddar is high in tyramine \u2014 dangerous hypertensive crisis with MAOIs"
+  },
+  "phenelzine+red wine": {
+    "risk": "High",
+    "mechanism": "Red wine contains tyramine \u2014 MAOIs cause severe hypertensive crisis"
+  },
+  "red wine+phenelzine": {
+    "risk": "High",
+    "mechanism": "Red wine contains tyramine \u2014 MAOIs cause severe hypertensive crisis"
+  },
+  "phenelzine+beer": {
+    "risk": "High",
+    "mechanism": "Beer contains tyramine \u2014 dangerous hypertensive crisis with MAOIs"
+  },
+  "beer+phenelzine": {
+    "risk": "High",
+    "mechanism": "Beer contains tyramine \u2014 dangerous hypertensive crisis with MAOIs"
+  },
+  "phenelzine+soy sauce": {
+    "risk": "High",
+    "mechanism": "Soy sauce is very high in tyramine \u2014 MAOIs cause hypertensive crisis"
+  },
+  "soy sauce+phenelzine": {
+    "risk": "High",
+    "mechanism": "Soy sauce is very high in tyramine \u2014 MAOIs cause hypertensive crisis"
+  },
+  "phenelzine+pickled foods": {
+    "risk": "High",
+    "mechanism": "Pickled/fermented foods are high in tyramine \u2014 hypertensive crisis risk"
+  },
+  "pickled foods+phenelzine": {
+    "risk": "High",
+    "mechanism": "Pickled/fermented foods are high in tyramine \u2014 hypertensive crisis risk"
+  },
+  "phenelzine+achar": {
+    "risk": "High",
+    "mechanism": "Pickled foods high in tyramine \u2014 dangerous with MAO inhibitors"
+  },
+  "achar+phenelzine": {
+    "risk": "High",
+    "mechanism": "Pickled foods high in tyramine \u2014 dangerous with MAO inhibitors"
+  },
+  "phenelzine+cured meats": {
+    "risk": "High",
+    "mechanism": "Cured meats contain tyramine \u2014 MAOIs cause dangerous blood pressure spike"
+  },
+  "cured meats+phenelzine": {
+    "risk": "High",
+    "mechanism": "Cured meats contain tyramine \u2014 MAOIs cause dangerous blood pressure spike"
+  },
+  "phenelzine+banana": {
+    "risk": "Moderate",
+    "mechanism": "Bananas contain some tyramine \u2014 moderate risk with MAO inhibitors"
+  },
+  "banana+phenelzine": {
+    "risk": "Moderate",
+    "mechanism": "Bananas contain some tyramine \u2014 moderate risk with MAO inhibitors"
+  },
+  "phenelzine+avocado": {
+    "risk": "Moderate",
+    "mechanism": "Avocado contains some tyramine \u2014 moderate risk with MAO inhibitors"
+  },
+  "avocado+phenelzine": {
+    "risk": "Moderate",
+    "mechanism": "Avocado contains some tyramine \u2014 moderate risk with MAO inhibitors"
+  },
+  "phenelzine+caffeine": {
+    "risk": "Moderate",
+    "mechanism": "Caffeine has stimulant effects that may interact with MAO inhibitors"
+  },
+  "caffeine+phenelzine": {
+    "risk": "Moderate",
+    "mechanism": "Caffeine has stimulant effects that may interact with MAO inhibitors"
+  },
+  "amlodipine+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 significantly increases amlodipine levels"
+  },
+  "grapefruit+amlodipine": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 significantly increases amlodipine levels"
+  },
+  "amlodipine+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice increases amlodipine blood levels causing excessive hypotension"
+  },
+  "grapefruit juice+amlodipine": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice increases amlodipine blood levels causing excessive hypotension"
+  },
+  "amlodipine+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances blood pressure lowering effect \u2014 hypotension risk"
+  },
+  "alcohol+amlodipine": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances blood pressure lowering effect \u2014 hypotension risk"
+  },
+  "nifedipine+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit greatly increases nifedipine levels via CYP3A4 inhibition"
+  },
+  "grapefruit+nifedipine": {
+    "risk": "High",
+    "mechanism": "Grapefruit greatly increases nifedipine levels via CYP3A4 inhibition"
+  },
+  "nifedipine+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice increases nifedipine levels causing severe hypotension"
+  },
+  "grapefruit juice+nifedipine": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice increases nifedipine levels causing severe hypotension"
+  },
+  "verapamil+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits verapamil metabolism \u2014 toxicity risk"
+  },
+  "grapefruit+verapamil": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits verapamil metabolism \u2014 toxicity risk"
+  },
+  "verapamil+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances verapamil's blood pressure lowering effect"
+  },
+  "alcohol+verapamil": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances verapamil's blood pressure lowering effect"
+  },
+  "diltiazem+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits diltiazem metabolism \u2014 increases blood levels"
+  },
+  "grapefruit+diltiazem": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits diltiazem metabolism \u2014 increases blood levels"
+  },
+  "diltiazem+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol increases diltiazem's hypotensive effect"
+  },
+  "alcohol+diltiazem": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol increases diltiazem's hypotensive effect"
+  },
+  "levothyroxine+soy": {
+    "risk": "High",
+    "mechanism": "Soy products reduce levothyroxine absorption \u2014 take 4 hours apart"
+  },
+  "soy+levothyroxine": {
+    "risk": "High",
+    "mechanism": "Soy products reduce levothyroxine absorption \u2014 take 4 hours apart"
+  },
+  "levothyroxine+tofu": {
+    "risk": "High",
+    "mechanism": "Soy in tofu reduces levothyroxine absorption significantly"
+  },
+  "tofu+levothyroxine": {
+    "risk": "High",
+    "mechanism": "Soy in tofu reduces levothyroxine absorption significantly"
+  },
+  "levothyroxine+calcium": {
+    "risk": "High",
+    "mechanism": "Calcium supplements/foods reduce levothyroxine absorption"
+  },
+  "calcium+levothyroxine": {
+    "risk": "High",
+    "mechanism": "Calcium supplements/foods reduce levothyroxine absorption"
+  },
+  "levothyroxine+milk": {
+    "risk": "Moderate",
+    "mechanism": "Calcium in milk reduces levothyroxine absorption \u2014 take on empty stomach"
+  },
+  "milk+levothyroxine": {
+    "risk": "Moderate",
+    "mechanism": "Calcium in milk reduces levothyroxine absorption \u2014 take on empty stomach"
+  },
+  "levothyroxine+coffee": {
+    "risk": "Moderate",
+    "mechanism": "Coffee reduces levothyroxine absorption \u2014 take 30 min before coffee"
+  },
+  "coffee+levothyroxine": {
+    "risk": "Moderate",
+    "mechanism": "Coffee reduces levothyroxine absorption \u2014 take 30 min before coffee"
+  },
+  "levothyroxine+iron": {
+    "risk": "High",
+    "mechanism": "Iron chelates levothyroxine \u2014 reduces absorption significantly"
+  },
+  "iron+levothyroxine": {
+    "risk": "High",
+    "mechanism": "Iron chelates levothyroxine \u2014 reduces absorption significantly"
+  },
+  "levothyroxine+high fiber foods": {
+    "risk": "Moderate",
+    "mechanism": "High fiber reduces levothyroxine absorption \u2014 take on empty stomach"
+  },
+  "high fiber foods+levothyroxine": {
+    "risk": "Moderate",
+    "mechanism": "High fiber reduces levothyroxine absorption \u2014 take on empty stomach"
+  },
+  "levothyroxine+walnuts": {
+    "risk": "Moderate",
+    "mechanism": "Walnuts can reduce levothyroxine absorption"
+  },
+  "walnuts+levothyroxine": {
+    "risk": "Moderate",
+    "mechanism": "Walnuts can reduce levothyroxine absorption"
+  },
+  "losartan+potassium rich foods": {
+    "risk": "High",
+    "mechanism": "ARBs increase potassium levels \u2014 high potassium foods cause dangerous hyperkalemia"
+  },
+  "potassium rich foods+losartan": {
+    "risk": "High",
+    "mechanism": "ARBs increase potassium levels \u2014 high potassium foods cause dangerous hyperkalemia"
+  },
+  "losartan+bananas": {
+    "risk": "Moderate",
+    "mechanism": "Bananas high in potassium \u2014 hyperkalemia risk with losartan"
+  },
+  "bananas+losartan": {
+    "risk": "Moderate",
+    "mechanism": "Bananas high in potassium \u2014 hyperkalemia risk with losartan"
+  },
+  "losartan+salt substitutes": {
+    "risk": "High",
+    "mechanism": "Salt substitutes contain potassium \u2014 dangerous hyperkalemia with losartan"
+  },
+  "salt substitutes+losartan": {
+    "risk": "High",
+    "mechanism": "Salt substitutes contain potassium \u2014 dangerous hyperkalemia with losartan"
+  },
+  "losartan+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances losartan's blood pressure lowering effect"
+  },
+  "alcohol+losartan": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances losartan's blood pressure lowering effect"
+  },
+  "losartan+licorice": {
+    "risk": "High",
+    "mechanism": "Licorice causes sodium retention opposing losartan's antihypertensive effect"
+  },
+  "licorice+losartan": {
+    "risk": "High",
+    "mechanism": "Licorice causes sodium retention opposing losartan's antihypertensive effect"
+  },
+  "furosemide+licorice": {
+    "risk": "High",
+    "mechanism": "Licorice causes potassium loss worsening furosemide-induced hypokalemia"
+  },
+  "licorice+furosemide": {
+    "risk": "High",
+    "mechanism": "Licorice causes potassium loss worsening furosemide-induced hypokalemia"
+  },
+  "furosemide+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances diuretic effect and hypotensive effect"
+  },
+  "alcohol+furosemide": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances diuretic effect and hypotensive effect"
+  },
+  "hydrochlorothiazide+licorice": {
+    "risk": "High",
+    "mechanism": "Licorice worsens hypokalemia caused by thiazide diuretics"
+  },
+  "licorice+hydrochlorothiazide": {
+    "risk": "High",
+    "mechanism": "Licorice worsens hypokalemia caused by thiazide diuretics"
+  },
+  "hydrochlorothiazide+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances antihypertensive and diuretic effects"
+  },
+  "alcohol+hydrochlorothiazide": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol enhances antihypertensive and diuretic effects"
+  },
+  "ibuprofen+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol combined with ibuprofen increases risk of stomach bleeding"
+  },
+  "alcohol+ibuprofen": {
+    "risk": "High",
+    "mechanism": "Alcohol combined with ibuprofen increases risk of stomach bleeding"
+  },
+  "ibuprofen+beer": {
+    "risk": "High",
+    "mechanism": "Alcohol increases gastrointestinal bleeding risk with ibuprofen"
+  },
+  "beer+ibuprofen": {
+    "risk": "High",
+    "mechanism": "Alcohol increases gastrointestinal bleeding risk with ibuprofen"
+  },
+  "ibuprofen+coffee": {
+    "risk": "Moderate",
+    "mechanism": "Caffeine in coffee can worsen ibuprofen-related stomach irritation"
+  },
+  "coffee+ibuprofen": {
+    "risk": "Moderate",
+    "mechanism": "Caffeine in coffee can worsen ibuprofen-related stomach irritation"
+  },
+  "aspirin+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol significantly increases risk of GI bleeding with aspirin"
+  },
+  "alcohol+aspirin": {
+    "risk": "High",
+    "mechanism": "Alcohol significantly increases risk of GI bleeding with aspirin"
+  },
+  "aspirin+grapefruit": {
+    "risk": "Low",
+    "mechanism": "Minor interaction \u2014 grapefruit has minimal effect on aspirin"
+  },
+  "grapefruit+aspirin": {
+    "risk": "Low",
+    "mechanism": "Minor interaction \u2014 grapefruit has minimal effect on aspirin"
+  },
+  "paracetamol+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol significantly increases hepatotoxicity risk with paracetamol"
+  },
+  "alcohol+paracetamol": {
+    "risk": "High",
+    "mechanism": "Alcohol significantly increases hepatotoxicity risk with paracetamol"
+  },
+  "paracetamol+beer": {
+    "risk": "High",
+    "mechanism": "Alcohol in beer greatly increases liver damage risk with paracetamol"
+  },
+  "beer+paracetamol": {
+    "risk": "High",
+    "mechanism": "Alcohol in beer greatly increases liver damage risk with paracetamol"
+  },
+  "paracetamol+wine": {
+    "risk": "High",
+    "mechanism": "Alcohol in wine increases liver damage risk with paracetamol"
+  },
+  "wine+paracetamol": {
+    "risk": "High",
+    "mechanism": "Alcohol in wine increases liver damage risk with paracetamol"
+  },
+  "tramadol+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression and respiratory depression with tramadol"
+  },
+  "alcohol+tramadol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression and respiratory depression with tramadol"
+  },
+  "tramadol+grapefruit": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit inhibits tramadol metabolism \u2014 increases blood levels"
+  },
+  "grapefruit+tramadol": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit inhibits tramadol metabolism \u2014 increases blood levels"
+  },
+  "codeine+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression and respiratory depression with codeine"
+  },
+  "alcohol+codeine": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression and respiratory depression with codeine"
+  },
+  "carbamazepine+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 greatly increases carbamazepine toxicity risk"
+  },
+  "grapefruit+carbamazepine": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 greatly increases carbamazepine toxicity risk"
+  },
+  "carbamazepine+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice significantly increases carbamazepine blood levels"
+  },
+  "grapefruit juice+carbamazepine": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice significantly increases carbamazepine blood levels"
+  },
+  "carbamazepine+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol increases CNS depression and lowers seizure threshold"
+  },
+  "alcohol+carbamazepine": {
+    "risk": "High",
+    "mechanism": "Alcohol increases CNS depression and lowers seizure threshold"
+  },
+  "valproic acid+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression and liver toxicity with valproate"
+  },
+  "alcohol+valproic acid": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression and liver toxicity with valproate"
+  },
+  "phenytoin+alcohol": {
+    "risk": "High",
+    "mechanism": "Chronic alcohol use reduces phenytoin levels \u2014 seizure risk"
+  },
+  "alcohol+phenytoin": {
+    "risk": "High",
+    "mechanism": "Chronic alcohol use reduces phenytoin levels \u2014 seizure risk"
+  },
+  "phenytoin+calcium": {
+    "risk": "Moderate",
+    "mechanism": "High calcium intake may reduce phenytoin absorption"
+  },
+  "calcium+phenytoin": {
+    "risk": "Moderate",
+    "mechanism": "High calcium intake may reduce phenytoin absorption"
+  },
+  "lamotrigine+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol may lower seizure threshold with lamotrigine"
+  },
+  "alcohol+lamotrigine": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol may lower seizure threshold with lamotrigine"
+  },
+  "cyclosporine+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit significantly increases cyclosporine levels \u2014 toxicity risk"
+  },
+  "grapefruit+cyclosporine": {
+    "risk": "High",
+    "mechanism": "Grapefruit significantly increases cyclosporine levels \u2014 toxicity risk"
+  },
+  "cyclosporine+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice greatly increases cyclosporine blood levels"
+  },
+  "grapefruit juice+cyclosporine": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice greatly increases cyclosporine blood levels"
+  },
+  "cyclosporine+st johns wort": {
+    "risk": "High",
+    "mechanism": "St John's Wort induces CYP3A4 \u2014 drastically reduces cyclosporine levels"
+  },
+  "st johns wort+cyclosporine": {
+    "risk": "High",
+    "mechanism": "St John's Wort induces CYP3A4 \u2014 drastically reduces cyclosporine levels"
+  },
+  "tacrolimus+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits tacrolimus metabolism \u2014 toxicity and rejection risk"
+  },
+  "grapefruit+tacrolimus": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits tacrolimus metabolism \u2014 toxicity and rejection risk"
+  },
+  "tacrolimus+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice greatly increases tacrolimus levels"
+  },
+  "grapefruit juice+tacrolimus": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice greatly increases tacrolimus levels"
+  },
+  "diazepam+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol greatly enhances CNS depression with diazepam \u2014 respiratory depression risk"
+  },
+  "alcohol+diazepam": {
+    "risk": "High",
+    "mechanism": "Alcohol greatly enhances CNS depression with diazepam \u2014 respiratory depression risk"
+  },
+  "diazepam+grapefruit": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit inhibits diazepam metabolism \u2014 increases sedation"
+  },
+  "grapefruit+diazepam": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit inhibits diazepam metabolism \u2014 increases sedation"
+  },
+  "lorazepam+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol potentiates lorazepam sedation \u2014 dangerous respiratory depression"
+  },
+  "alcohol+lorazepam": {
+    "risk": "High",
+    "mechanism": "Alcohol potentiates lorazepam sedation \u2014 dangerous respiratory depression"
+  },
+  "alprazolam+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol greatly enhances alprazolam CNS depression"
+  },
+  "alcohol+alprazolam": {
+    "risk": "High",
+    "mechanism": "Alcohol greatly enhances alprazolam CNS depression"
+  },
+  "alprazolam+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 greatly increases alprazolam blood levels"
+  },
+  "grapefruit+alprazolam": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP3A4 \u2014 greatly increases alprazolam blood levels"
+  },
+  "risperidone+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression and sedation with risperidone"
+  },
+  "alcohol+risperidone": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression and sedation with risperidone"
+  },
+  "quetiapine+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol significantly enhances quetiapine sedation and CNS depression"
+  },
+  "alcohol+quetiapine": {
+    "risk": "High",
+    "mechanism": "Alcohol significantly enhances quetiapine sedation and CNS depression"
+  },
+  "quetiapine+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits quetiapine metabolism \u2014 increases blood levels"
+  },
+  "grapefruit+quetiapine": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits quetiapine metabolism \u2014 increases blood levels"
+  },
+  "olanzapine+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression with olanzapine"
+  },
+  "alcohol+olanzapine": {
+    "risk": "High",
+    "mechanism": "Alcohol enhances CNS depression with olanzapine"
+  },
+  "olanzapine+caffeine": {
+    "risk": "Moderate",
+    "mechanism": "Caffeine may reduce olanzapine effectiveness"
+  },
+  "caffeine+olanzapine": {
+    "risk": "Moderate",
+    "mechanism": "Caffeine may reduce olanzapine effectiveness"
+  },
+  "iron+milk": {
+    "risk": "High",
+    "mechanism": "Calcium in milk binds iron \u2014 take iron 2 hours before or after dairy"
+  },
+  "milk+iron": {
+    "risk": "High",
+    "mechanism": "Calcium in milk binds iron \u2014 take iron 2 hours before or after dairy"
+  },
+  "iron+coffee": {
+    "risk": "High",
+    "mechanism": "Tannins in coffee bind iron \u2014 reduces absorption by up to 80%"
+  },
+  "coffee+iron": {
+    "risk": "High",
+    "mechanism": "Tannins in coffee bind iron \u2014 reduces absorption by up to 80%"
+  },
+  "iron+tea": {
+    "risk": "High",
+    "mechanism": "Tannins in tea bind iron \u2014 significantly reduces iron absorption"
+  },
+  "tea+iron": {
+    "risk": "High",
+    "mechanism": "Tannins in tea bind iron \u2014 significantly reduces iron absorption"
+  },
+  "iron+black tea": {
+    "risk": "High",
+    "mechanism": "Black tea tannins severely reduce iron absorption"
+  },
+  "black tea+iron": {
+    "risk": "High",
+    "mechanism": "Black tea tannins severely reduce iron absorption"
+  },
+  "iron+calcium": {
+    "risk": "High",
+    "mechanism": "Calcium inhibits iron absorption \u2014 take at different times"
+  },
+  "calcium+iron": {
+    "risk": "High",
+    "mechanism": "Calcium inhibits iron absorption \u2014 take at different times"
+  },
+  "iron+antacids": {
+    "risk": "High",
+    "mechanism": "Antacids reduce stomach acid needed for iron absorption"
+  },
+  "antacids+iron": {
+    "risk": "High",
+    "mechanism": "Antacids reduce stomach acid needed for iron absorption"
+  },
+  "iron+eggs": {
+    "risk": "Moderate",
+    "mechanism": "Phosphoproteins in eggs may reduce iron absorption"
+  },
+  "eggs+iron": {
+    "risk": "Moderate",
+    "mechanism": "Phosphoproteins in eggs may reduce iron absorption"
+  },
+  "iron+orange juice": {
+    "risk": "None",
+    "mechanism": "Vitamin C in orange juice actually enhances iron absorption"
+  },
+  "orange juice+iron": {
+    "risk": "None",
+    "mechanism": "Vitamin C in orange juice actually enhances iron absorption"
+  },
+  "iron+vitamin c": {
+    "risk": "None",
+    "mechanism": "Vitamin C enhances non-heme iron absorption \u2014 beneficial combination"
+  },
+  "vitamin c+iron": {
+    "risk": "None",
+    "mechanism": "Vitamin C enhances non-heme iron absorption \u2014 beneficial combination"
+  },
+  "calcium+high fiber foods": {
+    "risk": "Moderate",
+    "mechanism": "High fiber may reduce calcium absorption slightly"
+  },
+  "high fiber foods+calcium": {
+    "risk": "Moderate",
+    "mechanism": "High fiber may reduce calcium absorption slightly"
+  },
+  "calcium+spinach": {
+    "risk": "Moderate",
+    "mechanism": "Oxalates in spinach bind calcium \u2014 reduces absorption"
+  },
+  "spinach+calcium": {
+    "risk": "Moderate",
+    "mechanism": "Oxalates in spinach bind calcium \u2014 reduces absorption"
+  },
+  "calcium+coffee": {
+    "risk": "Moderate",
+    "mechanism": "Caffeine increases calcium excretion through urine"
+  },
+  "coffee+calcium": {
+    "risk": "Moderate",
+    "mechanism": "Caffeine increases calcium excretion through urine"
+  },
+  "isoniazid+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol greatly increases hepatotoxicity risk with isoniazid"
+  },
+  "alcohol+isoniazid": {
+    "risk": "High",
+    "mechanism": "Alcohol greatly increases hepatotoxicity risk with isoniazid"
+  },
+  "isoniazid+cheese": {
+    "risk": "High",
+    "mechanism": "Isoniazid inhibits MAO \u2014 aged cheese causes hypertensive crisis"
+  },
+  "cheese+isoniazid": {
+    "risk": "High",
+    "mechanism": "Isoniazid inhibits MAO \u2014 aged cheese causes hypertensive crisis"
+  },
+  "isoniazid+aged cheese": {
+    "risk": "High",
+    "mechanism": "Aged cheese high in tyramine \u2014 isoniazid inhibits MAO causing crisis"
+  },
+  "aged cheese+isoniazid": {
+    "risk": "High",
+    "mechanism": "Aged cheese high in tyramine \u2014 isoniazid inhibits MAO causing crisis"
+  },
+  "isoniazid+tuna": {
+    "risk": "High",
+    "mechanism": "Fish high in histamine \u2014 isoniazid inhibits histamine metabolism causing flushing"
+  },
+  "tuna+isoniazid": {
+    "risk": "High",
+    "mechanism": "Fish high in histamine \u2014 isoniazid inhibits histamine metabolism causing flushing"
+  },
+  "isoniazid+high fat meal": {
+    "risk": "Low",
+    "mechanism": "High fat meals may reduce isoniazid absorption \u2014 take on empty stomach"
+  },
+  "high fat meal+isoniazid": {
+    "risk": "Low",
+    "mechanism": "High fat meals may reduce isoniazid absorption \u2014 take on empty stomach"
+  },
+  "rifampicin+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol combined with rifampicin greatly increases hepatotoxicity"
+  },
+  "alcohol+rifampicin": {
+    "risk": "High",
+    "mechanism": "Alcohol combined with rifampicin greatly increases hepatotoxicity"
+  },
+  "fluconazole+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol increases liver damage risk with fluconazole"
+  },
+  "alcohol+fluconazole": {
+    "risk": "High",
+    "mechanism": "Alcohol increases liver damage risk with fluconazole"
+  },
+  "ketoconazole+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol increases hepatotoxicity risk with ketoconazole"
+  },
+  "alcohol+ketoconazole": {
+    "risk": "High",
+    "mechanism": "Alcohol increases hepatotoxicity risk with ketoconazole"
+  },
+  "ketoconazole+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits ketoconazole metabolism"
+  },
+  "grapefruit+ketoconazole": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits ketoconazole metabolism"
+  },
+  "itraconazole+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice can affect itraconazole levels"
+  },
+  "grapefruit juice+itraconazole": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice can affect itraconazole levels"
+  },
+  "itraconazole+cola": {
+    "risk": "Moderate",
+    "mechanism": "Acidic beverages like cola increase itraconazole absorption"
+  },
+  "cola+itraconazole": {
+    "risk": "Moderate",
+    "mechanism": "Acidic beverages like cola increase itraconazole absorption"
+  },
+  "omeprazole+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol may worsen acid reflux that omeprazole is treating"
+  },
+  "alcohol+omeprazole": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol may worsen acid reflux that omeprazole is treating"
+  },
+  "omeprazole+grapefruit": {
+    "risk": "Low",
+    "mechanism": "Grapefruit has minimal clinically significant effect on omeprazole"
+  },
+  "grapefruit+omeprazole": {
+    "risk": "Low",
+    "mechanism": "Grapefruit has minimal clinically significant effect on omeprazole"
+  },
+  "pantoprazole+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol worsens GERD symptoms that pantoprazole treats"
+  },
+  "alcohol+pantoprazole": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol worsens GERD symptoms that pantoprazole treats"
+  },
+  "prednisolone+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol with corticosteroids increases GI bleeding and ulcer risk"
+  },
+  "alcohol+prednisolone": {
+    "risk": "High",
+    "mechanism": "Alcohol with corticosteroids increases GI bleeding and ulcer risk"
+  },
+  "prednisolone+grapefruit": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit may increase prednisolone levels via CYP3A4 inhibition"
+  },
+  "grapefruit+prednisolone": {
+    "risk": "Moderate",
+    "mechanism": "Grapefruit may increase prednisolone levels via CYP3A4 inhibition"
+  },
+  "prednisolone+high sodium foods": {
+    "risk": "High",
+    "mechanism": "High sodium worsens fluid retention caused by corticosteroids"
+  },
+  "high sodium foods+prednisolone": {
+    "risk": "High",
+    "mechanism": "High sodium worsens fluid retention caused by corticosteroids"
+  },
+  "prednisolone+salt": {
+    "risk": "Moderate",
+    "mechanism": "Excess salt worsens corticosteroid-induced fluid retention and hypertension"
+  },
+  "salt+prednisolone": {
+    "risk": "Moderate",
+    "mechanism": "Excess salt worsens corticosteroid-induced fluid retention and hypertension"
+  },
+  "prednisolone+sugar": {
+    "risk": "High",
+    "mechanism": "Corticosteroids raise blood sugar \u2014 high sugar foods worsen hyperglycemia"
+  },
+  "sugar+prednisolone": {
+    "risk": "High",
+    "mechanism": "Corticosteroids raise blood sugar \u2014 high sugar foods worsen hyperglycemia"
+  },
+  "dexamethasone+alcohol": {
+    "risk": "High",
+    "mechanism": "Alcohol with dexamethasone increases GI ulcer and bleeding risk"
+  },
+  "alcohol+dexamethasone": {
+    "risk": "High",
+    "mechanism": "Alcohol with dexamethasone increases GI ulcer and bleeding risk"
+  },
+  "dexamethasone+high sodium foods": {
+    "risk": "High",
+    "mechanism": "High sodium worsens dexamethasone-induced fluid retention"
+  },
+  "high sodium foods+dexamethasone": {
+    "risk": "High",
+    "mechanism": "High sodium worsens dexamethasone-induced fluid retention"
+  },
+  "digoxin+licorice": {
+    "risk": "High",
+    "mechanism": "Licorice causes potassium loss (hypokalemia) increasing digoxin toxicity risk"
+  },
+  "licorice+digoxin": {
+    "risk": "High",
+    "mechanism": "Licorice causes potassium loss (hypokalemia) increasing digoxin toxicity risk"
+  },
+  "digoxin+high fiber foods": {
+    "risk": "Moderate",
+    "mechanism": "High fiber reduces digoxin absorption \u2014 take separately"
+  },
+  "high fiber foods+digoxin": {
+    "risk": "Moderate",
+    "mechanism": "High fiber reduces digoxin absorption \u2014 take separately"
+  },
+  "digoxin+st johns wort": {
+    "risk": "High",
+    "mechanism": "St John's Wort reduces digoxin levels by inducing P-glycoprotein"
+  },
+  "st johns wort+digoxin": {
+    "risk": "High",
+    "mechanism": "St John's Wort reduces digoxin levels by inducing P-glycoprotein"
+  },
+  "clopidogrel+grapefruit": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP2C19 which activates clopidogrel \u2014 reduces effectiveness"
+  },
+  "grapefruit+clopidogrel": {
+    "risk": "High",
+    "mechanism": "Grapefruit inhibits CYP2C19 which activates clopidogrel \u2014 reduces effectiveness"
+  },
+  "clopidogrel+grapefruit juice": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice reduces clopidogrel activation \u2014 increases clot risk"
+  },
+  "grapefruit juice+clopidogrel": {
+    "risk": "High",
+    "mechanism": "Grapefruit juice reduces clopidogrel activation \u2014 increases clot risk"
+  },
+  "clopidogrel+alcohol": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol with clopidogrel increases bleeding risk"
+  },
+  "alcohol+clopidogrel": {
+    "risk": "Moderate",
+    "mechanism": "Alcohol with clopidogrel increases bleeding risk"
+  }
+}
